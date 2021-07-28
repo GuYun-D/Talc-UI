@@ -1,15 +1,12 @@
 <template>
-  <div>你好轮子</div>
-  <First></First>
+  <div>导航栏</div>
+  <hr />
+  <router-view />
 </template>
 
 <script>
-import First from './components/First.vue'
-
 export default {
-  name: 'App',
-  components: {
-    First
-  }
-}
+  name: "App",
+  components: {},
+};
 </script>
