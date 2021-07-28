@@ -8,8 +8,11 @@ import { provide, ref } from 'vue';
 export default {
   name: "App",
   setup(){
-    const asideVisible = ref(false)
-    provide('xxx', asideVisible)
+    // 初始化获取屏幕的宽度
+    const width = document.documentElement.clientWidth
+    // const asideVisible = ref(false)
+    const asideVisible = ref(width <= 500 ? false : true)
+    provide('asideVisible', asideVisible)
   }
 };
 </script>
