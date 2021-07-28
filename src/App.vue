@@ -1,6 +1,4 @@
 <template>
-  <div>导航栏</div>
-  <hr />
   <router-view />
 </template>
 

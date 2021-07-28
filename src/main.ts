@@ -1,8 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './index.css'
 
-import First from './components/First.vue'
+import Home from './views/Home.vue'
+import Doc from './views/Doc.vue'
+
+// 引入全局样式
+import './index.scss'
 
 import { createWebHashHistory, createRouter } from 'vue-router'
 const history = createWebHashHistory()
@@ -11,7 +14,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: First
+      component: Home
+    },
+    {
+      path: '/doc',
+      component: Doc
     }
   ]
 })
