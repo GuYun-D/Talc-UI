@@ -3,8 +3,13 @@
 </template>
 
 <script>
+import { provide, ref } from 'vue';
+
 export default {
   name: "App",
-  components: {},
+  setup(){
+    const asideVisible = ref(false)
+    provide('xxx', asideVisible)
+  }
 };
 </script>
