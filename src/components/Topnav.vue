@@ -21,7 +21,6 @@ export default {
     const toggleAside = () => {
       asideVisible.value = !asideVisible.value;
     };
-
     return { toggleAside };
   },
 };
