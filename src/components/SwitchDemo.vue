@@ -1,13 +1,13 @@
 <template>
   <div>
     swich文档
-    <Switch :value="y" @input="y = $event"></Switch>
+    <Switch :value="y" @updata:value="y = $event"></Switch>
   </div>
 </template>
 
 <script>
 import Switch from "../lib/switch.vue";
-import {ref} from 'vue'
+import { ref } from "vue";
 export default {
   components: {
     Switch,
