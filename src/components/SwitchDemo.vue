@@ -1,7 +1,7 @@
 <template>
   <div>
     swich文档
-    <Switch :value="y" @updata:value="y = $event"></Switch>
+    <Switch :value="bool" @updata:value="bool = $event"></Switch>
   </div>
 </template>
 
@@ -14,8 +14,8 @@ export default {
   },
 
   setup() {
-    const y = ref(true);
-    return { y };
+    const bool = ref(true);
+    return { bool };
   },
 };
 </script>
