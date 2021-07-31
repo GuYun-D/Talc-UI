@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h3>案例一</h3>
     <Button>默认按钮</Button>
     <Button theme="button">就是按钮</Button>
     <Button theme="link">链接形式</Button>
@@ -25,4 +26,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h3{
+  padding-bottom: 20px;
+}
 </style>

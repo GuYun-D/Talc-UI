@@ -1,5 +1,5 @@
 <template>
-  <button class="t-button" :class="{ [`t-theme-${theme}`]: theme }">
+  <button class="t-button" :class="{[`t-theme-${theme}`]: theme}">
     <slot />
   </button>
 </template>
@@ -12,7 +12,12 @@ export default {
       type: String,
       default: "button",
     },
-  },
+
+    size: {
+      type: String,
+      default: "normal",
+    },
+  }
 };
 </script>
 
@@ -25,7 +30,7 @@ $radius: 4px;
 .t-button {
   box-sizing: border-box;
   height: $h;
-  padding: 0 12px!important;
+  padding: 0 12px !important;
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
@@ -49,6 +54,22 @@ $radius: 4px;
   }
   &::-moz-focus-inner {
     border: 0;
+  }
+   &.t-theme-link{
+    border-color: transparent;
+    box-shadow: none;
+    color: $blue;
+    &:hover,&:focus{
+      color: lighten($blue, 10%);
+    }
+  }
+  &.t-theme-text{
+    border-color: transparent;
+    box-shadow: none;
+    color: inherit;
+    &:hover,&:focus{
+      background: darken(white, 5%);;
+    }
   }
 }
 </style>
