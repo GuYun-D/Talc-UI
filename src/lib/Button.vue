@@ -1,5 +1,5 @@
 <template>
-  <button class="t-button" :class="{ [`theme-${theme}`]: theme }">
+  <button class="t-button" :class="{ [`t-theme-${theme}`]: theme }">
     <slot />
   </button>
 </template>
@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $h: 32px;
 $border-color: #d9d9d9;
 $color: #333;
@@ -25,7 +25,7 @@ $radius: 4px;
 .t-button {
   box-sizing: border-box;
   height: $h;
-  padding: 0 12px;
+  padding: 0 12px!important;
   cursor: pointer;
   display: inline-flex;
   justify-content: center;
