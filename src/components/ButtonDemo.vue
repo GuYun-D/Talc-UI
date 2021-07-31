@@ -1,13 +1,9 @@
 <template>
   <div>
-    <!-- 
-      默认会将绑定的属性都绑定到根元素
-      Button ：
-        <div  @mouseover="onClick" @focus="onClick"  @click="onClick">
-          <button></button>
-        </div>
-     -->
-    <Button @mouseover="onClick" @focus="onClick"  @click="onClick">你好</Button>
+    <Button>默认按钮</Button>
+    <Button theme="button">就是按钮</Button>
+    <Button theme="link">链接形式</Button>
+    <Button theme="text">文本形式</Button>
   </div>
 </template>
 
