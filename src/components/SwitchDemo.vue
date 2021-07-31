@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Switch from "../lib/Switch";
+import Switch from "../lib/Switch.vue";
 import { ref } from "vue";
 export default {
   components: {
