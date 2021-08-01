@@ -1,5 +1,6 @@
 <template>
   <button class="t-button" :class="classes" :disabled="disabled">
+    <span v-if="loading" class="t-loadingIndicator"></span>
     <slot />
   </button>
 </template>
@@ -29,6 +30,11 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    loading: {
+      type: Boolean,
+      default: false
+    }
   },
 
   setup(props) {
@@ -175,6 +181,29 @@ $grey: grey;
     &[disabled] {
       cursor: not-allowed;
       color: $grey;
+    }
+  }
+
+  > .t-loadingIndicator{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 4px;
+    border-radius: 8px;
+    border-color: $blue $blue $blue transparent;
+    border-style: solid;
+    border-width: 2px;
+    animation: t-spin 1s infinite linear;
+  }
+
+  @keyframes t-spin {
+    0%{
+      transform: rotate(0deg);
+    }
+
+    100%{
+      transform: rotate(360deg);
+
     }
   }
 }

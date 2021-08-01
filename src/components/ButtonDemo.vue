@@ -22,7 +22,7 @@
       <Button size="normal" theme="link">普通按钮</Button>
       <Button size="small" theme="link" level="danger">危险按钮</Button>
     </div>
-     <div>
+    <div>
       <Button size="big" theme="text" level="main">主要按钮</Button>
       <Button size="normal" theme="text">普通按钮</Button>
       <Button size="small" theme="text" level="danger">危险按钮</Button>
@@ -31,7 +31,14 @@
     <h3>案例四</h3>
     <div>
       <Button disabled>禁用的按钮</Button>
-      <Button :disabled=" true ">禁用的按钮</Button>
+      <Button :disabled="true">禁用的按钮</Button>
+    </div>
+
+    <h3>案例五</h3>
+    <div>
+      <Button loading>加载中</Button>
+      <Button :loading="true">加载中</Button>
+      <Button>加载完毕</Button>
     </div>
   </div>
 </template>
@@ -53,7 +60,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 h3 {
   color: #42b983;
   margin: 20px 0;
