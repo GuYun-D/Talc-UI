@@ -1,18 +1,23 @@
 <template>
-  <div class="t-dialog-overlay"></div>
-  <div class="t-dialog-wrapper">
-    <div class="t-dialog">
-      <header>标题 <span class="t-dialog-close"></span></header>
-      <main>
-        <p>第一行字</p>
-        <p>第二行字</p>
-      </main>
-      <footer>
-        <Button level="main">OK</Button>
-        <Button>Cancel</Button>
-      </footer>
+  <template v-if="visible">
+    <!-- 遮罩层 -->
+    <div class="t-dialog-overlay" @click="onClickOverlay"></div>
+    <div class="t-dialog-wrapper">
+      <div class="t-dialog">
+        <header>
+          标题 <span @click="close" class="t-dialog-close"></span>
+        </header>
+        <main>
+          <p>第一行字</p>
+          <p>第二行字</p>
+        </main>
+        <footer>
+          <Button @click="confirm" level="main">OK</Button>
+          <Button @click="cancel">Cancel</Button>
+        </footer>
+      </div>
     </div>
-  </div>
+  </template>
 </template>
 
 <script lang="ts">
@@ -21,6 +26,53 @@ export default {
   name: "Dialog",
   components: {
     Button,
+  },
+  props: {
+    visible: {
+      type: Boolean,
+      default: false,
+    },
+
+    // 是否点击遮罩层关闭dialog
+    closeOnClickOverlay: {
+      type: Boolean,
+      default: true
+    },
+
+    // 用户传过来的确认函数
+    confirm: {
+      type: Function
+    },
+
+    // 用户传过来的取消函数
+    cancel: {
+      type: Function
+    }
+  },
+
+  setup(props, context) {
+    const close = () => {
+      context.emit('updata:visible', false)
+    };
+
+    const onClickOverlay = () => {
+      if(props.closeOnClickOverlay){
+        close()
+      }
+    }
+
+    const confirm = () => {
+      if(props.confirm && props.confirm() !== false){
+        close()
+      }
+    }
+
+    const cancel = () => {
+      // context.emit('cancel')
+      close()
+    }
+
+    return { close, onClickOverlay, confirm, cancel };
   },
 };
 </script>
@@ -32,7 +84,7 @@ $border-color: #d9d9d9;
   background: white;
   border-radius: $radius;
   box-shadow: 0 0 3px fade_out(black, 0.5);
-  min-width: 45em;
+  min-width: 35em;
   max-width: 90%;
   &-overlay {
     position: fixed;
