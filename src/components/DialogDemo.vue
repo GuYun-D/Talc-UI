@@ -1,15 +1,23 @@
 <template>
   <div>
-    dialog文档
+    <h3>示例一</h3>
+    <Dialog></Dialog>
   </div>
 </template>
 
 <script>
-  export default {
-    
-  }
+import Dialog from "../lib/Dialog.vue";
+export default {
+  name: "DialogDemo",
+  components: {
+    Dialog,
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+h3 {
+  color: #42b983;
+  margin: 20px 0;
+}
 </style>
