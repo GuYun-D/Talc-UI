@@ -27,6 +27,12 @@
       <Button size="normal" theme="text">普通按钮</Button>
       <Button size="small" theme="text" level="danger">危险按钮</Button>
     </div>
+
+    <h3>案例四</h3>
+    <div>
+      <Button disabled>禁用的按钮</Button>
+      <Button :disabled=" true ">禁用的按钮</Button>
+    </div>
   </div>
 </template>
 
