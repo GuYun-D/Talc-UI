@@ -4,10 +4,14 @@
     <Dialog
       :confirm="confirm"
       :cancel="cancel"
-      :closeOnClickOverlay="false"
+      :closeOnClickOverlay="true"
       :visible="x"
       @updata:visible="x = $event"
-    ></Dialog>
+      title="自定义标题"
+    >
+      <div>你好</div>
+      <div>Dialog</div>
+    </Dialog>
     <Button @click="toggle">点击打开</Button>
   </div>
 </template>
@@ -30,7 +34,8 @@ export default {
     };
 
     const confirm = () => {
-      return false
+      // 如果return false说明不通过，dialog不会关闭
+      // return false
     };
 
     const cancel = () => {

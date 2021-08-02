@@ -5,11 +5,10 @@
     <div class="t-dialog-wrapper">
       <div class="t-dialog">
         <header>
-          标题 <span @click="close" class="t-dialog-close"></span>
+          {{ title }} <span @click="close" class="t-dialog-close"></span>
         </header>
         <main>
-          <p>第一行字</p>
-          <p>第二行字</p>
+          <slot />
         </main>
         <footer>
           <Button @click="confirm" level="main">OK</Button>
@@ -36,41 +35,46 @@ export default {
     // 是否点击遮罩层关闭dialog
     closeOnClickOverlay: {
       type: Boolean,
-      default: true
+      default: true,
     },
 
     // 用户传过来的确认函数
     confirm: {
-      type: Function
+      type: Function,
     },
 
     // 用户传过来的取消函数
     cancel: {
-      type: Function
-    }
+      type: Function,
+    },
+
+    title: {
+      type: String,
+      default: "提示",
+    },
   },
 
   setup(props, context) {
     const close = () => {
-      context.emit('updata:visible', false)
+      context.emit("updata:visible", false);
     };
 
     const onClickOverlay = () => {
-      if(props.closeOnClickOverlay){
-        close()
+      if (props.closeOnClickOverlay) {
+        close();
       }
-    }
+    };
 
     const confirm = () => {
-      if(props.confirm && props.confirm() !== false){
-        close()
+      if (props.confirm && props.confirm() !== false) {
+        close();
       }
-    }
+    };
 
     const cancel = () => {
       // context.emit('cancel')
-      close()
-    }
+      close();
+    };
 
     return { close, onClickOverlay, confirm, cancel };
   },
