@@ -5,10 +5,11 @@
     <div class="t-dialog-wrapper">
       <div class="t-dialog">
         <header>
-          {{ title }} <span @click="close" class="t-dialog-close"></span>
+          <slot name="title" />
+          <span @click="close" class="t-dialog-close"></span>
         </header>
         <main>
-          <slot />
+          <slot name="content" />
         </main>
         <footer>
           <Button @click="confirm" level="main">OK</Button>
@@ -46,11 +47,6 @@ export default {
     // 用户传过来的取消函数
     cancel: {
       type: Function,
-    },
-
-    title: {
-      type: String,
-      default: "提示",
     },
   },
 

@@ -7,10 +7,15 @@
       :closeOnClickOverlay="true"
       :visible="x"
       @updata:visible="x = $event"
-      title="自定义标题"
     >
-      <div>你好</div>
-      <div>Dialog</div>
+      <template v-slot:content>
+        <strong>dialog 组件</strong>
+        <div><em>好啊好啊</em></div>
+      </template>
+
+      <template v-slot:title>
+        <strong>标题</strong>
+      </template>
     </Dialog>
     <Button @click="toggle">点击打开</Button>
   </div>
