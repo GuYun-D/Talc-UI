@@ -39,7 +39,7 @@ export default {
     // 是否点击遮罩层关闭dialog
     closeOnClickOverlay: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     // 用户传过来的确认函数
@@ -55,7 +55,7 @@ export default {
 
   setup(props, context) {
     const close = () => {
-      context.emit("updata:visible", false);
+      context.emit("update:visible", !props.visible);
     };
 
     const onClickOverlay = () => {
@@ -75,9 +75,6 @@ export default {
       props.cancel && props.cancel()
       close();
     };
-
-    
-
     return { close, onClickOverlay, confirm, cancel };
   },
 };

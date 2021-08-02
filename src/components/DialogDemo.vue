@@ -6,7 +6,7 @@
       :cancel="cancel"
       :closeOnClickOverlay="true"
       :visible="x"
-      @updata:visible="x = $event"
+      @update:visible="x = $event"
     >
       <template v-slot:content>
         <strong>dialog 组件</strong>
@@ -57,7 +57,6 @@ export default {
         title: "标题",
         content: "你好",
         confirm(){
-
         },
 
         cancel(){
