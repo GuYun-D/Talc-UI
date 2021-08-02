@@ -18,12 +18,16 @@
       </template>
     </Dialog>
     <Button @click="toggle">点击打开</Button>
+
+    <h3>示例二</h3>
+    <Button @click="showDialog">点击打开</Button>
   </div>
 </template>
 
 <script>
 import Dialog from "../lib/Dialog.vue";
 import Button from "../lib/Button.vue";
+import { openDialog } from "../lib/openDialog";
 import { ref } from "vue";
 export default {
   name: "DialogDemo",
@@ -47,7 +51,22 @@ export default {
       console.log("用户已取消");
     };
 
-    return { x, toggle, confirm, cancel };
+    // 一句话调用dialog
+    const showDialog = () => {
+      openDialog({
+        title: "标题",
+        content: "你好",
+        confirm(){
+
+        },
+
+        cancel(){
+
+        }
+      });
+    };
+
+    return { x, toggle, confirm, cancel, showDialog };
   },
 };
 </script>

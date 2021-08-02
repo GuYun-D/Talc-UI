@@ -24,6 +24,7 @@
 
 <script lang="ts">
 import Button from "./Button.vue";
+
 export default {
   name: "Dialog",
   components: {
@@ -71,8 +72,11 @@ export default {
 
     const cancel = () => {
       // context.emit('cancel')
+      props.cancel && props.cancel()
       close();
     };
+
+    
 
     return { close, onClickOverlay, confirm, cancel };
   },
