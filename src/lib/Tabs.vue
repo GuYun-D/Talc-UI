@@ -1,7 +1,22 @@
 <template>
-  <div>
-    <component :is="defaults[0]" />
-    <component :is="defaults[1]" />
+  <div class="t-tabs">
+    <div class="t-tabs-nav">
+      <div
+        class="t-tabs-nav-item"
+        v-for="(title, index) in titles"
+        :key="index"
+      >
+        {{ title }}
+      </div>
+    </div>
+    <div class="t-tabs-content">
+      <component
+      class="t-tabs-content-item"
+        :key="index"
+        v-for="(component, index) in defaults"
+        :is="component"
+      />
+    </div>
   </div>
 </template>
 
@@ -22,10 +37,42 @@ export default {
         throw new Error("Tabs子组件必须是Tab");
       }
     });
-    return { defaults };
+
+    /**
+     * Tab组件传递过来的title属性是要显示到上面的切换栏的，使用map获取到所有的title
+     */
+    const titles = defaults.map((tag) => {
+      return tag.props.title;
+    });
+
+    return { defaults, titles };
   },
 };
 </script>
 
 <style lang="scss">
+$blue: #40a9ff;
+$color: #333;
+$border-color: #d9d9d9;
+.t-tabs {
+  &-nav {
+    display: flex;
+    color: $color;
+    border-bottom: 1px solid $border-color;
+    &-item {
+      padding: 8px 0 !important;
+      margin: 0 16px !important;
+      cursor: pointer;
+      &:first-child {
+        margin-left: 0 !important;
+      }
+      &.selected {
+        color: $blue;
+      }
+    }
+  }
+  &-content {
+    padding: 8px 0;
+  }
+}
 </style>
