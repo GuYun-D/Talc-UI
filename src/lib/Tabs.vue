@@ -5,13 +5,14 @@
         class="t-tabs-nav-item"
         v-for="(title, index) in titles"
         :key="index"
+        :class="{ selected: title === selected }"
       >
         {{ title }}
       </div>
     </div>
     <div class="t-tabs-content">
       <component
-      class="t-tabs-content-item"
+        class="t-tabs-content-item"
         :key="index"
         v-for="(component, index) in defaults"
         :is="component"
@@ -24,6 +25,11 @@
 import Tab from "./Tab.vue";
 export default {
   name: "Tabs",
+  props: {
+    selected: {
+      type: String
+    }
+  },
   setup(props, context) {
     /**
      * defaults就是关于子组件的信息 类型是一个数组，每个元素就是Tabs子组件的信息
