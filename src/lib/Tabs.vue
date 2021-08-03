@@ -6,6 +6,7 @@
         v-for="(title, index) in titles"
         :key="index"
         :class="{ selected: title === selected }"
+        @click="selected(title)"
       >
         {{ title }}
       </div>
@@ -15,7 +16,7 @@
         class="t-tabs-content-item"
         :key="index"
         v-for="(component, index) in defaults"
-        :is="component"
+        :is="current"
       />
     </div>
   </div>
@@ -23,12 +24,13 @@
 
 <script lang="ts">
 import Tab from "./Tab.vue";
+import { computed } from "vue";
 export default {
   name: "Tabs",
   props: {
     selected: {
-      type: String
-    }
+      type: String,
+    },
   },
   setup(props, context) {
     /**
@@ -51,7 +53,23 @@ export default {
       return tag.props.title;
     });
 
-    return { defaults, titles };
+    /**
+     * 显示的Tab
+     */
+    const current = computed(() => {
+      defaults.filter((tag) => {
+        tag.props.title === props.selected
+      })[0];
+    });
+
+    /**
+     * Tab栏切换
+     */
+    const selected = (title: String) => {
+      context.emit("update:selected", title);
+    };
+
+    return { defaults, titles, current, selected };
   },
 };
 </script>
