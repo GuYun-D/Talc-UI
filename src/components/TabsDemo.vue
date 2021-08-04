@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>示例一</h3>
-    <Tabs selected="title" @update:selected="title = $event">
+    <Tabs :selected="title" @update:selected="title = $event">
       <Tab title="导航一">内容一</Tab>
       <Tab title="导航二">内容二</Tab>
     </Tabs>
@@ -20,7 +20,6 @@ export default {
 
   setup() {
     const title = ref("导航一");
-
     return { title };
   },
 };

@@ -6,7 +6,7 @@
         v-for="(title, index) in titles"
         :key="index"
         :class="{ selected: title === selected }"
-        @click="selected(title)"
+        @click="select(title)"
       >
         {{ title }}
       </div>
@@ -16,7 +16,8 @@
         class="t-tabs-content-item"
         :key="index"
         v-for="(component, index) in defaults"
-        :is="current"
+        :is="component"
+        :class="{ selected: component.props.title === selected }"
       />
     </div>
   </div>
@@ -58,18 +59,18 @@ export default {
      */
     const current = computed(() => {
       defaults.filter((tag) => {
-        tag.props.title === props.selected
+        tag.props.title === props.selected;
       })[0];
     });
 
     /**
      * Tab栏切换
      */
-    const selected = (title: String) => {
+    const select = (title: String) => {
       context.emit("update:selected", title);
     };
 
-    return { defaults, titles, current, selected };
+    return { defaults, titles, current, select };
   },
 };
 </script>
@@ -97,6 +98,13 @@ $border-color: #d9d9d9;
   }
   &-content {
     padding: 8px 0;
+
+    &-item {
+      display: none;
+      &.selected {
+        display: block;
+      }
+    }
   }
 }
 </style>
