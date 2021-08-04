@@ -7,10 +7,15 @@
         :key="index"
         :class="{ selected: title === selected }"
         @click="select(title)"
+        :ref="
+          (el) => {
+            if (el) navItems[index] = el;
+          }
+        "
       >
         {{ title }}
       </div>
-      <div class="t-tabs-nav-indicator"></div>
+      <div class="t-tabs-nav-indicator" ref="indicator"></div>
     </div>
     <div class="t-tabs-content">
       <component
@@ -26,7 +31,7 @@
 
 <script lang="ts">
 import Tab from "./Tab.vue";
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 export default {
   name: "Tabs",
   props: {
@@ -71,7 +76,34 @@ export default {
       context.emit("update:selected", title);
     };
 
-    return { defaults, titles, current, select };
+    /**
+     * 为动态渲染出来的dom添加ref
+     * :ref="
+     *    (el) => {
+     *      if (el) navItems[index] = el;
+     *    }
+     *  "
+     */
+    const navItems = ref<HTMLDivElement[]>([]);
+    const indicator = ref(null);
+
+    console.log(indicator);
+    
+
+    onMounted(() => {
+      // 获取到所有的dom
+      const divs = navItems.value;
+      // 找到一个类名为selected的div
+      const result = divs.filter((div) =>
+        div.classList.contains("selected")
+      )[0];
+      const { width } = result.getBoundingClientRect();
+      console.log(indicator.value.style);
+      
+      indicator.value.style.width = width + "px";
+    });
+
+    return { defaults, titles, current, select, navItems, indicator };
   },
 };
 </script>
