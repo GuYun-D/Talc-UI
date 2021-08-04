@@ -9,7 +9,7 @@
         @click="select(title)"
         :ref="
           (el) => {
-            if (el) navItems[index] = el;
+            if (title === selected) selectedItem = el;
           }
         "
       >
@@ -84,26 +84,17 @@ export default {
      *    }
      *  "
      */
-    const navItems = ref<HTMLDivElement[]>([]);
+    const selectedItem = ref<HTMLDivElement>(null);
     const indicator = ref<HTMLDivElement>(null);
     const container = ref<HTMLDivElement>(null);
 
     const x = () => {
-      /**
-       * 在页面第一次渲染时执行
-       */
-      // 获取到所有的dom
-      const divs = navItems.value;
-      // 找到一个类名为selected的div
-      const result = divs.filter((div) =>
-        div.classList.contains("selected")
-      )[0];
-      const { width } = result.getBoundingClientRect();
+      const { width } = selectedItem.value.getBoundingClientRect();
 
       indicator.value.style.width = width + "px";
 
       const { left: left1 } = container.value.getBoundingClientRect();
-      const { left: left2 } = result.getBoundingClientRect();
+      const { left: left2 } = selectedItem.value.getBoundingClientRect();
       const left = left2 - left1;
       indicator.value.style.left = left + "px";
     };
@@ -118,8 +109,8 @@ export default {
       titles,
       current,
       select,
-      navItems,
       indicator,
+      selectedItem
     };
   },
 };
