@@ -12,14 +12,20 @@ ol {
 a {
   text-decoration: none;
   color: inherit;
+  color: #273849;
 
   &:hover {
-    border-bottom: 1px solid;
+    text-decoration: none;
     cursor: pointer;
   }
 }
 
-h1,h2,h3,h4,h5,h6{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: normal;
 }
 
@@ -27,4 +33,24 @@ body {
   font-size: 16px;
   // 字体跨平台
   font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  // background-color: rgb(4, 27, 32);
+}
+
+@font-face {
+  font-family: myFont;
+  src: url(./assets/SigmarOne-Regular.ttf);
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
