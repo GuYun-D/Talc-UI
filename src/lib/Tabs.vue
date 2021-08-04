@@ -61,15 +61,6 @@ export default {
     });
 
     /**
-     * 显示的Tab
-     */
-    const current = computed(() => {
-      defaults.filter((tag) => {
-        tag.props.title === props.selected;
-      })[0];
-    });
-
-    /**
      * Tab栏切换
      */
     const select = (title: String) => {
@@ -100,14 +91,13 @@ export default {
     };
 
     onMounted(x);
-
     onUpdated(x);
+
 
     return {
       container,
       defaults,
       titles,
-      current,
       select,
       indicator,
       selectedItem
