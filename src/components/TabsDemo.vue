@@ -3,7 +3,7 @@
     <h3>示例一</h3>
     <Tabs :selected="title" @update:selected="title = $event">
       <Tab title="导航一">内容一</Tab>
-      <Tab title="导航二">内容二</Tab>
+      <Tab title="导航二fr">内容二</Tab>
     </Tabs>
   </div>
 </template>

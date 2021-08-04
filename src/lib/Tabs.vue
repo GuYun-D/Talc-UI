@@ -1,6 +1,6 @@
 <template>
   <div class="t-tabs">
-    <div class="t-tabs-nav">
+    <div class="t-tabs-nav" ref="container">
       <div
         class="t-tabs-nav-item"
         v-for="(title, index) in titles"
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import Tab from "./Tab.vue";
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted, onUpdated, ref } from "vue";
 export default {
   name: "Tabs",
   props: {
@@ -85,12 +85,13 @@ export default {
      *  "
      */
     const navItems = ref<HTMLDivElement[]>([]);
-    const indicator = ref(null);
+    const indicator = ref<HTMLDivElement>(null);
+    const container = ref<HTMLDivElement>(null);
 
-    console.log(indicator);
-    
-
-    onMounted(() => {
+    const x = () => {
+      /**
+       * 在页面第一次渲染时执行
+       */
       // 获取到所有的dom
       const divs = navItems.value;
       // 找到一个类名为selected的div
@@ -98,12 +99,28 @@ export default {
         div.classList.contains("selected")
       )[0];
       const { width } = result.getBoundingClientRect();
-      console.log(indicator.value.style);
-      
-      indicator.value.style.width = width + "px";
-    });
 
-    return { defaults, titles, current, select, navItems, indicator };
+      indicator.value.style.width = width + "px";
+
+      const { left: left1 } = container.value.getBoundingClientRect();
+      const { left: left2 } = result.getBoundingClientRect();
+      const left = left2 - left1;
+      indicator.value.style.left = left + "px";
+    };
+
+    onMounted(x);
+
+    onUpdated(x);
+
+    return {
+      container,
+      defaults,
+      titles,
+      current,
+      select,
+      navItems,
+      indicator,
+    };
   },
 };
 </script>
@@ -137,6 +154,7 @@ $border-color: #d9d9d9;
       left: 0;
       bottom: -1px;
       width: 100px;
+      transition: all 250ms;
     }
   }
   &-content {
