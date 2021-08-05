@@ -1,8 +1,20 @@
 <template>
   <div class="layout">
-    <Topnav class="nav" />
+    <Topnav :toggleMenuButtonVisible="true" class="nav" />
     <div class="content">
       <aside v-if="asideVisible">
+        <h2>文档</h2>
+        <ol>
+          <li>
+            <router-link to="/doc/introduce">介绍</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/get-start">开始</router-link>
+          </li>
+          <li>
+            <router-link to="/doc/install">安装</router-link>
+          </li>
+        </ol>
         <h2>组件列表</h2>
         <ol>
           <li>

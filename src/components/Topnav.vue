@@ -4,15 +4,19 @@
       <div class="logo">
         <img src="../assets/(zhaoxi.net).png" alt="" />
 
-          <router-link to="/">Talc UI</router-link>  
-
+        <router-link to="/">Talc UI</router-link>
       </div>
       <ul class="menu">
         <li><router-link to="/doc">文档</router-link></li>
         <li><router-link to="">Github</router-link></li>
       </ul>
 
-      <span class="toggleAside" @click="toggleAside"></span>
+      <svg
+        v-if="toggleMenuButtonVisible"
+        class="toggleAside"
+        @click="toggleAside"
+        
+      ><use xlink:href="#icon-caidan"></svg>
     </div>
   </div>
 </template>
@@ -20,6 +24,12 @@
 <script lang="ts">
 import { inject, Ref } from "vue";
 export default {
+  props: {
+    toggleMenuButtonVisible: {
+      type: Boolean,
+      default: false,
+    },
+  },
   setup() {
     const asideVisible = inject<Ref<boolean>>("asideVisible");
     // console.log('topnav获取到的为：' + asideVisible.value);
@@ -58,7 +68,7 @@ $mainColor: #4fc08d;
       vertical-align: middle;
     }
 
-    a{
+    a {
       margin-left: 10px;
       vertical-align: -3px;
       color: #1f2225;
@@ -83,16 +93,14 @@ $mainColor: #4fc08d;
     }
     > .logo {
       margin: 0 auto;
-
-
     }
   }
 
   .toggleAside {
     display: none;
-    width: 24px;
-    height: 24px;
-    background-color: #f40;
+    width: 34px;
+    height: 34px;
+    color: $mainColor;
     position: absolute;
     left: 16px;
     top: 50%;
