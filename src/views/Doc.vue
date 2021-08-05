@@ -54,6 +54,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$main: #4fc08d;
+
 .layout {
   display: flex;
   flex-direction: column;
@@ -81,20 +83,38 @@ export default {
   }
 }
 aside {
-  background: lightblue;
+  background: #fff;
   width: 150px;
-  padding: 16px;
-   position: fixed;
+  padding: 16px 0;
+  position: fixed;
   top: 0;
   left: 0;
-  padding-top: 70px;
+  padding-top: 66px;
   height: 100%;
+  box-shadow: 1px 0 9px #abb6ab;
   > h2 {
     margin-bottom: 4px;
+    padding: 10px 10px;
+    color: $main;
   }
   > ol {
     > li {
-      padding: 4px 0;
+      > a {
+        display: block;
+        padding: 6px 18px;
+        transition: all 250ms;
+      }
+
+      .router-link-active {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: $main;
+        text-decoration: underline;
+        padding-bottom: 2px;
+        background-color: #fff;
+        border-right: 4px solid $main;
+      }
     }
   }
 }
