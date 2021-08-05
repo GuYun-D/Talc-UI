@@ -6,9 +6,11 @@ import Tabs from './components/TabsDemo.vue'
 import Home from './views/Home.vue'
 import Doc from './views/Doc.vue'
 import DocSet from './components/DocDemo.vue'
-import Introduce from './views/Introduce.vue'
-import GetStart from './views/GetStart.vue'
-import Install from './views/Install.vue'
+
+const mdPath = path => h(Markdown, {path: path, key: path})
+
+import { h } from 'vue'
+import Markdown from './components/markdown.vue'
 
 const history = createWebHashHistory()
 export const router = createRouter({
@@ -27,13 +29,13 @@ export const router = createRouter({
           component: DocSet
         }, {
           path: 'introduce',
-          component: Introduce
+          component: mdPath('../markdown/introduce.md')
         }, {
           path: 'get-start',
-          component: GetStart
+          component: mdPath('../markdown/GetStarted.md')
         }, {
           path: 'install',
-          component: Install
+          component: mdPath('../markdown/install.md')
         },
         {
           path: 'switch',
