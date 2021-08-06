@@ -1,3 +1,7 @@
+<demo>
+支持 disabled
+</demo>
+
 <template>
   <Switch :value="bool" @updata:value="bool = $event" disabled></Switch>
 </template>

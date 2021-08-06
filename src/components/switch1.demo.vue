@@ -1,3 +1,7 @@
+<demo>
+  基本用法
+</demo>
+
 <template>
   <Switch :value="bool" @updata:value="bool = $event"></Switch>
 </template>
