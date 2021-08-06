@@ -54,3 +54,18 @@ body {
   fill: currentColor;
   overflow: hidden;
 }
+
+h1{
+  color: #1f2f3d;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h2{
+  color: rgb(79, 192, 141);
+}
+
+h2::before{
+  content: "#";
+  display: inline-block;
+}

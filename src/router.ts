@@ -5,7 +5,6 @@ import Dialog from './components/DialogDemo.vue'
 import Tabs from './components/TabsDemo.vue'
 import Home from './views/Home.vue'
 import Doc from './views/Doc.vue'
-import DocSet from './components/DocDemo.vue'
 
 const mdPath = path => h(Markdown, {path: path, key: path})
 
@@ -26,7 +25,7 @@ export const router = createRouter({
       children: [
         {
           path: '',
-          component: DocSet
+          redirect: '/doc/introduce' 
         }, {
           path: 'introduce',
           component: mdPath('../markdown/introduce.md')

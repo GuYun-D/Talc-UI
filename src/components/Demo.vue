@@ -1,20 +1,19 @@
 <template>
+  <h2>{{ component.__sourceCodeTitle }}</h2>
   <div class="demo">
-    <h2>{{ component.__sourceCodeTitle }}</h2>
     <div class="demo-component">
       <component :is="component"></component>
     </div>
-    <div class="demo-actions">
-      <Button @click="codeVisible = !codeVisible">查看代码</Button>
+    <div class="demo-actions" @click="codeVisible = !codeVisible">
+      {{ codeVisible ? "隐藏代码" : "查看代码" }}
     </div>
     <div class="demo-code" v-if="codeVisible">
-      <pre class="language-html" v-html="html" />
+      <pre v-html="html" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Button from "../lib/Button.vue";
 import "prismjs";
 import "prismjs/themes/prism.css";
 const Prism = (window as any).Prism;
@@ -24,9 +23,6 @@ export default {
   props: {
     component: Object,
   },
-  components: {
-    Button,
-  },
   setup(props) {
     const html = computed(() => {
       return Prism.highlight(
@@ -35,8 +31,8 @@ export default {
         "html"
       );
     });
-
     const codeVisible = ref(false);
+
     return {
       Prism,
       html,
@@ -48,29 +44,76 @@ export default {
 
 <style lang="scss" >
 $border-color: #d9d9d9;
+h2 {
+  font-size: 20px;
+  padding: 8px 16px;
+  color: #1f2f3d;
+  font-weight: 100;
+}
 .demo {
   border: 1px solid $border-color;
   margin: 16px 0 32px;
-  > h2 {
-    font-size: 20px;
-    padding: 8px 16px;
-    border-bottom: 1px solid $border-color;
-  }
+
   &-component {
     padding: 16px;
   }
   &-actions {
     padding: 8px 16px;
     border-top: 1px dashed $border-color;
+    text-align: center;
+    cursor: pointer;
+    color: #d5d4d4;
+    transition: all 0.3s;
+    &:hover {
+      box-shadow: 2px 2px 2px #ccc;
+    }
   }
   &-code {
-    padding: 8px 16px;
     border-top: 1px dashed $border-color;
+    transition: all 1s;
+    overflow: auto;
     > pre {
       line-height: 1.1;
       font-family: Consolas, "Courier New", Courier, monospace;
-      margin: 0;
+      margin: 10px;
     }
   }
+}
+
+.token.tag {
+  color: #4181be !important;
+}
+
+.token.attr-name {
+  color: #88c6ea;
+}
+
+.token.attr-value {
+  color: #26e144;
+}
+
+.token.keyword {
+  color: #e91e63;
+}
+
+.token.string {
+  color: #10e1c5;
+}
+
+.token.function {
+  color: #f5b607;
+}
+
+.token.number {
+  color: #7f3cfa;
+}
+
+.token .language-javascript {
+  color: #06ee19;
+}
+
+pre {
+  font-size: 15px;
+  line-height: 1.2 !important;
 }
 </style>
