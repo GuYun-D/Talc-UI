@@ -66,6 +66,7 @@ h2 {
     transition: all 0.3s;
     &:hover {
       box-shadow: 2px 2px 2px #ccc;
+      color: #26e144;
     }
   }
   &-code {

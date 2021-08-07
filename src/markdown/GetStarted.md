@@ -20,7 +20,7 @@ import {Button, Tabs, Switch, Dialog} from "talc-ui"
   <div><Button>按钮</Button></div>
 </template>
 <script>
-  import {Button, Tabs, Switch, Dialog} from "king-ui"
+  import {Butto} from "talc-ui"
   export default {
     components: {Button}
   }

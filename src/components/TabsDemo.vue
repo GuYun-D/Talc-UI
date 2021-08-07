@@ -1,26 +1,18 @@
 <template>
-  <div>
-    <h3>示例一</h3>
-    <Tabs :selected="title" @update:selected="title = $event">
-      <Tab title="导航一">内容一</Tab>
-      <Tab title="导航二fr">内容二</Tab>
-    </Tabs>
-  </div>
+  <h1>Tabs组件</h1>
+    <Demo :component="Tabs1"></Demo>
 </template>
 
 <script lang="ts">
-import Tabs from "../lib/Tabs.vue";
-import Tab from "../lib/Tab.vue";
-import { ref } from "vue";
+import Demo from "./Demo.vue"
+import Tabs1 from "./demoUI/Tabs/Tabs1.demo.vue"
 export default {
   components: {
-    Tabs,
-    Tab,
+    Demo
   },
 
   setup() {
-    const title = ref("导航一");
-    return { title };
+    return { Tabs1 };
   },
 };
 </script>

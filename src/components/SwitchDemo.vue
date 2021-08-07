@@ -8,12 +8,9 @@
 </template>
 
 <script>
-import Switch1Demo from "./switch1.demo.vue";
-import Switch2Demo from "./switch2.demo.vue";
+import Switch1Demo from "./demoUI/Switch/switch1.demo.vue";
+import Switch2Demo from "./demoUI/Switch/switch2.demo.vue";
 import Demo from './Demo.vue'
-
-const Prism = window.Prism;
-console.log(Prism);
 export default {
   components: {
     Demo

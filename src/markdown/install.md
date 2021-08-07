@@ -3,7 +3,7 @@
 打开终端运行下列命令：
 
 ```js
-npm install king-ui
+npm install talc-ui
 ```
 
 或

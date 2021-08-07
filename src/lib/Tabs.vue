@@ -142,6 +142,7 @@ $border-color: #d9d9d9;
     padding: 8px 0;
 
     &-item {
+      padding: 10px 0 !important;
       display: none;
       &.selected {
         display: block;

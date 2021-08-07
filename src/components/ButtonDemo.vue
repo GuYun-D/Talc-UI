@@ -1,53 +1,25 @@
 <template>
   <div>
-    <h3>案例一</h3>
-    <Button>默认按钮</Button>
-    <Button theme="button">就是按钮</Button>
-    <Button theme="link">链接形式</Button>
-    <Button theme="text">文本形式</Button>
+    <h1>Button按钮组件</h1>
+    <Demo :component="Button2demo"></Demo>
+    <Demo :component="Button3demo"></Demo>
+    <Demo :component="Button4demo"></Demo>
+    <Demo :component="Button5demo"></Demo>
 
-    <h3>案例二</h3>
-    <Button>normal</Button>
-    <Button size="big">big</Button>
-    <Button size="small">small</Button>
-
-    <h3>案例三</h3>
-    <div>
-      <Button size="big" level="main">主要按钮</Button>
-      <Button size="normal">普通按钮</Button>
-      <Button size="small" level="danger">危险按钮</Button>
-    </div>
-    <div>
-      <Button size="big" theme="link" level="main">主要按钮</Button>
-      <Button size="normal" theme="link">普通按钮</Button>
-      <Button size="small" theme="link" level="danger">危险按钮</Button>
-    </div>
-    <div>
-      <Button size="big" theme="text" level="main">主要按钮</Button>
-      <Button size="normal" theme="text">普通按钮</Button>
-      <Button size="small" theme="text" level="danger">危险按钮</Button>
-    </div>
-
-    <h3>案例四</h3>
-    <div>
-      <Button disabled>禁用的按钮</Button>
-      <Button :disabled="true">禁用的按钮</Button>
-    </div>
-
-    <h3>案例五</h3>
-    <div>
-      <Button loading>加载中</Button>
-      <Button :loading="true">加载中</Button>
-      <Button>加载完毕</Button>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
-import Button from "../lib/Button.vue";
+import Button1demo from "./demoUI/Button/Button1.demo.vue";
+import Button2demo from "./demoUI/Button/Button2.demo.vue";
+import Button3demo from "./demoUI/Button/Button3.demo.vue";
+import Button4demo from "./demoUI/Button/Button4.demo.vue";
+import Button5demo from "./demoUI/Button/Button5.demo.vue";
+import Demo from "./Demo.vue";
+
 export default {
   components: {
-    Button,
+    Demo,
   },
 
   setup() {
@@ -55,7 +27,14 @@ export default {
       console.log("执行了");
     };
 
-    return { onClick };
+    return {
+      onClick,
+      Button1demo,
+      Button2demo,
+      Button3demo,
+      Button4demo,
+      Button5demo,
+    };
   },
 };
 </script>
