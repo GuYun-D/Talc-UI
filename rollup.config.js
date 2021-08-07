@@ -11,7 +11,7 @@ export default {
       vue: 'Vue'
     },
     name: 'Gulu',
-    file: 'dist/lib/gulu.js',
+    file: 'dist/lib/TalcUI.js',
     format: 'umd',
     plugins: [terser()]
   },
