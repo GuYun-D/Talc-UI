@@ -56,6 +56,7 @@ export default {
 $mainColor: #4fc08d;
 
 .page {
+  // background-color: rgb(26, 100, 19);
   .container {
     display: flex;
     justify-content: center;
@@ -64,9 +65,8 @@ $mainColor: #4fc08d;
       > h1 {
         font-size: 100px;
         font-weight: bold;
-        font-family: myFont;
         color: $mainColor;
-        text-shadow: 8px 8px 0px #787a79;
+        text-shadow: rgb(120 122 121) 1px 2px 3px;
       }
 
       > h2 {
@@ -95,7 +95,7 @@ $mainColor: #4fc08d;
 
   .footer {
     margin: 10px auto 0;
-    width: 400px;
+    width: 375px;
     @media (min-width: 800px) {
       width: 800px;
     }
@@ -105,12 +105,14 @@ $mainColor: #4fc08d;
     > ul {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       > li {
-        width: 400px;
+        width: 300px;
         margin: 16px 0;
         display: grid;
         justify-content: center;
         align-content: space-between;
+        align-items: end;
         grid-template-areas:
           "icon title"
           "icon text";
@@ -131,7 +133,7 @@ $mainColor: #4fc08d;
         > p {
           grid-area: text;
           @media (max-width: 500px) {
-            font-size: 10px;
+            font-size: 15px;
           }
         }
 
