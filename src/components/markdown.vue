@@ -3,25 +3,14 @@
 </template>
 
 <script lang="ts">
-import {ref} from 'vue'
 
 export default {
   props: {
-    path: {
+    content: {
       type: String,
       required: true,
     },
-  },
-
-  setup(props) {
-    const content = ref<String>(null);
-    // 异步的请求
-    import(props.path).then(result => {
-      content.value = result.default
-    })
-
-    return {content}
-  },
+  }
 };
 </script>
 

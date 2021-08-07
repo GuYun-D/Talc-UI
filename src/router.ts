@@ -6,7 +6,11 @@ import Tabs from './components/TabsDemo.vue'
 import Home from './views/Home.vue'
 import Doc from './views/Doc.vue'
 
-const mdPath = path => h(Markdown, {path: path, key: path})
+import introduce from "../src/markdown/introduce.md"
+import install from "../src/markdown/install.md"
+import getStarted from "../src/markdown/GetStarted.md"
+
+const mdPath = string => h(Markdown, {content: string, key: string})
 
 import { h } from 'vue'
 import Markdown from './components/markdown.vue'
@@ -28,13 +32,13 @@ export const router = createRouter({
           redirect: '/doc/introduce' 
         }, {
           path: 'introduce',
-          component: mdPath('../markdown/introduce.md')
+          component: mdPath(introduce)
         }, {
           path: 'get-start',
-          component: mdPath('../markdown/GetStarted.md')
+          component: mdPath(getStarted)
         }, {
           path: 'install',
-          component: mdPath('../markdown/install.md')
+          component: mdPath(install)
         },
         {
           path: 'switch',
