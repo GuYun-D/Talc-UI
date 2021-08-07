@@ -16,7 +16,7 @@
         class="toggleAside"
         @click="toggleAside"
         
-      ><use xlink:href="#icon-caidan"></svg>
+      ><use xlink:href="#icon-caidan"></use></svg>
     </div>
   </div>
 </template>
