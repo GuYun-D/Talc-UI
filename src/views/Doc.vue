@@ -1,6 +1,6 @@
 <template>
   <div class="layout">
-    <Topnav :toggleMenuButtonVisible="true" class="nav" />
+    <Topnav :docBgc="bgcObj" :toggleMenuButtonVisible="true" class="nav" />
     <div class="content">
       <aside v-if="asideVisible">
         <h2>文档</h2>
@@ -48,7 +48,10 @@ export default {
   setup() {
     const asideVisible = inject<Ref<boolean>>("asideVisible");
     // console.log("DOC获取到的为：" + asideVisible.value);
-    return { asideVisible };
+    const bgcObj = {
+      backgroundColor: "#fff",
+    };
+    return { asideVisible, bgcObj };
   },
 };
 </script>
@@ -66,7 +69,7 @@ $main: #4fc08d;
   > .content {
     flex-grow: 1;
     padding-top: 60px;
-    padding-left: 156px;
+    padding-left: 256px;
     @media (max-width: 500px) {
       padding-left: 0;
     }
@@ -80,11 +83,15 @@ $main: #4fc08d;
   > main {
     flex-grow: 1;
     padding: 16px;
+
+    h2 {
+      border-bottom: 1px solid #f40;
+    }
   }
 }
 aside {
   background: #fff;
-  width: 150px;
+  width: 250px;
   padding: 16px 0;
   position: fixed;
   top: 0;
@@ -97,12 +104,16 @@ aside {
     margin-bottom: 4px;
     padding: 10px 10px;
     color: $main;
+    border: none;
   }
   > ol {
     > li {
+      height: 46px;
+      line-height: 46px;
       > a {
         display: block;
-        padding: 6px 18px;
+        padding-left: 20px;
+        font-size: 18px;
         transition: all 250ms;
       }
 
@@ -111,10 +122,8 @@ aside {
         width: 100%;
         height: 100%;
         color: $main;
-        text-decoration: underline;
-        padding-bottom: 2px;
-        background-color: #fff;
-        border-right: 4px solid $main;
+        border-left: 5px solid #4fc08d;
+        background: #e8fff4;
       }
     }
   }

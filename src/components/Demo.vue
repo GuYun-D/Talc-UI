@@ -42,7 +42,7 @@ export default {
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 $border-color: #d9d9d9;
 h2 {
   font-size: 20px;

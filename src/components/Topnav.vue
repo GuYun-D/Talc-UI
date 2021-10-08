@@ -1,22 +1,31 @@
 <template>
   <div>
-    <div class="topnav">
+    <div class="topnav" :style="docBgc">
       <div class="logo">
         <img src="../assets/(zhaoxi.net).png" alt="" />
 
         <router-link to="/">Talc UI</router-link>
       </div>
       <ul class="menu">
-        <li><router-link to="/doc">文档</router-link></li>
-        <li><router-link to="">Github</router-link></li>
+        <li>
+          <router-link :class="{ home: colorStyle === 'home' }" to="/doc"
+            >文档</router-link
+          >
+        </li>
+        <li>
+          <router-link :class="{ home: colorStyle === 'home' }" to=""
+            >Github</router-link
+          >
+        </li>
       </ul>
 
       <svg
         v-if="toggleMenuButtonVisible"
         class="toggleAside"
         @click="toggleAside"
-        
-      ><use xlink:href="#icon-caidan"></use></svg>
+      >
+        <use xlink:href="#icon-caidan"></use>
+      </svg>
     </div>
   </div>
 </template>
@@ -29,6 +38,12 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    colorStyle: {
+      type: String,
+    },
+
+    docBgc: Object
   },
   setup() {
     const asideVisible = inject<Ref<boolean>>("asideVisible");
@@ -46,12 +61,12 @@ $color: rgb(51, 54, 57);
 $mainColor: #4fc08d;
 
 .topnav {
-  background-color: #fff;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  // background: pink;
+  background: transparent;
+  color: #fff;
   display: flex;
   padding: 16px 48px;
   z-index: 10;
@@ -62,6 +77,10 @@ $mainColor: #4fc08d;
     max-width: 8em;
     font-size: 24px;
     margin-right: auto;
+
+    a {
+      color: rgb(79, 192, 141) !important;
+    }
 
     img {
       width: 32px;
@@ -81,6 +100,9 @@ $mainColor: #4fc08d;
     color: $color;
     > li {
       margin: 0 1em;
+      a.home {
+        color: #fff;
+      }
     }
   }
 
