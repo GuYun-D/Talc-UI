@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <button class="t-switch" @click="toggle" :class="{'t-checked': value }">
-      <span></span>
-    </button>
-  </div>
+  <button class="t-switch" @click="toggle" :class="{ 't-checked': value }">
+    <span></span>
+  </button>
 </template>
 
 <script lang="ts">
