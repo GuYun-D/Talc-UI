@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import TButton from "../../../lib/button/index";
+import TButton from "../../../lib/button/src/TButton.vue";
 export default {
   components: {
     TButton,

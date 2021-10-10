@@ -1,35 +1,39 @@
 <template>
-  <button
-    class="t-button"
-    :class="classes"
-    :disabled="disabled"
-  >
+  <button class="t-button" :class="classes" :disabled="disabled">
     <span v-if="loading" class="t-loadingIndicator"></span>
-    <slot />
+    <t-icon v-if="icon" class="icon" :icon="icon"></t-icon>
+    <div class="content">
+      <slot />
+    </div>
   </button>
 </template>
 
 <script>
-import { computed } from "vue";
+import { computed, defineComponent } from "vue";
 import { TBProps } from "./button";
+import TIcon from "../../iconfont/src/TIcon.vue";
 
-export default {
+export default defineComponent({
   name: "Button",
   props: TBProps,
+  components: {
+    TIcon,
+  },
   setup(props) {
-    const { theme, size, level, ripple } = props;
+    const { theme, size, level, ripple, icon, iconPosition } = props;
     const classes = computed(() => {
       return {
         [`t-theme-${theme}`]: theme,
         [`t-size-${size}`]: size,
         [`t-level-${level}`]: level,
         [`t-ripple`]: ripple,
+        [`icon-${iconPosition}`]: true,
       };
     });
 
-    return { classes };
+    return { classes, icon };
   },
-};
+});
 </script>
 
 <style lang="scss">
@@ -56,7 +60,7 @@ $grey: grey;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
   transition: all 250ms;
-  overflow: hidden;
+  vertical-align: middle;
   & + & {
     margin-left: 8px;
   }
@@ -70,6 +74,26 @@ $grey: grey;
   }
   &::-moz-focus-inner {
     border: 0;
+  }
+  > .content {
+    order: 2;
+  }
+  > .icon {
+    margin-right: 0.3em;
+    margin-left: 0;
+    order: 1;
+  }
+
+  &.icon-right {
+    > .icon {
+      order: 2;
+      margin-right: 0;
+      margin-left: 0.3em;
+    }
+
+    > .content {
+      order: 1;
+    }
   }
   &.t-theme-link {
     border-color: transparent;

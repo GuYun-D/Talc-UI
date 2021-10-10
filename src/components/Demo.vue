@@ -1,14 +1,21 @@
 <template>
-  <h2>{{ component.__sourceCodeTitle }}</h2>
-  <div class="demo">
-    <div class="demo-component">
-      <component :is="component"></component>
-    </div>
-    <div class="demo-actions" @click="codeVisible = !codeVisible">
-      {{ codeVisible ? "隐藏代码" : "查看代码" }}
-    </div>
-    <div class="demo-code" v-if="codeVisible">
-      <pre v-html="html" />
+  <div>
+    <h2>{{ component.__sourceCodeTitle }}</h2>
+    <div class="demo">
+      <div class="demo-component">
+        <component :is="component"></component>
+      </div>
+
+      <div class="desc">
+        <slot></slot>
+      </div>
+
+      <div class="demo-actions" @click="codeVisible = !codeVisible">
+        {{ codeVisible ? "隐藏代码" : "查看代码" }}
+      </div>
+      <div class="demo-code" v-if="codeVisible">
+        <pre v-html="html" />
+      </div>
     </div>
   </div>
 </template>
@@ -53,6 +60,12 @@ h2 {
 .demo {
   border: 1px solid $border-color;
   margin: 16px 0 32px;
+
+  .desc {
+    padding: 10px 20px;
+    font-size: 15px;
+    color: rgb(99, 97, 97);
+  }
 
   &-component {
     padding: 16px;

@@ -1,7 +1,12 @@
 <template>
   <div>
     <h1>Button按钮组件</h1>
-    <Demo :component="Button1demo"></Demo>
+    <Demo :component="Button1demo">
+      组件提供了三种类型的按钮，普通按钮。文本按钮和连接式的按钮，但是连接式的按钮没有添加超链接功能，你可以用过添加事件结合vue-router，通过编程式导航可以实现路由的切换
+    </Demo>
+    <Demo :component="Button6demo">
+      按钮内部可以内嵌字体图标，通过添加图标可以增加按钮的辨识度，不过只允许使用svg的字体图标。如果你使用class的图标，那么默认图标显示在按钮左侧
+    </Demo>
     <Demo :component="Button2demo"></Demo>
     <Demo :component="Button3demo"></Demo>
     <Demo :component="Button4demo"></Demo>
@@ -16,6 +21,7 @@ import Button2demo from "./demo/Button2.demo.vue";
 import Button3demo from "./demo/Button3.demo.vue";
 import Button4demo from "./demo/Button4.demo.vue";
 import Button5demo from "./demo/Button5.demo.vue";
+import Button6demo from "./demo/Button6.demo.vue";
 import Demo from "../Demo.vue";
 import Attribute from "../../base-ui/attribute/index";
 import { attributeConfig } from "./config/attribute.config";
@@ -38,6 +44,7 @@ export default {
       Button3demo,
       Button4demo,
       Button5demo,
+      Button6demo,
       attributeConfig,
     };
   },

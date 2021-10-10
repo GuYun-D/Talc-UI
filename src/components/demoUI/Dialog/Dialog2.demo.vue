@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { openDialog } from "../../../lib/openDialog";
-import Button from "../../../lib/button/src/Button.vue";
+import Button from "../../../lib/button//src/TButton.vue";
 
 export default {
   components: {

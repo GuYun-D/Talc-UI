@@ -45,5 +45,19 @@ export const attributeConfig: IAttributeConfig = {
       value: "_",
       defaultValue: "false",
     },
+    {
+      name: "icon",
+      desc: "为按钮添加图标",
+      type: "String",
+      value: "见icon组件",
+      defaultValue: "_",
+    },
+    {
+      name: "iconPosition",
+      desc: "图标的位置",
+      type: "String",
+      value: "left / right",
+      defaultValue: "left",
+    },
   ],
 };

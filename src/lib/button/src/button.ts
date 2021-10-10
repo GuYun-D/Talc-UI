@@ -28,4 +28,14 @@ export const TBProps = {
     type: Boolean,
     default: false,
   },
+
+  icon: String,
+
+  iconPosition: {
+    type: String,
+    default: "left",
+    validator: function (value: string) {
+      return ["left", "right"].includes(value);
+    },
+  },
 };

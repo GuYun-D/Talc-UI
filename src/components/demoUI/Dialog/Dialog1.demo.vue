@@ -26,7 +26,7 @@
 
 <script>
 import Dialog from "../../../lib/Dialog.vue";
-import Button from "../../../lib/button/src/Button.vue";
+import Button from "../../../lib/button/src/TButton.vue";
 import { ref } from "vue";
 export default {
   components: {
