@@ -1,5 +1,9 @@
 <template>
-  <button class="t-button" :class="classes" :disabled="disabled">
+  <button
+    class="t-button"
+    :class="classes"
+    :disabled="disabled"
+  >
     <span v-if="loading" class="t-loadingIndicator"></span>
     <slot />
   </button>
@@ -7,43 +11,19 @@
 
 <script>
 import { computed } from "vue";
+import { TBProps } from "./button";
 
 export default {
   name: "Button",
-  props: {
-    theme: {
-      type: String,
-      default: "button",
-    },
-
-    size: {
-      type: String,
-      default: "normal",
-    },
-
-    level: {
-      type: String,
-      default: "normal",
-    },
-
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-
-    loading: {
-      type: Boolean,
-      default: false
-    }
-  },
-
+  props: TBProps,
   setup(props) {
-    const { theme, size, level } = props;
+    const { theme, size, level, ripple } = props;
     const classes = computed(() => {
       return {
         [`t-theme-${theme}`]: theme,
         [`t-size-${size}`]: size,
         [`t-level-${level}`]: level,
+        [`t-ripple`]: ripple,
       };
     });
 
@@ -61,6 +41,7 @@ $radius: 4px;
 $red: red;
 $grey: grey;
 .t-button {
+  position: relative;
   box-sizing: border-box;
   height: $h;
   padding: 0 12px !important;
@@ -74,7 +55,8 @@ $grey: grey;
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 1px 0 fade-out(black, 0.95);
-  transition: background 250ms;
+  transition: all 250ms;
+  overflow: hidden;
   & + & {
     margin-left: 8px;
   }
@@ -184,7 +166,7 @@ $grey: grey;
     }
   }
 
-  > .t-loadingIndicator{
+  > .t-loadingIndicator {
     display: inline-block;
     width: 14px;
     height: 14px;
@@ -196,14 +178,29 @@ $grey: grey;
     animation: t-spin 1s infinite linear;
   }
 
+  span.ripple {
+    position: absolute;
+    /* 根据按钮定位 */
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 600ms linear;
+    background-color: rgba(241, 0, 0, 0.7);
+  }
+
+  @keyframes ripple {
+    to {
+      transform: scale(4);
+      opacity: 1;
+    }
+  }
+
   @keyframes t-spin {
-    0%{
+    0% {
       transform: rotate(0deg);
     }
 
-    100%{
+    100% {
       transform: rotate(360deg);
-
     }
   }
 }
