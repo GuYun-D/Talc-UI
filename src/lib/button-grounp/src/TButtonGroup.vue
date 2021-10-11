@@ -26,7 +26,7 @@ export default defineComponent({
   display: inline-flex;
   vertical-align: middle;
   font-size: 0;
-  margin: 0 10px;
+  margin: 10px 10px;
 
   > .t-button {
     margin-left: 0;
