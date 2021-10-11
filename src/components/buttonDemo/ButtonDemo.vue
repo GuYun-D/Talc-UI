@@ -11,6 +11,9 @@
     <Demo :component="Button3demo"></Demo>
     <Demo :component="Button4demo"></Demo>
     <Demo :component="Button5demo"></Demo>
+    <Demo :component="Button7demo">
+      使用按钮组你需要导入一个TButtonGroup的组件，该组件内部直接子元素必须使用TButton组件
+    </Demo>
     <Attribute :attributeConfig="attributeConfig"></Attribute>
   </div>
 </template>
@@ -22,6 +25,7 @@ import Button3demo from "./demo/Button3.demo.vue";
 import Button4demo from "./demo/Button4.demo.vue";
 import Button5demo from "./demo/Button5.demo.vue";
 import Button6demo from "./demo/Button6.demo.vue";
+import Button7demo from "./demo/Button7.demo.vue";
 import Demo from "../Demo.vue";
 import Attribute from "../../base-ui/attribute/index";
 import { attributeConfig } from "./config/attribute.config";
@@ -45,6 +49,7 @@ export default {
       Button4demo,
       Button5demo,
       Button6demo,
+      Button7demo,
       attributeConfig,
     };
   },
