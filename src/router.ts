@@ -4,6 +4,7 @@ import Button from "./components/buttonDemo/ButtonDemo.vue";
 import Dialog from "./components/DialogDemo.vue";
 import Tabs from "./components/TabsDemo.vue";
 import Icon from "./components/iconfontDemo/IconfontDemo.vue";
+import Input from "./components/inputDemo/InputDemo.vue";
 import Home from "./views/Home.vue";
 import Doc from "./views/Doc.vue";
 
@@ -63,6 +64,10 @@ export const router = createRouter({
         {
           path: "icon",
           component: Icon,
+        },
+        {
+          path: "input",
+          component: Input,
         },
       ],
     },
