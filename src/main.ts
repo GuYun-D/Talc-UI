@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import { router } from './router'
 import Markdown from './components/markdown.vue'
-import './lib/iconfont/src/iconfont'
+import './lib/iconfont/font/iconfont'
 
 import 'github-markdown-css'
 // 引入全局样式

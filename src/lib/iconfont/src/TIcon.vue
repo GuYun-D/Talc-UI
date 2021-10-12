@@ -11,6 +11,7 @@ export default defineComponent({
   props: {
     icon: {
       type: String,
+      required: true
     },
   },
   setup() {
@@ -23,5 +24,6 @@ export default defineComponent({
 .t-icon {
   width: 1em;
   height: 1em;
+  cursor: pointer;
 }
 </style>

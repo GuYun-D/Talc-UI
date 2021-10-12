@@ -50,7 +50,7 @@ $borderColor: rgb(180, 176, 176);
 
 footer {
   width: 100%;
-  padding: 20px;
+  padding: 20px 0;
   .itemAttribute {
     width: 100%;
     .title {

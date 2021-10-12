@@ -1,0 +1,197 @@
+@font-face {
+  font-family: "talc";
+  /* Project id 2857757 */
+  src: url('//at.alicdn.com/t/font_2857757_hhauhdppx06.woff2?t=1634015757173') format('woff2'), url('//at.alicdn.com/t/font_2857757_hhauhdppx06.woff?t=1634015757173') format('woff'), url('//at.alicdn.com/t/font_2857757_hhauhdppx06.ttf?t=1634015757173') format('truetype');
+}
+
+.talc {
+  font-family: "talc" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ta-31sousuo:before {
+  content: "\e602";
+}
+
+.ta-shouji:before {
+  content: "\e6c7";
+}
+
+.ta-kefu:before {
+  content: "\e741";
+}
+
+.ta-xiangji1:before {
+  content: "\e77f";
+}
+
+.ta-shouji1:before {
+  content: "\e692";
+}
+
+.ta-kefu1:before {
+  content: "\e658";
+}
+
+.ta-sousuo-xianxing:before {
+  content: "\e8b8";
+}
+
+.ta-dianhua:before {
+  content: "\e88b";
+}
+
+.ta-wenjianjia:before {
+  content: "\ec17";
+}
+
+.ta-fasong:before {
+  content: "\e61d";
+}
+
+.ta-wj-chwj:before {
+  content: "\e76f";
+}
+
+.ta-24gl-fileText:before {
+  content: "\eabe";
+}
+
+.ta-fasong1:before {
+  content: "\e646";
+}
+
+.ta-shoucang:before {
+  content: "\e8b9";
+}
+
+.ta-xiangji:before {
+  content: "\e8bc";
+}
+
+.ta-shoucang1:before {
+  content: "\e8c6";
+}
+
+.ta-home:before {
+  content: "\e60b";
+}
+
+.ta-menu-1:before {
+  content: "\e6b7";
+}
+
+.ta-home1:before {
+  content: "\e608";
+}
+
+.ta-menu:before {
+  content: "\e762";
+}
+
+.ta-setting:before {
+  content: "\e64b";
+}
+
+.ta-cloud-download:before {
+  content: "\ec1d";
+}
+
+.ta-simple-setting:before {
+  content: "\e8b7";
+}
+
+.ta-download:before {
+  content: "\e626";
+}
+
+.ta-user:before {
+  content: "\e600";
+}
+
+.ta-delete:before {
+  content: "\e601";
+}
+
+.ta-password:before {
+  content: "\e620";
+}
+
+.ta-user-simple:before {
+  content: "\e788";
+}
+
+.ta-right-arrow:before {
+  content: "\e65f";
+}
+
+.ta-left-arrow:before {
+  content: "\e660";
+}
+
+.ta-edit:before {
+  content: "\e738";
+}
+
+.ta-arrow-right:before {
+  content: "\e624";
+}
+
+.ta-arrow-left:before {
+  content: "\e625";
+}
+
+.ta-user-round:before {
+  content: "\e63d";
+}
+
+.ta-layout:before {
+  content: "\e892";
+}
+
+.ta-sign-out:before {
+  content: "\e61a";
+}
+
+.ta-add:before {
+  content: "\e64f";
+}
+
+.ta-message:before {
+  content: "\ec3b";
+}
+
+.ta-edit-user:before {
+  content: "\e690";
+}
+
+.ta-add-img:before {
+  content: "\ec7d";
+}
+
+.ta-msg:before {
+  content: "\e618";
+}
+
+.ta-fold:before {
+  content: "\e647";
+}
+
+.ta-delete-1:before {
+  content: "\e8b6";
+}
+
+.ta-doble-top:before {
+  content: "\e634";
+}
+
+.ta-double-left:before {
+  content: "\e64a";
+}
+
+.ta-Interface-32:before {
+  content: "\e7fc";
+}
