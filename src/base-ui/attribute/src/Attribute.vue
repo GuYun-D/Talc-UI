@@ -60,11 +60,12 @@ footer {
     .attr-container {
       overflow: auto;
       .itemHeader {
-        width: 100%;
         min-width: 796px;
-        font-weight: bold;
+        width: 100%;
         height: 20px;
-        padding: 20px 20px 25px 20px;
+        padding: 20px;
+        line-height: 5px;
+        border-bottom: 1px dotted $borderColor;
         border-bottom: 2px solid $mainColor;
         border-top: 1px solid $borderColor;
 
