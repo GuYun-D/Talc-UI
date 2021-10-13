@@ -1,14 +1,16 @@
 <template>
-  <h1>Tabs组件</h1>
+  <div>
+    <h1>Tabs组件</h1>
     <Demo :component="Tabs1"></Demo>
+  </div>
 </template>
 
 <script lang="ts">
-import Demo from "./Demo.vue"
-import Tabs1 from "./demoUI/Tabs/Tabs1.demo.vue"
+import Demo from "./Demo.vue";
+import Tabs1 from "./demoUI/Tabs/Tabs1.demo.vue";
 export default {
   components: {
-    Demo
+    Demo,
   },
 
   setup() {

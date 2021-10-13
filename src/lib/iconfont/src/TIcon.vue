@@ -24,6 +24,5 @@ export default defineComponent({
 .t-icon {
   width: 1em;
   height: 1em;
-  cursor: pointer;
 }
 </style>
