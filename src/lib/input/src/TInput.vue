@@ -71,6 +71,11 @@ export default defineComponent({
     const inputRef = ref(null);
     const prefixIconRef = ref<InstanceType<typeof TIcon>>();
     const suffixIconRef = ref<InstanceType<typeof TIcon>>();
+    enum IconLocation {
+      head = "prefix",
+      end = "suffix",
+    }
+
     const size = props.size;
     const sizeObj = {
       normal: {
@@ -96,33 +101,34 @@ export default defineComponent({
     const calcStyle = (position: string) => {
       let left = null;
       let right = null;
-      const el = position === "prefix" ? prefixIconRef : suffixIconRef;
-      let offset = position === "prefix" ? left : right;
+      const el = position === IconLocation.head ? prefixIconRef : suffixIconRef;
+      let offset = position === IconLocation.head ? left : right;
       const { width } = el.value.$el.getBoundingClientRect();
-      let top = sizeObj[size].inputHeight / 2 - width / 2 - 1 + 'px';
-      offset = 15 - width / 2 + 'px';
+      let top = sizeObj[size].inputHeight / 2 - width / 2 - 1 + "px";
+      offset = 15 - width / 2 + "px";
       return {
         top,
         offset,
       };
     };
 
-    onMounted(() => {
-      if (props.prefixIcon && prefixIconRef.value) {
-        const { top, offset } = calcStyle("prefix");
-        inputRef.value.style.paddingLeft = "30px";
-        prefixIconRef.value.$el.style.fontSize = sizeObj[size].font + "px";
-        prefixIconRef.value.$el.style.top = top;
-        prefixIconRef.value.$el.style.left = offset;
-      }
+    const handleIcon = (
+      iconPosition: string,
+      offsetPosition: string,
+      inputPadding: string
+    ) => {
+      let iconComponent =
+        iconPosition === IconLocation.head ? prefixIconRef : suffixIconRef;
+      const { top, offset } = calcStyle(iconPosition);
+      inputRef.value.style[inputPadding] = "30px";
+      iconComponent.value.$el.style.fontSize = sizeObj[size].font + "px";
+      iconComponent.value.$el.style.top = top;
+      iconComponent.value.$el.style[offsetPosition] = offset;
+    };
 
-      if (props.prefixIcon && suffixIconRef.value) {
-        const { top, offset } = calcStyle("suffixIcon");
-        inputRef.value.style.paddingRight = "30px";
-        suffixIconRef.value.$el.style.fontSize = sizeObj[size].font + "px";
-        suffixIconRef.value.$el.style.top = top;
-        suffixIconRef.value.$el.style.right = offset;
-      }
+    onMounted(() => {
+      props.prefixIcon && handleIcon(IconLocation.head, "left", "paddingLeft");
+      props.prefixIcon && handleIcon(IconLocation.end, "right", "paddingRight");
     });
 
     const handleValueChange = (e) => {
