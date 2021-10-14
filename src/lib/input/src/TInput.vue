@@ -31,7 +31,7 @@
         ref="suffixIconRef"
         :icon="showIcon"
         @click="clearValue"
-        :class="{point: clearable}"
+        :class="{ point: clearable }"
       ></t-icon>
     </template>
 
@@ -73,6 +73,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    shadow: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   components: {
@@ -111,6 +115,7 @@ export default defineComponent({
     const inpClass = computed(() => {
       return {
         [`t-input-${size}`]: size !== "normal",
+        [`t-input-shadow`]: props.shadow,
       };
     });
 
@@ -199,19 +204,21 @@ export default defineComponent({
     position: absolute;
   }
 
-  .point{
+  .point {
     cursor: pointer;
   }
 
   &.error {
     > input {
       border-color: #f1453d;
-      box-shadow: inset 0 1px 3px #f1453d;
       margin-bottom: 4px;
+
+      &.t-input-shadow {
+        box-shadow: inset 0 1px 3px #f1453d;
+      }
 
       &:focus {
         border-color: #f1453d;
-        box-shadow: inset 0 1px 3px #f1453d;
       }
 
       &:hover {
@@ -263,6 +270,10 @@ export default defineComponent({
 
     &:focus {
       outline: none;
+      // box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    &.t-input-shadow:focus {
       box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
     }
 

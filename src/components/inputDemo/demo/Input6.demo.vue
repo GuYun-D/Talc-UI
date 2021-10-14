@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <t-input :clearable="true" v-model:value="msg"></t-input>
+    <t-input :clearable="true" v-model:value="msg" :shadow="true"></t-input>
     <div class="example">{{ msg }}</div>
   </div>
 </template>

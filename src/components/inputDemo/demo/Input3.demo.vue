@@ -5,6 +5,7 @@
 <template>
   <div>
     <t-input value="表单验证失败" error="请输入用户名"></t-input>
+    <t-input value="表单验证失败" :shadow="true" error="请输入用户名"></t-input>
   </div>
 </template>
 
