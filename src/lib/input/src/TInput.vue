@@ -9,11 +9,13 @@
       :disabled="disable"
       :placeholder="placeholder"
       ref="inputRef"
+      :maxlength="maxLength"
       @change="$emit('change', $event.target.value)"
       @focus="$emit('focus', $event.target.value)"
       @blur="$emit('blur', $event.target.value)"
       @input="handleValueChange"
     />
+
     <template v-if="error">
       <div>
         <t-icon icon="delete" class="icon-error"></t-icon>
@@ -35,49 +37,21 @@
       ></t-icon>
     </template>
 
-    {{}}
+    <template v-if="maxLength">
+      <span ref="counterRef" class="counter">
+        {{ counter }}/{{ maxLength }}
+      </span>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from "vue";
+import { computed, defineComponent, onMounted, ref, watch } from "vue";
 import TIcon from "../../iconfont/src/TIcon.vue";
+import { inputProps } from "./input";
 
 export default defineComponent({
-  props: {
-    value: String,
-    disable: {
-      type: Boolean,
-      default: false,
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-    error: String,
-    placeholder: String,
-    type: String,
-    size: {
-      type: String,
-      default: "normal",
-    },
-    prefixIcon: {
-      type: String,
-      default: "",
-    },
-    suffixIcon: {
-      type: String,
-      default: "",
-    },
-    clearable: {
-      type: Boolean,
-      default: false,
-    },
-    shadow: {
-      type: Boolean,
-      default: false,
-    },
-  },
+  props: inputProps,
 
   components: {
     TIcon,
@@ -87,6 +61,9 @@ export default defineComponent({
     const inputRef = ref(null);
     const prefixIconRef = ref<InstanceType<typeof TIcon>>();
     const suffixIconRef = ref<InstanceType<typeof TIcon>>();
+    const counterRef = ref(null);
+    const counter = ref(0);
+
     let isShowSuffixIcon = ref(
       props.clearable || props.suffixIcon ? true : false
     );
@@ -94,6 +71,7 @@ export default defineComponent({
     enum IconLocation {
       head = "prefix",
       end = "suffix",
+      counter = "counter",
     }
 
     const size = props.size;
@@ -181,6 +159,13 @@ export default defineComponent({
       emit("update:value", "");
     };
 
+    watch(
+      () => props.value,
+      (newVal, oldVal) => {
+        counter.value = newVal.length;
+      }
+    );
+
     return {
       handleValueChange,
       inpClass,
@@ -190,6 +175,8 @@ export default defineComponent({
       isShowSuffixIcon,
       showIcon,
       clearValue,
+      counter,
+      counterRef,
     };
   },
 });
@@ -206,6 +193,13 @@ export default defineComponent({
 
   .point {
     cursor: pointer;
+  }
+
+  .counter {
+    color: #999;
+    position: absolute;
+    top: 12px;
+    right: 10px;
   }
 
   &.error {
