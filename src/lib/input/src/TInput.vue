@@ -128,7 +128,7 @@ export default defineComponent({
 
     onMounted(() => {
       props.prefixIcon && handleIcon(IconLocation.head, "left", "paddingLeft");
-      props.prefixIcon && handleIcon(IconLocation.end, "right", "paddingRight");
+      props.suffixIcon && handleIcon(IconLocation.end, "right", "paddingRight");
     });
 
     const handleValueChange = (e) => {

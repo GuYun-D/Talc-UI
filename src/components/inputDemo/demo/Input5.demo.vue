@@ -1,12 +1,12 @@
 <demo>
-  支持size属性
+  添加icon
 </demo>
 
 <template>
   <div>
-    <t-input value="大输入框" size="big"></t-input>
-    <t-input value="正常输入框"></t-input>
-    <t-input value="小输入框" size="mini"></t-input>
+    <t-input prefixIcon="31sousuo"></t-input>
+    <t-input suffixIcon="delete"></t-input>
+    <t-input prefixIcon="31sousuo" suffixIcon="delete"></t-input>
   </div>
 </template>
 
