@@ -12,6 +12,7 @@
     <Demo :component="Input3Demo"></Demo>
     <Demo :component="Input4Demo"></Demo>
     <Demo :component="Input5Demo"></Demo>
+    <Demo :component="Input6Demo"></Demo>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import Input2Demo from "./demo/Input2.demo.vue";
 import Input3Demo from "./demo/Input3.demo.vue";
 import Input4Demo from "./demo/Input4.demo.vue";
 import Input5Demo from "./demo/Input5.demo.vue";
+import Input6Demo from "./demo/Input6.demo.vue";
 
 export default defineComponent({
   components: {
@@ -44,6 +46,7 @@ export default defineComponent({
       Input3Demo,
       Input4Demo,
       Input5Demo,
+      Input6Demo,
     };
   },
 });

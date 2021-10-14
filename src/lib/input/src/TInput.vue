@@ -25,9 +25,17 @@
       <t-icon class="icon" ref="prefixIconRef" :icon="prefixIcon"></t-icon>
     </template>
 
-    <template v-if="suffixIcon">
-      <t-icon class="icon" ref="suffixIconRef" :icon="suffixIcon"></t-icon>
+    <template v-if="isShowSuffixIcon">
+      <t-icon
+        class="icon"
+        ref="suffixIconRef"
+        :icon="showIcon"
+        @click="clearValue"
+        :class="{point: clearable}"
+      ></t-icon>
     </template>
+
+    {{}}
   </div>
 </template>
 
@@ -61,6 +69,10 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   components: {
@@ -71,6 +83,10 @@ export default defineComponent({
     const inputRef = ref(null);
     const prefixIconRef = ref<InstanceType<typeof TIcon>>();
     const suffixIconRef = ref<InstanceType<typeof TIcon>>();
+    let isShowSuffixIcon = ref(
+      props.clearable || props.suffixIcon ? true : false
+    );
+    let showIcon = ref(props.suffixIcon);
     enum IconLocation {
       head = "prefix",
       end = "suffix",
@@ -126,20 +142,49 @@ export default defineComponent({
       iconComponent.value.$el.style[offsetPosition] = offset;
     };
 
+    const handleClearable = () => {
+      if (props.clearable) {
+        if (props.suffixIcon) {
+          console.error("TIcon-Error:clearable和suffixIcon只支持其中一个");
+          isShowSuffixIcon.value = false;
+          return;
+        }
+
+        showIcon.value = "delete";
+        handleIcon(IconLocation.end, "right", "paddingRight");
+      }
+    };
+
     onMounted(() => {
+      handleClearable();
       props.prefixIcon && handleIcon(IconLocation.head, "left", "paddingLeft");
-      props.suffixIcon && handleIcon(IconLocation.end, "right", "paddingRight");
+      if (!props.clearable) {
+        props.suffixIcon &&
+          handleIcon(IconLocation.end, "right", "paddingRight");
+      }
     });
 
     const handleValueChange = (e) => {
       emit("update:value", e.target.value);
     };
+
+    const clearValue = (e) => {
+      if (!props.clearable) {
+        return;
+      }
+      inputRef.value.focus();
+      emit("update:value", "");
+    };
+
     return {
       handleValueChange,
       inpClass,
       inputRef,
       prefixIconRef,
       suffixIconRef,
+      isShowSuffixIcon,
+      showIcon,
+      clearValue,
     };
   },
 });
@@ -152,6 +197,10 @@ export default defineComponent({
 
   .icon {
     position: absolute;
+  }
+
+  .point{
+    cursor: pointer;
   }
 
   &.error {
