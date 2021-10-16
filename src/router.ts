@@ -6,6 +6,7 @@ import Tabs from "./components/TabsDemo.vue";
 import Icon from "./components/iconfontDemo/IconfontDemo.vue";
 import Input from "./components/inputDemo/InputDemo.vue";
 import Grid from "./components/gridDemo/gridDemo.vue";
+import Content from "./components/contentDemo/ContentDemo.vue";
 import Home from "./views/Home.vue";
 import Doc from "./views/Doc.vue";
 
@@ -72,6 +73,9 @@ export const router = createRouter({
         }, {
           path: 'grid',
           component: Grid
+        }, {
+          path: 'layout',
+          component: Content
         }
       ],
     },
