@@ -72,6 +72,7 @@ $main: #4fc08d;
   display: flex;
   flex-direction: column;
   height: 100vh;
+
   > .nav {
     flex-shrink: 0;
   }
@@ -86,6 +87,7 @@ $main: #4fc08d;
 }
 .content {
   display: flex;
+
   > aside {
     flex-shrink: 0;
   }
@@ -109,6 +111,35 @@ aside {
   padding-top: 66px;
   height: 100%;
   box-shadow: 1px 0 9px #abb6ab;
+  overflow: auto;
+  overflow-x: hidden;
+
+
+  &::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    border: 5px solid transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.2) inset;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    min-height: 20px;
+    background-clip: content-box;
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.171) inset;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
   > h2 {
     margin-bottom: 4px;
     padding: 10px 10px;

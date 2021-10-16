@@ -7,10 +7,10 @@
         <li>
           &lt;t-layout&gt;：外层布局容器。&lt;t-layout&gt;直接包含&lt;t-sider&gt;组件时，这三个组件默认是上下排列，当你使用&lt;t-footer&gt;组件时，尽量再使用一个&lt;t-layout&gt;将它作为sider的父组件，也就是下面布局的第二种和第三种方式，因为t-layout组件内部会对sider组件进行检测，当layout组件检测到sider组件的存在时，其内部的排列顺序将变成横向排列
         </li>
-        <li>&lt;t-header&gt;:</li>
-        <li>&lt;t-content&gt;:</li>
-        <li>&lt;t-sider&gt;:</li>
-        <li>&lt;t-footer&gt;:</li>
+        <li>&lt;t-header&gt;：顶栏容器</li>
+        <li>&lt;t-content&gt;：内容容器</li>
+        <li>&lt;t-sider&gt;：侧边栏容器</li>
+        <li>&lt;t-footer&gt;：底栏容器</li>
       </ul>
     </Explain>
 
