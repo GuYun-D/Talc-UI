@@ -72,7 +72,8 @@ $mainColor: #4fc08d;
   z-index: 10;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid $mainColor;
+  border-bottom: 1px solid rgb(233, 233, 233);
+
   > .logo {
     max-width: 8em;
     font-size: 24px;

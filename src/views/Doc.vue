@@ -110,7 +110,6 @@ aside {
   z-index: 1;
   padding-top: 66px;
   height: 100%;
-  box-shadow: 1px 0 9px #abb6ab;
   overflow: auto;
   overflow-x: hidden;
 
@@ -143,7 +142,7 @@ aside {
   > h2 {
     margin-bottom: 4px;
     padding: 10px 10px;
-    color: $main;
+    color: rgb(172, 172, 172);
     border: none;
   }
   > ol {

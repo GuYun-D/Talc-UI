@@ -45,9 +45,9 @@ export default defineComponent({
     li {
       color: rgb(68, 67, 67);
       font-size: 14px;
-      margin: 5px 0;
+      margin: 10px 0;
       text-indent: 2em;
-      line-height: 1.5;
+      line-height: 2;
       
     }
   }

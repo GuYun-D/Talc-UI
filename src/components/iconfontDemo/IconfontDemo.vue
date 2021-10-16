@@ -66,8 +66,8 @@ export default defineComponent({
 }
 
 pre {
-  background-color: #eaecec;
-  padding-top: 10px;
+  background-color: #3b3b3b;
+  padding-top: 30px;
   font-size: 20px;
 }
 </style>

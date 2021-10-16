@@ -1,13 +1,12 @@
 <template>
   <div>
     <h2>{{ component.__sourceCodeTitle }}</h2>
+    <div class="desc" ref="descRef" v-if="isShowDesc">
+      <slot></slot>
+    </div>
     <div class="demo">
       <div class="demo-component">
         <component :is="component"></component>
-      </div>
-
-      <div class="desc">
-        <slot></slot>
       </div>
 
       <div class="demo-actions" @click="codeVisible = !codeVisible">
@@ -24,13 +23,15 @@
 import "prismjs";
 import "prismjs/themes/prism.css";
 const Prism = (window as any).Prism;
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 
 export default {
   props: {
     component: Object,
   },
   setup(props) {
+    const descRef = ref(null);
+    const isShowDesc = ref(true);
     const html = computed(() => {
       return Prism.highlight(
         props.component.__sourceCode,
@@ -40,10 +41,19 @@ export default {
     });
     const codeVisible = ref(false);
 
+    onMounted(() => {
+      if (descRef.value.innerText.length === 0) {
+        isShowDesc.value = false;
+      }
+      console.log(descRef.value.innerText.length === 0);
+    });
+
     return {
       Prism,
       html,
       codeVisible,
+      descRef,
+      isShowDesc,
     };
   },
 };
@@ -57,15 +67,19 @@ h2 {
   color: #1f2f3d;
   font-weight: 100;
 }
-.demo {
-  border: 1px solid $border-color;
-  margin: 16px 0 32px;
 
-  .desc {
-    padding: 10px 20px;
-    font-size: 15px;
-    color: rgb(99, 97, 97);
-  }
+.desc {
+  padding: 10px 20px;
+  font-size: 15px;
+  color: rgb(99, 97, 97);
+  font-size: 14px;
+  padding: 0 0 0 30px;
+  line-height: 2;
+}
+.demo {
+  border: 1px solid rgb(235, 235, 235);
+  margin: 16px 0 32px;
+  border-radius: 10px;
 
   &-component {
     padding: 16px;
@@ -78,8 +92,8 @@ h2 {
     color: #d5d4d4;
     transition: all 0.3s;
     &:hover {
-      box-shadow: 2px 2px 2px #ccc;
-      color: #26e144;
+      box-shadow: 0px 2px 2px #ccc;
+      color: #000000;
     }
   }
   &-code {
@@ -95,39 +109,48 @@ h2 {
 }
 
 .token.tag {
-  color: #4181be !important;
+  color: #2180d8 !important;
 }
 
 .token.attr-name {
-  color: #88c6ea;
+  color: #2691cf;
 }
 
 .token.attr-value {
-  color: #26e144;
+  color: #39ce52;
 }
 
 .token.keyword {
-  color: #e91e63;
+  color: #d6235f;
 }
 
 .token.string {
-  color: #10e1c5;
+  color: #22d3bb;
 }
 
 .token.function {
-  color: #f5b607;
+  color: #c59a23;
 }
 
 .token.number {
-  color: #7f3cfa;
+  color: #5a22c4;
 }
 
 .token .language-javascript {
-  color: #06ee19;
+  color: #2cac37;
+}
+
+.token.operator {
+  color: rgb(238, 224, 224);
+  background-color: transparent;
 }
 
 pre {
   font-size: 15px;
   line-height: 1.2 !important;
+  background-color: #1b1b1b;
+  padding: 20px;
+  color: #fff;
+  border-radius: 5px;
 }
 </style>
