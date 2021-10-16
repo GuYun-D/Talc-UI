@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="col"
-    :class="[`col-${span}`, offset && `offset-${offset}`]"
-  >
+  <div class="col worinima" :class="[`col-${span}`, offset && `offset-${offset}`]">
     <slot></slot>
   </div>
 </template>
@@ -27,7 +24,6 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .col {
-  width: 50%;
   height: 100px;
   background-color: rgb(235, 137, 8);
   border: 1px solid red;

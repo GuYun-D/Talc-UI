@@ -37,6 +37,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .row {
   display: flex;
+  flex-shrink: 0;
   box-sizing: border-box;
 }
 </style>
