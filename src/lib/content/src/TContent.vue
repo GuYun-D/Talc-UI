@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="t-content">
     <slot></slot>
   </div>
 </template>
@@ -15,5 +15,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.t-content{
+  flex-grow: 1;
+}
 </style>

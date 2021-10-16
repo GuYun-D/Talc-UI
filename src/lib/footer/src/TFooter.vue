@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <div class="t-footer">
     <slot></slot>
   </div>
 </template>
@@ -14,6 +14,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="t-header">
     <slot></slot>
   </div>
 </template>
@@ -14,6 +14,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-</style>
