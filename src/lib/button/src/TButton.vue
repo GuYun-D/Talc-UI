@@ -14,7 +14,7 @@ import { TBProps } from "./button";
 import TIcon from "../../iconfont/src/TIcon.vue";
 
 export default defineComponent({
-  name: "Button",
+  name: "t-button",
   props: TBProps,
   components: {
     TIcon,
