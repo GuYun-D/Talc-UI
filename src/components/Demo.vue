@@ -100,6 +100,9 @@ h2 {
     border-top: 1px dashed $border-color;
     transition: all 1s;
     overflow: auto;
+    background-color: #1b1b1b;
+    border-radius: 5px;
+
     > pre {
       line-height: 1.1;
       font-family: Consolas, "Courier New", Courier, monospace;
@@ -148,9 +151,7 @@ h2 {
 pre {
   font-size: 15px;
   line-height: 1.2 !important;
-  background-color: #1b1b1b;
   padding: 20px;
   color: #fff;
-  border-radius: 5px;
 }
 </style>
