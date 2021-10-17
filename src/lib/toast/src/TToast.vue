@@ -1,6 +1,9 @@
 <template>
   <div class="t-toast" v-if="visible" ref="toastRef">
-    <slot></slot>
+    <slot class="defaultSlot" v-if="!enableHtml"></slot>
+    <div v-else class="htmlSlot">
+      <slot name="toastHtml"></slot>
+    </div>
     <span class="line"></span>
     <span v-if="closeButton.text" class="closeLine" @click="onclickClose">
       {{ closeButton.text }}
@@ -9,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, watch, PropType, Prop } from "vue";
+import { computed, defineComponent, watch, PropType, ref } from "vue";
 import { ICloseButton } from "../types/types";
 
 export default defineComponent({
@@ -26,7 +29,7 @@ export default defineComponent({
     },
     autoCloseDelay: {
       type: Number,
-      default: 3,
+      default: 5,
     },
     closeButton: {
       type: Object as PropType<ICloseButton>,
@@ -36,6 +39,10 @@ export default defineComponent({
           callBack: () => {},
         };
       },
+    },
+    enableHtml: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {
@@ -82,7 +89,7 @@ export default defineComponent({
   box-sizing: border-box;
   font-size: 14px;
   line-height: 1.8;
-  height: 40px;
+  max-width: 1200px;
   padding: 10px;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
   background: rgba(0, 0, 0, 0.75);
@@ -90,16 +97,23 @@ export default defineComponent({
   color: #fff;
   z-index: 10;
 
+  .htmlSlot {
+    display: flex;
+    flex-direction: column;
+  }
+
   .closeLine {
     position: relative;
     padding-left: 16px;
+    padding-right: 5px;
     cursor: pointer;
+    flex-shrink: 0;
+    border-left: 1px solid #666;
   }
 
   .line {
     display: inline-block;
     height: 100%;
-    border-left: 1px solid #666;
     margin-left: 16px;
   }
 }

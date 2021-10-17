@@ -4,10 +4,21 @@
     <t-toast
       :visible="isShowToast"
       :closeButton="closeButtonObj"
+      :enableHtml="false"
       :autoClose="true"
       @update:visible="isShowToast = $event"
-      >我是以一个totals</t-toast
     >
+      我是一个toast
+      <template #toastHtml>
+        <strong>haha</strong>
+        <p>尼玛</p>
+        <mark>操</mark>
+        <div>我来了</div>
+        <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
+        <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
+        <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
+      </template>
+    </t-toast>
   </div>
 </template>
 
@@ -23,7 +34,7 @@ export default defineComponent({
     const closeButtonObj = {
       text: "关闭",
       callBack: function () {
-        console.log("老子知道了");
+        console.log("执行了回调");
       },
     };
     return { isShowToast, toggleToast, closeButtonObj };
