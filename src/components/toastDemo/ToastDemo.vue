@@ -7,6 +7,7 @@
       :enableHtml="false"
       :autoClose="true"
       @update:visible="isShowToast = $event"
+      @toastClose="toastClose"
     >
       我是一个toast
       <template #toastHtml>
@@ -39,7 +40,10 @@ export default defineComponent({
         console.log("执行了回调");
       },
     };
-    return { isShowToast, toggleToast, closeButtonObj };
+    const toastClose = () => {
+      alert("toast 要关闭了");
+    };
+    return { isShowToast, toggleToast, closeButtonObj, toastClose };
   },
 });
 </script>

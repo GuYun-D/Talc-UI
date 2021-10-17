@@ -19,7 +19,7 @@ import { ICloseButton } from "../types/types";
 
 export default defineComponent({
   name: "t-toast",
-  emits: ["update:visible"],
+  emits: ["update:visible", "toastClose"],
   props: {
     visible: {
       type: Boolean,
@@ -31,7 +31,7 @@ export default defineComponent({
     },
     autoCloseDelay: {
       type: Number,
-      default: 50,
+      default: 5,
     },
     closeButton: {
       type: Object as PropType<ICloseButton>,
@@ -80,6 +80,7 @@ export default defineComponent({
     }
 
     const close = () => {
+      emit("toastClose");
       emit("update:visible", false);
     };
 
