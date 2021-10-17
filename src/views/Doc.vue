@@ -38,6 +38,9 @@
           <li>
             <router-link to="/doc/layout">layout 布局</router-link>
           </li>
+          <li>
+            <router-link to="/doc/toast">Toast 组件</router-link>
+          </li>
         </ol>
       </aside>
       <main>
@@ -112,7 +115,6 @@ aside {
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
-
 
   &::-webkit-scrollbar {
     width: 14px;

@@ -1,7 +1,7 @@
 import type { IAttributeConfig } from "../../../base-ui/attribute/types/types";
 
 export const attributeEventConfig: IAttributeConfig = {
-  attributeTitle: "Input Event",
+  attributeTitle: "Toast Event",
   attributeItems: [
     {
       name: "input",

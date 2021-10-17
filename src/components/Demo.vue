@@ -45,7 +45,7 @@ export default {
       if (descRef.value.innerText.length === 0) {
         isShowDesc.value = false;
       }
-      console.log(descRef.value.innerText.length === 0);
+      
     });
 
     return {

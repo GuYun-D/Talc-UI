@@ -1,49 +1,40 @@
 <template>
   <div>
-    <t-button @click="toggleToast">toast</t-button>
-    <t-toast
-      :visible="isShowToast"
-      :closeButton="closeButtonObj"
-      :enableHtml="false"
-      :autoClose="true"
-      @update:visible="isShowToast = $event"
-      @toastClose="toastClose"
-    >
-      我是一个toast
-      <template #toastHtml>
-        <strong>haha</strong>
-        <p>尼玛</p>
-        <mark>操</mark>
-        <div>我来了</div>
-        <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
-        <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
-        <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
-      </template>
-    </t-toast>
-    <t-toast :visible="isShowToast" position="middle">123456</t-toast>
-    <t-toast :visible="isShowToast" position="bottom">123456</t-toast>
+    <h1>Toast组件</h1>
+    <Demo :component="Toast1Demo"></Demo>
+    <Demo :component="Toast2Demo"></Demo>
+    <Demo :component="Toast3Demo"></Demo>
+    <Demo :component="Toast4Demo"></Demo>
+    <Attribute :attributeConfig="attributeConfig"></Attribute>
+    <Attribute :attributeConfig="attributeEventConfig"></Attribute>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import Demo from "../Demo.vue";
+import Attribute from "../../base-ui/attribute/index";
+import Toast1Demo from "./demo/toast1.demo.vue";
+import Toast2Demo from "./demo/toast2.demo.vue";
+import Toast3Demo from "./demo/toast3.demo.vue";
+import Toast4Demo from "./demo/toast4.demo.vue";
+import { attributeConfig } from "./config/attributeConfig";
+import { attributeEventConfig } from "./config/attributeEvent.config";
 
 export default defineComponent({
+  components: {
+    Demo,
+    Attribute,
+  },
   setup() {
-    const isShowToast = ref(false);
-    const toggleToast = () => {
-      isShowToast.value = !isShowToast.value;
+    return {
+      Toast1Demo,
+      Toast2Demo,
+      Toast3Demo,
+      Toast4Demo,
+      attributeConfig,
+      attributeEventConfig,
     };
-    const closeButtonObj = {
-      text: "关闭",
-      callBack: function () {
-        console.log("执行了回调");
-      },
-    };
-    const toastClose = () => {
-      alert("toast 要关闭了");
-    };
-    return { isShowToast, toggleToast, closeButtonObj, toastClose };
   },
 });
 </script>

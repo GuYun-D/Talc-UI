@@ -31,7 +31,7 @@ export default defineComponent({
     },
     autoCloseDelay: {
       type: Number,
-      default: 5,
+      default: 3,
     },
     closeButton: {
       type: Object as PropType<ICloseButton>,
