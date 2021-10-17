@@ -19,8 +19,8 @@
         <p>日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈日你妈</p>
       </template>
     </t-toast>
-
     <t-toast :visible="isShowToast" position="middle">123456</t-toast>
+    <t-toast :visible="isShowToast" position="bottom">123456</t-toast>
   </div>
 </template>
 
