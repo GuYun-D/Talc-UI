@@ -8,10 +8,11 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  name: "t-icon",
   props: {
     icon: {
       type: String,
-      required: true
+      required: true,
     },
   },
   setup() {

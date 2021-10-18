@@ -2,7 +2,7 @@ import { createWebHashHistory, createRouter } from "vue-router";
 import Switch from "./components/SwitchDemo.vue";
 import Button from "./components/buttonDemo/ButtonDemo.vue";
 import Dialog from "./components/DialogDemo.vue";
-import Tabs from "./components/TabsDemo.vue";
+import Tabs from "./components/tabsDemo/TabsDemo.vue";
 import Icon from "./components/iconfontDemo/IconfontDemo.vue";
 import Input from "./components/inputDemo/InputDemo.vue";
 import Grid from "./components/gridDemo/gridDemo.vue";

@@ -41,6 +41,9 @@
           <li>
             <router-link to="/doc/toast">toast 组件</router-link>
           </li>
+          <li>
+            <router-link to="/doc/tabs">tabs 组件</router-link>
+          </li>
         </ol>
       </aside>
       <main>
