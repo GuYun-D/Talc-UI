@@ -1,11 +1,12 @@
 <template>
-  <div class="t-tab-item">
+  <div class="t-tab-item" @click="xxxxx">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import emitter from "../../tabs/src/tabs";
 
 export default defineComponent({
   name: "t-tab-item",
@@ -14,9 +15,19 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    name: {
+      type: [String, Number],
+      required: true,
+    },
   },
-  setup() {
-    return {};
+  setup(props) {
+    emitter.on("update:selected", (name: string) => {
+      console.log(name);
+    });
+    const xxxxx = () => {
+      emitter.emit("update:selected", props.name);
+    };
+    return { xxxxx };
   },
 });
 </script>
