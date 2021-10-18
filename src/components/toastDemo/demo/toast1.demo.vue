@@ -5,15 +5,23 @@
 <template>
   <div>
     <t-button @click="toggleToastTop">上部</t-button>
-    <t-toast :visible="isShowToastTop">这是一个顶部的toast</t-toast>
+    <t-toast :visible="isShowToastTop" @update:visible="isShowToastTop = $event"
+      >这是一个顶部的toast</t-toast
+    >
 
     <t-button @click="toggleToastMiddle">中间</t-button>
-    <t-toast :visible="isShowToastMiddle" position="middle"
+    <t-toast
+      :visible="isShowToastMiddle"
+      @update:visible="isShowToastMiddle = $event"
+      position="middle"
       >这是一个中间的toast</t-toast
     >
 
     <t-button @click="toggleToastBottom">底部</t-button>
-    <t-toast :visible="isShowToastBottom" position="bottom"
+    <t-toast
+      :visible="isShowToastBottom"
+      @update:visible="isShowToastBottom = $event"
+      position="bottom"
       >这是一个底部的toast</t-toast
     >
   </div>
@@ -51,7 +59,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.t-button{
+.t-button {
   margin: 0 10px;
 }
 </style>

@@ -56,6 +56,9 @@ $fontColor: #fff;
         font-weight: bold;
         font-family: my;
         color: $fontColor;
+        display: block;
+        text-shadow: none;
+        border: none;
       }
 
       > h2 {

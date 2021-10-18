@@ -39,12 +39,14 @@
             <router-link to="/doc/layout">layout 布局</router-link>
           </li>
           <li>
-            <router-link to="/doc/toast">Toast 组件</router-link>
+            <router-link to="/doc/toast">toast 组件</router-link>
           </li>
         </ol>
       </aside>
       <main>
-        <router-view></router-view>
+        <transition name="yun">
+          <router-view></router-view>
+        </transition>
       </main>
     </div>
   </div>
@@ -59,7 +61,6 @@ export default {
   },
   setup() {
     const asideVisible = inject<Ref<boolean>>("asideVisible");
-    // console.log("DOC获取到的为：" + asideVisible.value);
     const bgcObj = {
       backgroundColor: "#fff",
     };
@@ -144,7 +145,8 @@ aside {
   > h2 {
     margin-bottom: 4px;
     padding: 10px 10px;
-    color: rgb(172, 172, 172);
+    color: rgb(3, 2, 2);
+
     border: none;
   }
   > ol {
@@ -154,8 +156,10 @@ aside {
       > a {
         display: block;
         padding-left: 20px;
-        font-size: 18px;
+        font-size: 16px;
+
         transition: all 250ms;
+        color: rgba(0, 0, 0, 0.65);
       }
 
       .router-link-active {
@@ -172,5 +176,20 @@ aside {
 
 main {
   overflow: hidden;
+}
+
+.yun-enter-from,
+.yun-leave-to {
+  opacity: 0;
+}
+
+.yun-enter-active,
+.yun-leave-active {
+  transition: opacity 700ms ease;
+}
+
+.yun-enter-to,
+.yun-leave-from {
+  opacity: 1;
 }
 </style>

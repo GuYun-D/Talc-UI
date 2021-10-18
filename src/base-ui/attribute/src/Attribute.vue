@@ -73,7 +73,7 @@ footer {
           display: inline-block;
           width: 20%;
           min-width: 151px;
-          color: $mainColor;
+          color: #474747;
         }
       }
 
@@ -85,11 +85,17 @@ footer {
         line-height: 5px;
         border-bottom: 1px dotted $borderColor;
 
+        &:nth-child(2n){
+          background-color: rgb(250, 252, 249);
+          
+        }
+
         span {
           display: inline-block;
           width: 20%;
           min-width: 151px;
-          color: rgb(63, 62, 62);
+          font-size: 16px;
+          color: rgb(78, 78, 78);
         }
       }
     }

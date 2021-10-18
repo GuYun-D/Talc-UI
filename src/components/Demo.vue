@@ -45,7 +45,6 @@ export default {
       if (descRef.value.innerText.length === 0) {
         isShowDesc.value = false;
       }
-      
     });
 
     return {
@@ -75,6 +74,9 @@ h2 {
   font-size: 14px;
   padding: 0 0 0 30px;
   line-height: 2;
+  margin: 20px 18px;
+  border-left: 6px solid #e6e6e6;
+  box-sizing: border-box;
 }
 .demo {
   border: 1px solid rgb(235, 235, 235);
@@ -91,6 +93,12 @@ h2 {
     cursor: pointer;
     color: #d5d4d4;
     transition: all 0.3s;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    user-select: none;
     &:hover {
       box-shadow: 0px 2px 2px #ccc;
       color: #000000;
@@ -144,8 +152,14 @@ h2 {
 }
 
 .token.operator {
-  color: rgb(238, 224, 224);
-  background-color: transparent;
+  color: rgb(238, 224, 224) !important;
+  background-color: transparent !important;
+}
+
+.token,
+.string,
+.url {
+  background-color: transparent !important;
 }
 
 pre {

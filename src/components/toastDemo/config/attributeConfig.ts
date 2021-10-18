@@ -1,7 +1,7 @@
 import type { IAttributeConfig } from "../../../base-ui/attribute/types/types";
 
 export const attributeConfig: IAttributeConfig = {
-  attributeTitle: "Input Attribute",
+  attributeTitle: "Toast Attribute",
   attributeItems: [
     {
       name: "position",

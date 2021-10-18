@@ -1,4 +1,4 @@
 export interface ICloseButton {
-  text: string
-  callBack: () => any
+  text?: string
+  callBack?: () => any
 }

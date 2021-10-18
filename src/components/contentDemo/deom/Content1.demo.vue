@@ -51,12 +51,13 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .t-layout {
-  height: 100vh;
+  height: 50vh;
   flex-grow: 1;
 
   .t-sider {
     width: 200px;
-    background-color: #009999;
+    background-color: #bcbdc2;
+    
   }
 
   &.wrapper {
@@ -64,17 +65,17 @@ export default defineComponent({
   }
 
   .t-header {
-    height: 100px;
-    background-color: #1d7373;
+    height: 50px;
+    background-color: #88898e;
   }
 
   .t-content {
-    background-color: #5ccccc;
+    background-color: #c9cacc;
   }
 
   .t-footer {
     height: 50px;
-    background-color: #005c5c;
+    background-color: #b4b5ba;
   }
 
   .demo-layout {
