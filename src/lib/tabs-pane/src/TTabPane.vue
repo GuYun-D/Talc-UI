@@ -7,6 +7,8 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import emitter from "../../tabs/src/tabs";
+import { IEmitter } from "../../tabs/src/types";
+
 
 export default defineComponent({
   name: "t-tab-pane",
@@ -23,13 +25,9 @@ export default defineComponent({
         active: active.value,
       };
     });
-    emitter.on("update:selected", (name: string) => {
-      // if (name == props.name) {
-      //   console.log(`pane-----------我${props.name}被选中了`);
-      // } else {
-      //   console.log(`pane-----------我${props.name}没有选中`);
-      // }
-      active.value = name === props.name;
+    emitter.on("update:selected", (obj: IEmitter) => {
+      // active.value = name === props.name;
+
     });
 
     return { classes, active };

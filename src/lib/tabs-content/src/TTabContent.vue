@@ -15,5 +15,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.t-tab-content{
+  padding: 10px 0;
+}
 </style>

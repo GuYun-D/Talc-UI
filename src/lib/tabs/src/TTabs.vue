@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, getCurrentInstance } from "vue";
+import emitter from './tabs'
 
 export default defineComponent({
   name: "t-tabs",
@@ -23,8 +24,24 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    // 获取组件实例
+
     onMounted(() => {
-      emit("update:selected", props.selected);
+      const instance = getCurrentInstance();
+      const tabsChhildren = instance.proxy.$el.children;
+      const tabNavCh = tabsChhildren[0].children;
+
+      for (let i = 0; i < tabNavCh.length; i++) {
+        let className = tabNavCh[i].classList[0] || "";
+        if (className === "t-tab-item") {
+          if (tabNavCh[i].getAttribute("name") === props.selected) {
+            emitter.emit("update:selected", {
+              selected: props.selected,
+              el: tabNavCh[i],
+            });
+          }
+        }
+      }
     });
     return {};
   },

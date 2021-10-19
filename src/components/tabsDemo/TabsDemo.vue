@@ -31,7 +31,7 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    let selectedTab = ref("sports");
+    let selectedTab = ref("woman");
     return { selectedTab };
   },
 });
