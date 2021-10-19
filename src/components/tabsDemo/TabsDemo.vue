@@ -6,9 +6,9 @@
       direction="horizontal"
     >
       <t-tab-nav>
-        <template #actions>
+        <!-- <template #actions>
           <t-button>添加</t-button>
-        </template>
+        </template> -->
         <t-tab-item name="woman">
           <t-icon icon="home"></t-icon>
           美女

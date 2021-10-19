@@ -5,9 +5,10 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, getCurrentInstance } from "vue";
 import emitter from "../../tabs/src/tabs";
 import { IEmitter } from "../../tabs/src/types";
+import { getElement } from "../../utils/common";
 
 export default defineComponent({
   name: "t-tab-item",
@@ -23,17 +24,17 @@ export default defineComponent({
   },
   setup(props) {
     const active = ref(false);
+    const instance = getCurrentInstance();
     const classes = computed(() => {
       return {
         active: active.value,
       };
     });
     emitter.on("update:selected", (obj: IEmitter) => {
-      // active.value = obj.selected === props.name;
-      console.log(obj);
+      // console.log(getElement(obj.el));
     });
     const xxxxx = () => {
-      emitter.emit("update:selected", {selected: props.name});
+      emitter.emit("update:selected", { selected: props.name, el: instance });
     };
     return { xxxxx, classes };
   },
@@ -42,6 +43,7 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .t-tab-item {
+  position: relative;
   flex-shrink: 0;
   padding: 0 2em;
   cursor: pointer;
@@ -49,6 +51,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid #990000;
 
   &.active {
     color: dodgerblue;

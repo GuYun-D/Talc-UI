@@ -12,19 +12,24 @@
 import { defineComponent, onMounted, ref } from "vue";
 import emitter from "../../tabs/src/tabs";
 import { IEmitter } from "../../tabs/src/types";
-
+import { getElement } from "../../utils/common";
 
 export default defineComponent({
   name: "t-tab-nav",
   setup() {
     const lineRef = ref(null);
     const tabNavRef = ref(null);
-    emitter.on("update:selected", (obj: IEmitter) => {});
-    
+
     onMounted(() => {
-      // console.log(lineRef);
+      emitter.on("update:selected", (obj: IEmitter) => {
+        let element = getElement(obj.el);
+        let { width, height, left } = element.getBoundingClientRect();
+        lineRef.value.style.width = width + "px";
+        lineRef.value.style.height = height + "px";
+        lineRef.value.style.left = left + 'px';
+      });
     });
-    return { lineRef, tabNavRef };
+    return { lineRef, tabNavRef};
   },
 });
 </script>
@@ -40,7 +45,7 @@ export default defineComponent({
   .line {
     position: absolute;
     bottom: 0;
-    width: 100px;
+    transition: all 1s;
     border-bottom: 3px solid #f40;
   }
 

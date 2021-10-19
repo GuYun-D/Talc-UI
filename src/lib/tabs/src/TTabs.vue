@@ -5,8 +5,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, getCurrentInstance } from "vue";
-import emitter from './tabs'
+import {
+  defineComponent,
+  onMounted,
+  getCurrentInstance,
+} from "vue";
+import emitter from "./tabs";
 
 export default defineComponent({
   name: "t-tabs",
@@ -23,7 +27,7 @@ export default defineComponent({
       },
     },
   },
-  setup(props, { emit }) {
+  setup(props) {
     // 获取组件实例
 
     onMounted(() => {
@@ -48,5 +52,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.t-tabs{
+  position: relative;
+}
 </style>

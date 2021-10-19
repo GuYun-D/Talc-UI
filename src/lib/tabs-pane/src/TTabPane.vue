@@ -9,7 +9,6 @@ import { computed, defineComponent, ref } from "vue";
 import emitter from "../../tabs/src/tabs";
 import { IEmitter } from "../../tabs/src/types";
 
-
 export default defineComponent({
   name: "t-tab-pane",
   props: {
@@ -26,8 +25,8 @@ export default defineComponent({
       };
     });
     emitter.on("update:selected", (obj: IEmitter) => {
-      // active.value = name === props.name;
-
+      active.value = obj.selected === props.name;
+      // console.log(obj);
     });
 
     return { classes, active };
@@ -37,7 +36,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .t-tab-pane {
-  &.active{
+  padding: 1em;
+  &.active {
     background-color: chocolate;
   }
 }
