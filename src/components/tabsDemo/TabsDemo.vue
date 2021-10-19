@@ -9,11 +9,11 @@
         <!-- <template #actions>
           <t-button>添加</t-button>
         </template> -->
-        <t-tab-item name="woman">
+        <t-tab-item name="woman" :disabled="true">
           <t-icon icon="home"></t-icon>
           美女
         </t-tab-item>
-        <t-tab-item name="finance" :disabled="true"> 财经 </t-tab-item>
+        <t-tab-item name="finance"> 财经 </t-tab-item>
         <t-tab-item name="sports"> 体育 </t-tab-item>
       </t-tab-nav>
 

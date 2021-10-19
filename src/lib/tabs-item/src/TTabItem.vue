@@ -1,5 +1,10 @@
 <template>
-  <div class="t-tab-item" :class="classes" @click="xxxxx" :name="name">
+  <div
+    class="t-tab-item"
+    :class="classes"
+    @click="xxxxx"
+    :name="name"
+  >
     <slot></slot>
   </div>
 </template>
@@ -28,12 +33,16 @@ export default defineComponent({
     const classes = computed(() => {
       return {
         active: active.value,
+        disabled: props.disabled,
       };
     });
     emitter.on("update:selected", (obj: IEmitter) => {
       // console.log(getElement(obj.el));
     });
     const xxxxx = () => {
+      if (props.disabled) {
+        return;
+      }
       emitter.emit("update:selected", { selected: props.name, el: instance });
     };
     return { xxxxx, classes };
@@ -52,6 +61,12 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   border: 1px solid #990000;
+
+  &.disabled{
+    color: #ccc;
+    background-color: rgb(241, 241, 241);
+    cursor: not-allowed;
+  }
 
   &.active {
     color: dodgerblue;
