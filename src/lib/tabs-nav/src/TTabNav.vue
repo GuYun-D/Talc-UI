@@ -1,7 +1,10 @@
 <template>
   <div class="t-tab-nav">
     <slot></slot>
-    <slot name="actions"></slot>
+    <div class="actions-wrapper">
+      <slot name="actions"></slot>
+    </div>
+    
   </div>
 </template>
 
@@ -16,5 +19,15 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.t-tab-nav{
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+
+  > .actions-wrapper{
+    margin-left: auto;
+  }
+}
 </style>

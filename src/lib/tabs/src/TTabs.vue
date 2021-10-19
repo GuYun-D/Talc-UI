@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 
 export default defineComponent({
   name: "t-tabs",
@@ -18,12 +18,14 @@ export default defineComponent({
       type: String,
       default: "horizontal",
       validator: (value: string) => {
-        return ['horizontal', 'vertical'].includes(value);
+        return ["horizontal", "vertical"].includes(value);
       },
     },
   },
   setup(props, { emit }) {
-    emit("update:selected", "finance");
+    onMounted(() => {
+      emit("update:selected", props.selected);
+    });
     return {};
   },
 });
