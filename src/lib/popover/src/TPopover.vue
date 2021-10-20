@@ -1,9 +1,9 @@
 <template>
   <div class="t-popover">
-    <div class="content-wrapper">
+    <div class="content-wrapper" @click.stop>
       <slot name="content" v-if="popoverVisible"></slot>
     </div>
-    <div @click="popoverClick">
+    <div @click.stop="popoverClick">
       <slot></slot>
     </div>
   </div>
@@ -16,8 +16,23 @@ export default defineComponent({
   name: "t-popover",
   setup() {
     const popoverVisible = ref(false);
+    let popoverTimer: number;
+
     const popoverClick = () => {
       popoverVisible.value = !popoverVisible.value;
+
+      if (popoverTimer) {
+        clearTimeout(popoverTimer);
+      }
+      popoverTimer = setTimeout(() => {
+        if (popoverVisible.value === true) {
+          function popoverClose() {
+            popoverVisible.value = false;
+            document.removeEventListener("click", popoverClose);
+          }
+          document.addEventListener("click", popoverClose);
+        }
+      });
     };
     return { popoverClick, popoverVisible };
   },
