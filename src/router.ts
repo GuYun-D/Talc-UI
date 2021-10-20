@@ -83,5 +83,9 @@ export const router = createRouter({
         }
       ],
     },
+    {
+      path: '/test',
+      component: () => import('./testComponents/Test.vue')
+    }
   ],
 });
