@@ -6,6 +6,7 @@ import TSider from '../lib/sider/src/TSider.vue'
 import TToast from '../lib/toast/src/TToast.vue'
 import TBootton from '../lib/button/src/TButton.vue'
 import TIcon from '../lib/iconfont/src/TIcon.vue'
+import TPopover from '../lib/popover/src/TPopover.vue'
 
 const talcArr = [
   TLayout,
@@ -15,7 +16,8 @@ const talcArr = [
   TSider,
   TToast,
   TBootton,
-  TIcon
+  TIcon,
+  TPopover
 ]
 
 export { talcArr }

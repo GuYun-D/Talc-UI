@@ -10,6 +10,7 @@ import Content from "./components/contentDemo/ContentDemo.vue";
 import Toast from "./components/toastDemo/ToastDemo.vue"
 import Home from "./views/Home.vue";
 import Doc from "./views/Doc.vue";
+import Popover from './components/popoverDeme/PopoverDemo.vue'
 
 import introduce from "../src/markdown/introduce.md";
 import install from "../src/markdown/install.md";
@@ -80,6 +81,9 @@ export const router = createRouter({
         }, {
           path: 'toast',
           component: Toast
+        }, {
+          path: 'popover',
+          component: Popover
         }
       ],
     },
