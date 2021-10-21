@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "t-popover",
@@ -36,18 +36,18 @@ export default defineComponent({
       popoverTimer = setTimeout(() => {
         if (popoverVisible.value === true) {
           const { top, left } = triggerRef.value.getBoundingClientRect();
-          contentRef.value.style.top = top + "px";
-          contentRef.value.style.left = left + "px";
+          contentRef.value.style.top = top + window.screenY + "px";
+          contentRef.value.style.left = left + window.screenX + "px";
           function popoverClose() {
             popoverVisible.value = false;
             document.removeEventListener("click", popoverClose);
           }
           document.addEventListener("click", popoverClose);
+        } else {
+          console.log("关闭popover");
         }
       });
     };
-
-    onMounted(() => {});
     return { popoverClick, popoverVisible, triggerRef, contentRef };
   },
 });
