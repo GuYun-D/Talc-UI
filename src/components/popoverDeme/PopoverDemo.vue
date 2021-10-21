@@ -4,6 +4,10 @@
       <template #content> 日你妈 </template>
       <t-button>点我</t-button>
     </t-popover>
+    <t-popover>
+      <template #content> 日你妈 </template>
+      <t-button>点我</t-button>
+    </t-popover>
   </div>
 </template>
 

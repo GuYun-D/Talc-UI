@@ -1,21 +1,30 @@
 <template>
   <div class="t-popover">
-    <div class="content-wrapper" @click.stop>
-      <slot name="content" v-if="popoverVisible"></slot>
-    </div>
-    <div @click.stop="popoverClick">
+    <teleport to="body">
+      <div
+        ref="contentRef"
+        class="content-wrapper"
+        @click.stop
+        v-if="popoverVisible"
+      >
+        <slot name="content"></slot>
+      </div>
+    </teleport>
+    <span ref="triggerRef" @click.stop="popoverClick">
       <slot></slot>
-    </div>
+    </span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
   name: "t-popover",
   setup() {
     const popoverVisible = ref(false);
+    const triggerRef = ref(null);
+    const contentRef = ref(null);
     let popoverTimer: number;
 
     const popoverClick = () => {
@@ -26,6 +35,9 @@ export default defineComponent({
       }
       popoverTimer = setTimeout(() => {
         if (popoverVisible.value === true) {
+          const { top, left } = triggerRef.value.getBoundingClientRect();
+          contentRef.value.style.top = top + "px";
+          contentRef.value.style.left = left + "px";
           function popoverClose() {
             popoverVisible.value = false;
             document.removeEventListener("click", popoverClose);
@@ -34,7 +46,9 @@ export default defineComponent({
         }
       });
     };
-    return { popoverClick, popoverVisible };
+
+    onMounted(() => {});
+    return { popoverClick, popoverVisible, triggerRef, contentRef };
   },
 });
 </script>
@@ -44,13 +58,13 @@ export default defineComponent({
   position: relative;
   display: inline-flex;
   vertical-align: top;
+}
 
-  .content-wrapper {
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    border: 1px solid #f40;
-    box-shadow: 1px 1px 1px #ccc;
-  }
+.content-wrapper {
+  position: absolute;
+  border: 1px solid #f40;
+  box-shadow: 1px 1px 1px #ccc;
+  transform: translateY(-100%);
+  z-index: 10;
 }
 </style>
