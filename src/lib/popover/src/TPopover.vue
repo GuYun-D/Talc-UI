@@ -50,30 +50,32 @@ export default defineComponent({
         clearTimeout(popoverTimer);
       }
       popoverTimer = setTimeout(() => {
+        document.addEventListener("click", popoverClose);
         if (popoverVisible.value === true) {
           const { top, left, height, width } =
             triggerRef.value.getBoundingClientRect();
-          if (props.position === "top") {
-            contentRef.value.style.top = top + window.screenY + "px";
-            contentRef.value.style.left = left + window.scrollX + "px";
-          } else if (props.position === "bottom") {
-            contentRef.value.style.top = top + height + window.screenY + "px";
-            contentRef.value.style.left = left + window.scrollX + "px";
-          } else if (props.position === "left") {
-            contentRef.value.style.left = left + window.scrollX + "px";
-            let { height: leftHeight } =
-              contentRef.value.getBoundingClientRect();
-            contentRef.value.style.top =
-              top + window.screenY - Math.abs(leftHeight - height) / 2 + "px";
-          } else if (props.position === "right") {
-            contentRef.value.style.left = left + window.scrollX + width + "px";
-            let { height: rightHeight } =
-              contentRef.value.getBoundingClientRect();
-            contentRef.value.style.top =
-              top + window.screenY - Math.abs(rightHeight - height) / 2 + "px";
-          }
-
-          document.addEventListener("click", popoverClose);
+          let { height: positionHeight } =
+            contentRef.value.getBoundingClientRect();
+          const positions = {
+            top: {
+              top: top + window.screenY,
+              left: left + window.scrollX,
+            },
+            bottom: {
+              top: top + height + window.screenY,
+              left: left + window.scrollX,
+            },
+            left: {
+              left: left + window.scrollX,
+              top: top + window.screenY - Math.abs(positionHeight - height) / 2,
+            },
+            right: {
+              left: left + window.scrollX + width,
+              top: top + window.screenY - Math.abs(positionHeight - height) / 2,
+            },
+          };
+          contentRef.value.style.left = positions[props.position].left + "px";
+          contentRef.value.style.top = positions[props.position].top + "px";
         }
       });
     };
