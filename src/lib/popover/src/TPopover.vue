@@ -11,14 +11,15 @@
         <slot name="content"></slot>
       </div>
     </teleport>
-    <span ref="triggerRef" @click.stop="popoverClick">
+    <!-- <span ref="triggerRef" @click.stop="popoverClick"> -->
+    <span ref="triggerRef">
       <slot></slot>
     </span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
   name: "t-popover",
@@ -30,6 +31,13 @@ export default defineComponent({
         return ["top", "bottom", "left", "right"].includes(value);
       },
     },
+    trigger: {
+      type: String,
+      default: "click",
+      validator: (value: string) => {
+        return ["click", "hover"].includes(value);
+      },
+    },
   },
   // 可优化的
   setup(props) {
@@ -38,13 +46,36 @@ export default defineComponent({
     const contentRef = ref(null);
     let popoverTimer: number;
 
+    const openEvent = computed(() => {
+      return props.trigger === "click" ? "click" : "mouseenter";
+    });
+
+    const closeEvent = computed(() => {
+      return props.trigger === "click" ? "clcik" : "mouseleave";
+    });
+
+    const popoverClose = () => {
+      popoverVisible.value = false;
+      document.removeEventListener("click", popoverClose);
+    };
+
+    onMounted(() => {
+      triggerRef.value.addEventListener(openEvent.value, () => {
+        popoverClick();
+      });
+
+      triggerRef.value.addEventListener(closeEvent.value, () => {
+        popoverClose();
+      });
+    });
+
     const popoverClick = () => {
       popoverVisible.value = !popoverVisible.value;
       document.removeEventListener("click", popoverClose);
-      function popoverClose() {
-        popoverVisible.value = false;
-        document.removeEventListener("click", popoverClose);
-      }
+      // function popoverClose() {
+      //   popoverVisible.value = false;
+      //   document.removeEventListener("click", popoverClose);
+      // }
 
       if (popoverTimer) {
         clearTimeout(popoverTimer);
@@ -79,7 +110,12 @@ export default defineComponent({
         }
       });
     };
-    return { popoverClick, popoverVisible, triggerRef, contentRef };
+    return {
+      popoverClick,
+      popoverVisible,
+      triggerRef,
+      contentRef,
+    };
   },
 });
 </script>
