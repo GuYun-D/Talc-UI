@@ -4,7 +4,15 @@
       <template #content> 日你妈 </template>
       <t-button>点我</t-button>
     </t-popover>
-    <t-popover>
+    <t-popover position="bottom">
+      <template #content> 日你妈 </template>
+      <t-button>点我</t-button>
+    </t-popover>
+     <t-popover position="left">
+      <template #content> 日你妈 </template>
+      <t-button>点我</t-button>
+    </t-popover>
+     <t-popover position="right">
       <template #content> 日你妈 </template>
       <t-button>点我</t-button>
     </t-popover>
