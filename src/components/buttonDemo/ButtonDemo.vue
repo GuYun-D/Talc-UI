@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Button按钮组件</h1>
+    <h1>Button按钮</h1>
     <Demo :component="Button1demo">
       组件提供了三种类型的按钮，普通按钮。文本按钮和连接式的按钮，但是连接式的按钮没有添加超链接功能，你可以用过添加事件结合vue-router，通过编程式导航可以实现路由的切换
     </Demo>

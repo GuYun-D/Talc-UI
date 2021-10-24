@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Toast组件</h1>
+    <h1>Toast</h1>
     <Demo :component="Toast1Demo"></Demo>
     <Demo :component="Toast2Demo"> toast也可以自动关闭的，你需要使autoClose属性为true。默认关闭的时间为3s，如果你不喜欢这个时间，你可以使用autoCloseDelay来定义toast的关闭时间，如1s 就是:autoCloseDelay="1"</Demo>
     <Demo :component="Toast3Demo">

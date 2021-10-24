@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Tabs组件</h1>
+    <h1>Tabs 栏</h1>
     <Demo :component="Tabs1"></Demo>
   </div>
 </template>

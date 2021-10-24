@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Dialog组件</h1>
+    <h1>Dialog 弹框</h1>
 
     <Demo :component="DialogDemo1"></Demo>
     <Demo :component="DialogDemo2"></Demo>
