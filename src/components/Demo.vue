@@ -120,7 +120,7 @@ h2 {
 }
 
 .token.tag {
-  color: #2180d8 !important;
+  color: #d6235f !important;
 }
 
 .token.attr-name {
@@ -132,7 +132,7 @@ h2 {
 }
 
 .token.keyword {
-  color: #d6235f;
+  color: #2180d8;
 }
 
 .token.string {

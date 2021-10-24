@@ -5,7 +5,7 @@
         ref="contentRef"
         class="content-wrapper"
         @click.stop
-        v-if="popoverVisible"
+        v-show="popoverVisible"
         :class="{ [`position-${position}`]: true }"
       >
         <slot name="content"></slot>
@@ -67,15 +67,20 @@ export default defineComponent({
       triggerRef.value.addEventListener(closeEvent.value, () => {
         popoverClose();
       });
+
+      if(checkHtml(contentRef.value.innerHTML)){
+        throw new Error("Currently Popover does not support HTML")
+      }
     });
+
+    const checkHtml = (htmlStr: string) => {
+      var reg = /<[^>]+>/g;
+      return reg.test(htmlStr);
+    };
 
     const popoverClick = () => {
       popoverVisible.value = !popoverVisible.value;
       document.removeEventListener("click", popoverClose);
-      // function popoverClose() {
-      //   popoverVisible.value = false;
-      //   document.removeEventListener("click", popoverClose);
-      // }
 
       if (popoverTimer) {
         clearTimeout(popoverTimer);
@@ -89,20 +94,20 @@ export default defineComponent({
             contentRef.value.getBoundingClientRect();
           const positions = {
             top: {
-              top: top + window.screenY,
+              top: top + window.scrollY,
               left: left + window.scrollX,
             },
             bottom: {
-              top: top + height + window.screenY,
+              top: top + height + window.scrollY,
               left: left + window.scrollX,
             },
             left: {
               left: left + window.scrollX,
-              top: top + window.screenY - Math.abs(positionHeight - height) / 2,
+              top: top + window.scrollY - Math.abs(positionHeight - height) / 2,
             },
             right: {
               left: left + window.scrollX + width,
-              top: top + window.screenY - Math.abs(positionHeight - height) / 2,
+              top: top + window.scrollY - Math.abs(positionHeight - height) / 2,
             },
           };
           contentRef.value.style.left = positions[props.position].left + "px";
@@ -194,7 +199,7 @@ export default defineComponent({
     }
 
     &::after {
-      left: calc(100% + 5px);
+      left: calc(100% + 3px);
       border-top-color: rgb(255, 255, 255);
     }
   }
@@ -210,11 +215,11 @@ export default defineComponent({
 
     &::before {
       border-top-color: rgb(168, 168, 168);
-      left: -32%;
+      left: -41%;
     }
 
     &::after {
-      left: -31%;
+      left: -39%;
       border-top-color: rgb(255, 255, 255);
     }
   }
