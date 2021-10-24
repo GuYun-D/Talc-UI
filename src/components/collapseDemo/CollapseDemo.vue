@@ -1,0 +1,23 @@
+<template>
+  <div>
+    <t-collapse>
+      <t-collapse-item title="标题一">哈哈哈</t-collapse-item>
+      <t-collapse-item title="标题二">啦啦啦</t-collapse-item>
+      <t-collapse-item title="标题三">呼呼呼</t-collapse-item>
+    </t-collapse>
+    
+  </div>
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  setup() {
+    return {};
+  },
+});
+</script>
+
+<style scoped>
+</style>

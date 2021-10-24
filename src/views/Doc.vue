@@ -44,6 +44,9 @@
           <li>
             <router-link to="/doc/popover">popover 组件</router-link>
           </li>
+          <li>
+            <router-link to="/doc/collapse">collapse 组件</router-link>
+          </li>
         </ol>
       </aside>
       <main>

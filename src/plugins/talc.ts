@@ -7,6 +7,8 @@ import TToast from '../lib/toast/src/TToast.vue'
 import TBootton from '../lib/button/src/TButton.vue'
 import TIcon from '../lib/iconfont/src/TIcon.vue'
 import TPopover from '../lib/popover/src/TPopover.vue'
+import TCollapse from '../lib/collapse/src/TCollapse.vue'
+import TCollapseItem from '../lib/collapse-item/src/TCollapseItem.vue'
 
 const talcArr = [
   TLayout,
@@ -17,7 +19,9 @@ const talcArr = [
   TToast,
   TBootton,
   TIcon,
-  TPopover
+  TPopover,
+  TCollapse,
+  TCollapseItem
 ]
 
 export { talcArr }
