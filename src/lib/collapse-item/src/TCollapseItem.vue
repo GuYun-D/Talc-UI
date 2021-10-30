@@ -3,15 +3,16 @@
     <div class="title" @click="toggleCollapse">
       {{ title }}
     </div>
-    <div class="content" v-show="false">
+    <div class="content" v-show="isOpen">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { emitter } from "../../utils";
+import { ICollapseUpdateIsopen } from "../../types";
 
 export default defineComponent({
   name: "t-collapse-item",
@@ -26,11 +27,24 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const isOpen = ref(false);
     const toggleCollapse = () => {
-      emitter.emit("update:selected", props.name);
+      if (!isOpen.value) {
+        isOpen.value = true;
+        emitter.emit("update:selected", props.name);
+      } else {
+        isOpen.value = false;
+      }
     };
 
-    return { toggleCollapse };
+    emitter.on("update:isopen", (updatedInfo: ICollapseUpdateIsopen) => {
+      if (props.name === updatedInfo.name) {
+        isOpen.value = updatedInfo.isSelected;
+      } else {
+        isOpen.value = updatedInfo.isSelected;
+      }
+    });
+    return { toggleCollapse, isOpen };
   },
 });
 </script>
@@ -47,7 +61,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     cursor: pointer;
-    
+    background-color: beige;
   }
 
   &:first-child {

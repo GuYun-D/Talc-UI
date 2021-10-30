@@ -20,15 +20,21 @@ export default defineComponent({
   setup(props) {
     const collapseRef = ref(null);
     onMounted(() => {
-      // console.log(collapseRef.value.children[0]);
-      emitter.on("update:selected", (name) => {
-        const collapseItems = collapseRef.value.children;
+      const collapseItems = collapseRef.value.children;
+      for (let i = 0; i < collapseItems.length; i++) {
+        if (collapseItems[i].getAttribute("name") === props.selected) {
+          collapseItems[i].children[1].style.display = "block";
+        }
+      }
 
+      emitter.on("update:selected", (name) => {
         for (let i = 0; i < collapseItems.length; i++) {
           if (collapseItems[i].getAttribute("name") === name) {
             collapseItems[i].children[1].style.display = "block";
+            // emitter.emit("update:isopen", { name, isSelected: true });
           } else if (props.single) {
             collapseItems[i].children[1].style.display = "none";
+            // emitter.emit("update:isopen", { name, isSelected: false });、、
           }
         }
       });
