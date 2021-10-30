@@ -5,11 +5,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
+import { emitter } from "../../utils";
 
 export default defineComponent({
   name: "t-collapse",
-  setup() {
+  setup(_, { slots }) {
+    const items = slots.default();
+    onMounted(() => {
+      emitter.on("update:selected", (uid: number) => {
+        // console.log(title);
+        // items.forEach((item) => {
+        //   // @ts-ignore
+        //   console.log(item.type.setup());
+        // });
+        console.log(uid);
+      });
+    });
+
     return {};
   },
 });
@@ -19,7 +32,5 @@ export default defineComponent({
 .t-collapse {
   border: 1px solid #ccc;
   border-radius: 4px;
-
-  
 }
 </style>

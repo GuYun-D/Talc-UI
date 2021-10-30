@@ -1,6 +1,6 @@
 <template>
   <div class="t-collapse-item">
-    <div class="title" @click="isOpen = !isOpen">
+    <div class="title" @click="toggleCollapse">
       {{ title }}
     </div>
     <div class="content" v-if="isOpen">
@@ -10,7 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, getCurrentInstance } from "vue";
+import { emitter } from "../../utils";
 
 export default defineComponent({
   name: "t-collapse-item",
@@ -20,9 +21,20 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
     const isOpen = ref(false);
-    return { isOpen };
+    const instance = getCurrentInstance();
+    const currentTitle = props.title;
+    const toggleCollapse = () => {
+      if (isOpen.value) {
+        isOpen.value = false;
+      } else {
+        isOpen.value = true;
+        emitter.emit("update:selected", instance.parent.uid);
+      }
+    };
+
+    return { isOpen, toggleCollapse, currentTitle };
   },
 });
 </script>
