@@ -1,9 +1,9 @@
 <template>
-  <div class="t-collapse-item">
+  <div class="t-collapse-item" :name="name">
     <div class="title" @click="toggleCollapse">
       {{ title }}
     </div>
-    <div class="content" v-if="isOpen">
+    <div class="content" v-show="false">
       <slot></slot>
     </div>
   </div>
@@ -20,21 +20,17 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
   },
   setup(props) {
-    const isOpen = ref(false);
-    const instance = getCurrentInstance();
-    const currentTitle = props.title;
     const toggleCollapse = () => {
-      if (isOpen.value) {
-        isOpen.value = false;
-      } else {
-        isOpen.value = true;
-        emitter.emit("update:selected", instance.parent.uid);
-      }
+      emitter.emit("update:selected", props.name);
     };
 
-    return { isOpen, toggleCollapse, currentTitle };
+    return { toggleCollapse };
   },
 });
 </script>

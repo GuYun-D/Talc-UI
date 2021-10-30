@@ -1,29 +1,35 @@
 <template>
-  <div class="t-collapse">
+  <div class="t-collapse" ref="collapseRef">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { emitter } from "../../utils";
 
 export default defineComponent({
   name: "t-collapse",
-  setup(_, { slots }) {
-    const items = slots.default();
+  setup() {
+    const collapseRef = ref(null);
     onMounted(() => {
-      emitter.on("update:selected", (uid: number) => {
-        // console.log(title);
-        // items.forEach((item) => {
-        //   // @ts-ignore
-        //   console.log(item.type.setup());
-        // });
-        console.log(uid);
+      // console.log(collapseRef.value.children[0]);
+      emitter.on("update:selected", (name) => {
+        const collapseItems = collapseRef.value.children;
+
+        for (let i = 0; i < collapseItems.length; i++) {
+          console.log(collapseItems[i].getAttribute("name"));
+
+          if (collapseItems[i].getAttribute("name") === name) {
+            collapseItems[i].children[1].style.display = "block";
+          } else {
+            collapseItems[i].children[1].style.display = "none";
+          }
+        }
       });
     });
 
-    return {};
+    return { collapseRef };
   },
 });
 </script>
