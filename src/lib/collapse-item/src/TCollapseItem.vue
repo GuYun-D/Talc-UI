@@ -1,5 +1,5 @@
 <template>
-  <div class="t-collapse-item" :name="name">
+  <div class="t-collapse-item" :name="name" :class="collapseDisabledClass">
     <div class="title" @click="toggleCollapse">
       {{ title }}
     </div>
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { emitter } from "../../utils";
 import { ICollapseUpdateIsopen } from "../../types";
 
@@ -25,11 +25,19 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    "collapse-disabled": {
+      type: String,
+      default: "none",
+      validator: (value: string) => {
+        return ["disable", "hidden", "none"].includes(value);
+      },
+    },
   },
   setup(props) {
     const isOpen = ref(false);
     const toggleCollapse = () => {
-      if (!isOpen.value) {
+      // @ts-ignore
+      if (!isOpen.value && props.collapseDisabled !== "disabled") {
         isOpen.value = true;
         emitter.emit("update:selected", props.name);
       } else {
@@ -37,20 +45,38 @@ export default defineComponent({
       }
     };
 
+    const collapseDisabledClass = computed(() => {
+      // @ts-ignore
+      if (props.collapseDisabled === "none") return;
+      // @ts-ignore
+      return `collapse-${props.collapseDisabled}`;
+    });
+
     emitter.on("update:isopen", (updatedInfo: ICollapseUpdateIsopen) => {
       if (props.name === updatedInfo.name) {
-        isOpen.value = updatedInfo.isSelected;
+        isOpen.value = true;
       } else {
-        isOpen.value = updatedInfo.isSelected;
+        isOpen.value = false;
       }
     });
-    return { toggleCollapse, isOpen };
+    return { toggleCollapse, isOpen, collapseDisabledClass };
   },
 });
 </script>
 
 <style scoped lang="scss">
 .t-collapse-item {
+  &.collapse-hidden {
+    display: none;
+  }
+  &.collapse-disabled {
+    > .title {
+      background-color: #f5f5f5;
+      color: #c3c3c3;
+      cursor: not-allowed;
+    }
+  }
+
   > .title {
     padding: 0 8px;
     border: 1px solid #ccc;
@@ -62,6 +88,7 @@ export default defineComponent({
     align-items: center;
     cursor: pointer;
     background-color: beige;
+    user-select: none;
   }
 
   &:first-child {

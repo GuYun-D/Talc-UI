@@ -1,11 +1,14 @@
 <template>
   <div>
-    <t-collapse>
-      <t-collapse-item title="标题一" name="1" >哈哈哈</t-collapse-item>
-      <t-collapse-item title="标题二" name="2" >啦啦啦</t-collapse-item>
-      <t-collapse-item title="标题三" name="3" >呼呼呼</t-collapse-item>
+    <t-collapse selected="1" :single="true">
+      <t-collapse-item title="标题一" name="1">哈哈哈</t-collapse-item>
+      <t-collapse-item title="标题二" name="2" collapse-disabled="hidden"
+        >啦啦啦</t-collapse-item
+      >
+      <t-collapse-item title="标题三" name="3" collapse-disabled="disabled"
+        >呼呼呼</t-collapse-item
+      >
     </t-collapse>
-    
   </div>
 </template>
 
