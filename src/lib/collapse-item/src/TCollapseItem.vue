@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, getCurrentInstance } from "vue";
+import { defineComponent } from "vue";
 import { emitter } from "../../utils";
 
 export default defineComponent({
@@ -46,6 +46,8 @@ export default defineComponent({
     min-height: 32px;
     display: flex;
     align-items: center;
+    cursor: pointer;
+    
   }
 
   &:first-child {

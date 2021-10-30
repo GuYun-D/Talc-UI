@@ -10,7 +10,14 @@ import { emitter } from "../../utils";
 
 export default defineComponent({
   name: "t-collapse",
-  setup() {
+  props: {
+    selected: String,
+    single: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  setup(props) {
     const collapseRef = ref(null);
     onMounted(() => {
       // console.log(collapseRef.value.children[0]);
@@ -18,11 +25,9 @@ export default defineComponent({
         const collapseItems = collapseRef.value.children;
 
         for (let i = 0; i < collapseItems.length; i++) {
-          console.log(collapseItems[i].getAttribute("name"));
-
           if (collapseItems[i].getAttribute("name") === name) {
             collapseItems[i].children[1].style.display = "block";
-          } else {
+          } else if (props.single) {
             collapseItems[i].children[1].style.display = "none";
           }
         }
