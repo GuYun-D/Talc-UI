@@ -22,7 +22,7 @@ export default defineComponent({
       required: true,
     },
     name: {
-      type: String,
+      type: [String, Number],
       required: true,
     },
     "collapse-disabled": {
@@ -87,7 +87,6 @@ export default defineComponent({
     display: flex;
     align-items: center;
     cursor: pointer;
-    background-color: beige;
     user-select: none;
   }
 
@@ -108,6 +107,7 @@ export default defineComponent({
 
   > .content {
     padding: 5px;
+    text-indent: 2em;
   }
 }
 </style>
