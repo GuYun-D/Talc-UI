@@ -16,6 +16,7 @@ import Collapse from './components/collapseDemo/CollapseDemo.vue'
 import introduce from "../src/markdown/introduce.md";
 import install from "../src/markdown/install.md";
 import getStarted from "../src/markdown/GetStarted.md";
+import Cascader from "../src/components/cascaderDemo/CascaderDemo.vue"
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -88,6 +89,9 @@ export const router = createRouter({
         }, {
           path: 'collapse',
           component: Collapse
+        }, {
+          path: 'cascader',
+          component: Cascader
         }
       ],
     },
