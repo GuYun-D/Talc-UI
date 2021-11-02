@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>cascader 级联选择器</h1>
     <t-cascader :data-source="cityData"></t-cascader>
   </div>
 </template>
@@ -29,14 +30,36 @@ export default defineComponent({
         children: [
           {
             name: "福州",
-            children: [
-              { name: "鼓楼" },
-              { name: "台江" },
-              { name: "苍山" },
-            ],
+            children: [{ name: "鼓楼" }, { name: "台江" }, { name: "苍山" }],
           },
           { name: "莆田" },
           { name: "厦门" },
+        ],
+      },
+      {
+        name: "广东",
+        children: [
+          {
+            name: "佛山",
+            children: [
+              {
+                name: "三水",
+              },
+              {
+                name: "南海",
+              },
+              {
+                name: "禅城",
+                
+              },
+            ],
+          },
+          {
+            name: "广州",
+          },
+          {
+            name: "东莞",
+          },
         ],
       },
     ];
