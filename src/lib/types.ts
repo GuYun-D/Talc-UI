@@ -4,6 +4,6 @@ export interface ICollapseUpdateIsopen {
 }
 
 export interface ISelectedItem {
-  name: string,
+  name?: string,
   children?: ISelectedItem[]
 }
