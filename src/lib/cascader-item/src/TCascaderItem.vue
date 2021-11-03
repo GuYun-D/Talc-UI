@@ -5,10 +5,10 @@
         @click="leftSelected = item1"
         v-for="item1 in items"
         :key="item1.name"
-        class="label"
+        class="label t-clearfix"
       >
-        {{ item1.name }}
-        <t-icon class="arrow" icon="right-arrow" v-if="item1.children">
+        <div class="t-left">{{ item1.name }}</div>
+        <t-icon class="arrow t-right" icon="right-arrow" v-if="item1.children">
           >
         </t-icon>
       </div>
@@ -33,6 +33,7 @@ export default defineComponent({
   },
   setup() {
     const leftSelected = ref<ISelectedItem>();
+
     const rightItems = computed(() => {
       if (leftSelected && leftSelected.value?.children)
         return leftSelected.value.children;
@@ -49,19 +50,25 @@ export default defineComponent({
   align-items: flex-start;
   overflow: hidden;
   color: rgb(94, 92, 92);
+  cursor: pointer;
 
   .cascader-left {
     height: 100%;
-    padding: 0.3em 0;
+    padding: 0.5em 0;
     white-space: nowrap;
 
     .label {
-      padding: 0.3em 1em;
+      padding: 0.5em 1em;
+      transition: all 300ms;
+      width: 135px;
+      &:hover {
+        background-color: rgba(115, 255, 192, 0.2);
+      }
 
       .arrow {
         vertical-align: middle;
         font-size: 12px;
-        margin-left: -2px;
+        margin-top: 5px;
       }
     }
   }
