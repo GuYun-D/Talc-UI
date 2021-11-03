@@ -5,8 +5,12 @@
         @click="leftSelected = item1"
         v-for="item1 in items"
         :key="item1.name"
+        class="label"
       >
         {{ item1.name }}
+        <t-icon class="arrow" icon="right-arrow" v-if="item1.children">
+          >
+        </t-icon>
       </div>
     </div>
     <div class="cascader-right wrapper" v-if="rightItems">
@@ -43,14 +47,29 @@ export default defineComponent({
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  overflow: hidden;
+  color: rgb(94, 92, 92);
 
   .cascader-left {
-    border: 1px solid #f04;
-    margin-top: -1px;
+    height: 100%;
+    padding: 0.3em 0;
+    white-space: nowrap;
+
+    .label {
+      padding: 0.3em 1em;
+
+      .arrow {
+        vertical-align: middle;
+        font-size: 12px;
+        margin-left: -2px;
+      }
+    }
   }
 
   .cascader-right {
-    margin-top: -1px;
+    height: 100%;
+    white-space: nowrap;
+    border-left: 1px solid rgb(224, 224, 224);
   }
 }
 </style>
