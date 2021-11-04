@@ -7,6 +7,8 @@
       <t-cascader-item
         :style="{ height: popoverHeight + 'px' }"
         :items="dataSource"
+        :selected="selected"
+        @update:cascader-selected="changeSelected"
       ></t-cascader-item>
     </div>
   </div>
@@ -25,11 +27,19 @@ export default defineComponent({
     popoverHeight: {
       type: String,
     },
+    selected: {
+      type: Array,
+      default: () => [],
+    },
   },
-  setup() {
+  setup(props, { emit }) {
     const popoverVisible = ref(false);
+    const changeSelected = (newSelected) => {
+      emit("update:changeSelected", newSelected);
+    };
     return {
       popoverVisible,
+      changeSelected,
     };
   },
 });

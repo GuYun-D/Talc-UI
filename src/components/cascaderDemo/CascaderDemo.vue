@@ -1,13 +1,17 @@
 <template>
   <div>
     <h1>cascader 级联选择器</h1>
-    <t-cascader :data-source="cityData"></t-cascader>
+    <t-cascader
+      @update:changeSelected="selected = $event"
+      :data-source="cityData"
+      :selected="selected"
+    ></t-cascader>
     哈哈哈
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
@@ -63,7 +67,9 @@ export default defineComponent({
         ],
       },
     ];
-    return { cityData };
+
+    const selected = ref([]);
+    return { cityData, selected };
   },
 });
 </script>

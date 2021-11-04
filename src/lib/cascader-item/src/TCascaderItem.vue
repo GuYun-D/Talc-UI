@@ -1,8 +1,10 @@
 <template>
   <div class="t-cascader-item">
+    <!-- <div>selected:{{ selected }}</div>
+    <div>level:{{ level }}</div> -->
     <div class="cascader-left wrapper">
       <div
-        @click="leftSelected = item1"
+        @click="onSelected(item1)"
         v-for="item1 in items"
         :key="item1.name"
         class="label t-clearfix"
@@ -14,7 +16,12 @@
       </div>
     </div>
     <div class="cascader-right wrapper" v-if="rightItems">
-      <t-cascader-item :items="rightItems"></t-cascader-item>
+      <t-cascader-item
+        :selected="selected"
+        @update:cascader-selected="onUpdateSelected"
+        :level="level + 1"
+        :items="rightItems"
+      ></t-cascader-item>
     </div>
   </div>
 </template>
@@ -25,20 +32,40 @@ import { ISelectedItem } from "../../types";
 
 export default defineComponent({
   name: "t-cascader-item",
+  emits: ["update:cascader-selected"],
   props: {
     items: {
       type: Array as PropType<ISelectedItem[]>,
       required: true,
     },
+    selected: {
+      type: Array,
+      default: () => [],
+    },
+    level: {
+      type: Number,
+      default: 0,
+    },
   },
-  setup() {
-    const leftSelected = ref<ISelectedItem>();
-
+  setup(props, { emit }) {
     const rightItems = computed(() => {
-      if (leftSelected && leftSelected.value?.children)
-        return leftSelected.value.children;
+      let currentSelected: ISelectedItem = props.selected[props.level];
+      if (currentSelected && currentSelected.children)
+        return currentSelected.children;
     });
-    return { leftSelected, rightItems };
+
+    const onSelected = (item: ISelectedItem) => {
+      // props.selected[props.level] = item;
+      let copySelected = JSON.parse(JSON.stringify(props.selected));
+      copySelected[props.level] = item;
+      emit("update:cascader-selected", copySelected);
+    };
+
+    const onUpdateSelected = (newSelected) => {
+      emit("update:cascader-selected", newSelected);
+    };
+
+    return { rightItems, onSelected, onUpdateSelected };
   },
 });
 </script>
