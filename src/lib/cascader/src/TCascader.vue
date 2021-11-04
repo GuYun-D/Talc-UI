@@ -1,7 +1,7 @@
 <template>
   <div class="t-cascader">
     <div class="trigger" @click="popoverVisible = !popoverVisible">
-      <!-- <slot></slot> -->
+      {{ selectedRes || cascaderPlaceholder }}
     </div>
     <div class="popover" v-if="popoverVisible">
       <t-cascader-item
@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
+import { ISelectedItem } from "../../types";
 
 export default defineComponent({
   name: "t-cascader",
@@ -31,15 +32,24 @@ export default defineComponent({
       type: Array,
       default: () => [],
     },
+    cascaderPlaceholder: {
+      type: String,
+      default: "请选择",
+    },
   },
   setup(props, { emit }) {
     const popoverVisible = ref(false);
     const changeSelected = (newSelected) => {
       emit("update:changeSelected", newSelected);
     };
+
+    const selectedRes = computed(() => {
+      return props.selected.map((item: ISelectedItem) => item.name).join(" / ");
+    });
     return {
       popoverVisible,
       changeSelected,
+      selectedRes,
     };
   },
 });
@@ -50,10 +60,15 @@ export default defineComponent({
   position: relative;
 
   .trigger {
+    box-sizing: border-box;
     border: 1px solid rgb(211, 211, 211);
-    width: 100px;
+    display: inline-flex;
+    min-width: 10em;
     height: 32px;
+    align-items: center;
     border-radius: 4px;
+    padding: 0 1em;
+    color: rgb(87, 87, 87);
   }
 
   .popover {

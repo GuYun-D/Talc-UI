@@ -55,13 +55,13 @@ export default defineComponent({
     });
 
     const onSelected = (item: ISelectedItem) => {
-      // props.selected[props.level] = item;
       let copySelected = JSON.parse(JSON.stringify(props.selected));
       copySelected[props.level] = item;
+      copySelected.splice(props.level + 1);
       emit("update:cascader-selected", copySelected);
     };
 
-    const onUpdateSelected = (newSelected) => {
+    const onUpdateSelected = (newSelected: ISelectedItem) => {
       emit("update:cascader-selected", newSelected);
     };
 
