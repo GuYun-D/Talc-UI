@@ -35,9 +35,9 @@
           <li>
             <router-link to="/doc/layout">layout 布局</router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/doc/toast">toast 组件</router-link>
-          </li>
+          </li> -->
           <li>
             <router-link to="/doc/tabs">tabs 组件</router-link>
           </li>
@@ -51,6 +51,8 @@
             <router-link to="/doc/cascader">cascader 级联选择器</router-link>
           </li>
         </ol>
+
+        <SiderItem item-title="base" :componentList="siderConfig"></SiderItem>
       </aside>
       <main>
         <transition name="yun">
@@ -62,20 +64,23 @@
 </template>
 
 <script lang="ts">
-import Topnav from "../components/Topnav.vue";
-import { Ref, inject } from "vue";
-export default {
+import Topnav from "../../components/Topnav.vue";
+import { Ref, inject, defineComponent } from "vue";
+import SiderItem from "../../base-ui/sider-item";
+import { siderConfig } from "./config/sider.config";
+export default defineComponent({
   components: {
     Topnav,
+    SiderItem,
   },
   setup() {
     const asideVisible = inject<Ref<boolean>>("asideVisible");
     const bgcObj = {
       backgroundColor: "#fff",
     };
-    return { asideVisible, bgcObj };
+    return { asideVisible, bgcObj, siderConfig };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

@@ -9,7 +9,7 @@ import Grid from "./components/gridDemo/gridDemo.vue";
 import Content from "./components/contentDemo/ContentDemo.vue";
 import Toast from "./components/toastDemo/ToastDemo.vue"
 import Home from "./views/Home.vue";
-import Doc from "./views/Doc.vue";
+import Doc from "./views/DocPage/Doc.vue";
 import Popover from './components/popoverDeme/PopoverDemo.vue'
 import Collapse from './components/collapseDemo/CollapseDemo.vue'
 
