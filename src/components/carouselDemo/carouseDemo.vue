@@ -2,9 +2,9 @@
   <div>
     <h1>carousel 轮播组件</h1>
     <t-carousel>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
+      <t-carousel-item class="box">1</t-carousel-item>
+      <t-carousel-item class="box">2</t-carousel-item>
+      <t-carousel-item class="box">3</t-carousel-item>
     </t-carousel>
   </div>
 </template>
@@ -20,4 +20,11 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.box {
+  width: 200px;
+  height: 150px;
+  box-sizing: border-box;
+  background-color: #ccc;
+  border: 1px solid red;
+}
 </style>
