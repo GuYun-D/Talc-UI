@@ -61,5 +61,14 @@ export const siderConfig = [
         url: "collapse"
       }
     ]
+  },
+  {
+    titleName: "other",
+    list: [
+      {
+        name: "carousel 轮播",
+        url: 'carousel'
+      }
+    ]
   }
 ]

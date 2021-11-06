@@ -11,6 +11,7 @@ import TCollapse from '../lib/collapse/src/TCollapse.vue'
 import TCollapseItem from '../lib/collapse-item/src/TCollapseItem.vue'
 import TCasasder from '../lib/cascader/src/TCascader.vue'
 import TCascaderItem from '../lib/cascader-item/src/TCascaderItem.vue'
+import TCarousel from '../lib/carousel/index'
 
 const talcArr = [
   TLayout,
@@ -25,7 +26,8 @@ const talcArr = [
   TCollapse,
   TCollapseItem,
   TCasasder,
-  TCascaderItem
+  TCascaderItem,
+  TCarousel
 ]
 
 export { talcArr }

@@ -17,6 +17,7 @@ import introduce from "../src/markdown/introduce.md";
 import install from "../src/markdown/install.md";
 import getStarted from "../src/markdown/GetStarted.md";
 import Cascader from "../src/components/cascaderDemo/CascaderDemo.vue"
+import Carousel from '../src/components/carouselDemo/carouseDemo.vue'
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -92,6 +93,9 @@ export const router = createRouter({
         }, {
           path: 'cascader',
           component: Cascader
+        }, {
+          path: 'carousel',
+          component: Carousel
         }
       ],
     },
