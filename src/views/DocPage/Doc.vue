@@ -16,43 +16,7 @@
           </li>
         </ol>
         <h2>组件列表</h2>
-        <ol>
-          <li>
-            <router-link to="/doc/icon">icon 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/switch">switch 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/button">button 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/dialog">dialog 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/input">input 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/layout">layout 布局</router-link>
-          </li>
-          <!-- <li>
-            <router-link to="/doc/toast">toast 组件</router-link>
-          </li> -->
-          <li>
-            <router-link to="/doc/tabs">tabs 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/popover">popover 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/collapse">collapse 组件</router-link>
-          </li>
-          <li>
-            <router-link to="/doc/cascader">cascader 级联选择器</router-link>
-          </li>
-        </ol>
-
-        <SiderItem item-title="base" :componentList="siderConfig"></SiderItem>
+        <SiderItem :componentList="siderConfig"></SiderItem>
       </aside>
       <main>
         <transition name="yun">
