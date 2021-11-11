@@ -1,7 +1,9 @@
 <template>
-  <div class="t-carousel-item" v-if="selfIndex === currentIndex">
+  <div class="t-carousel-item">
     <transition name="yun">
-      <img :src="imgUrl" alt="" />
+      <div v-if="selfIndex === currentIndex">
+        <img :src="imgUrl" alt="" />
+      </div>
     </transition>
   </div>
 </template>
@@ -56,40 +58,25 @@ export default defineComponent({
   top: 0;
   left: 0;
 
-  // .v-enter-active,
-  // .v-leave-active {
-  //   transition: all 300ms linear;
-  // }
-
-  // .v-enter-active {
-  //   transform: translateX(100%);
-  // }
-
-  // .v-enter-to {
-  //   transform: translateX(0);
-  // }
-
-  // .v-leave-active {
-  //   transform: translateX(0);
-  // }
-
-  // .v-leave-to {
-  //   transform: translateX(-100%);
-  // }
-
-  .yun-enter-from,
-  .yun-leave-to {
-    opacity: 0;
-  }
-
   .yun-enter-active,
   .yun-leave-active {
-    transition: opacity 700ms ease;
+    transition: all 300ms linear;
   }
 
-  .yun-enter-to,
-  .yun-leave-from {
-    opacity: 1;
+  .yun-enter-active {
+    transform: translateX(100%);
+  }
+
+  .yun-enter-to {
+    transform: translateX(0);
+  }
+
+  .yun-leave-active {
+    transform: translateX(0);
+  }
+
+  .yun-leave-to {
+    transform: translateX(-100%);
   }
 
   img {

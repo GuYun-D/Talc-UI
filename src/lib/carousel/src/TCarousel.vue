@@ -115,6 +115,7 @@ export default defineComponent({
 .t-carousel {
   width: 400px;
   height: 200px;
+  overflow: hidden;
 
   .inner {
     position: relative;
