@@ -27,7 +27,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .box {
   width: 200px;
   height: 150px;
@@ -37,6 +37,7 @@ export default defineComponent({
 }
 
 img {
-  width: 200px;
+  width: 400px;
+  height: 200px;
 }
 </style>

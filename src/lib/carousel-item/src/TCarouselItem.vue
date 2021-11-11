@@ -1,5 +1,5 @@
 <template>
-  <transition name="yun">
+  <transition>
     <div class="t-carousel-item" v-show="selfIndex === currentIndex">
       <slot></slot>
     </div>
@@ -49,30 +49,26 @@ export default defineComponent({
   top: 0;
   left: 0;
 
-  .v-enter-active,
-  .v-leave-active {
-    transition: all 300ms linear;
-  }
+  // .v-enter-active,
+  // .v-leave-active {
+  //   transition: all 300ms linear;
+  // }
 
-  .v-enter-active {
-    transform: translateX(100%);
-  }
+  // .v-enter-active {
+  //   transform: translateX(100%);
+  // }
 
-  .v-enter-to {
-    transform: translateX(0);
-  }
+  // .v-enter-to {
+  //   transform: translateX(0);
+  // }
 
-  .v-leave-active {
-    transform: translateX(0);
-  }
+  // .v-leave-active {
+  //   transform: translateX(0);
+  // }
 
-  .v-leave-to {
-    transform: translateX(-100%);
-  }
+  // .v-leave-to {
+  //   transform: translateX(-100%);
+  // }
 
-  img {
-    width: 100%;
-    height: 100%;
-  }
 }
 </style>

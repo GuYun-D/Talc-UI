@@ -1,6 +1,13 @@
 <template>
   <div class="t-carousel">
     <div class="inner">
+      <t-dot
+        dotBgColor="#f40"
+        :hasDot="true"
+        :itemLength="itemLength"
+        :currentIndex="currentIndex"
+        @dotClick="dotClick"
+      ></t-dot>
       <slot></slot>
     </div>
   </div>
@@ -13,11 +20,16 @@ import {
   onMounted,
   reactive,
   toRefs,
-  getCurrentInstance
+  getCurrentInstance,
 } from "vue";
+
+import TDot from "./TDot.vue";
 
 export default defineComponent({
   name: "t-carousel",
+  components: {
+    TDot,
+  },
   props: {
     autoplay: {
       type: Boolean,
@@ -39,6 +51,10 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    dotBgColor: {
+      type: String,
+      default: "#fff",
+    },
   },
   setup(props) {
     const instance = getCurrentInstance();
@@ -46,7 +62,6 @@ export default defineComponent({
       currentIndex: props.initial,
       itemLength: 0,
     });
-
 
     let t = null;
     const autoplay = () => {
@@ -90,9 +105,14 @@ export default defineComponent({
       clearInterval(t);
       t = null;
     });
-    
+
+    const dotClick = (index: number) => {
+      state.currentIndex = index;
+    };
+
     return {
       ...toRefs(state),
+      dotClick,
     };
   },
 });
@@ -100,8 +120,8 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .t-carousel {
-  width: 100%;
-  height: 100%;
+  width: 400px;
+  height: 200px;
 
   .inner {
     position: relative;
