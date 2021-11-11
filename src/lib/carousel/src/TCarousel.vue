@@ -8,6 +8,9 @@
         :currentIndex="currentIndex"
         @dotClick="dotClick"
       ></t-dot>
+
+      <t-director dir="next" @dirClick="dirClick"></t-director>
+      <t-director dir="prev" @dirClick="dirClick"></t-director>
       <slot></slot>
     </div>
   </div>
@@ -23,12 +26,14 @@ import {
   getCurrentInstance,
 } from "vue";
 
-import TDot from "./TDot.vue";
+import TDot from "./components/TDot.vue";
+import TDirector from "./components/TDirector.vue";
 
 export default defineComponent({
   name: "t-carousel",
   components: {
     TDot,
+    TDirector,
   },
   props: {
     autoplay: {
@@ -122,11 +127,16 @@ export default defineComponent({
       t = null;
     }
 
+    const dirClick = (dir: string) => {
+      setIndex(dir);
+    };
+
     return {
       ...toRefs(state),
       dotClick,
       mouseEnter,
       mouseLeave,
+      dirClick,
     };
   },
 });
