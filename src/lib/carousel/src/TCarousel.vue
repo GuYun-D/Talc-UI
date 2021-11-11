@@ -83,12 +83,14 @@ export default defineComponent({
       // @ts-ignore
       state.itemLength = instance.slots.default()[0].children.length;
     });
+
     // 卸载之前
     onBeforeUnmount(() => {
       // 清除定时器
       clearInterval(t);
       t = null;
     });
+    
     return {
       ...toRefs(state),
     };
