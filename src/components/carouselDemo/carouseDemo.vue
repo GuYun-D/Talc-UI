@@ -8,6 +8,7 @@
       :dot="true"
       :director="true"
       direction="next"
+      dotType="rectangle"
     >
       <t-carousel-item
         v-for="(item, index) in carouselData"

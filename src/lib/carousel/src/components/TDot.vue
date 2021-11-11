@@ -53,17 +53,6 @@ export default defineComponent({
 
     const isCircle = ref(true);
 
-    const dotTypeInfo = {
-      circle: {
-        width: "8px",
-        marginTop: "8px",
-      },
-      rectangle: {
-        width: "26px",
-        marginTop: "3px",
-      },
-    };
-
     onMounted(() => {
       if (props.dotType === "circle") {
         isCircle.value = false;
@@ -71,9 +60,6 @@ export default defineComponent({
         isCircle.value = true;
       }
     });
-
-    console.log(isCircle);
-
     return { dotClick, isCircle };
   },
 });

@@ -6,7 +6,7 @@
         :hasDot="true"
         :itemLength="itemLength"
         :currentIndex="currentIndex"
-        dotType="rectangle"
+        :dotType="dotType"
         @dotClick="dotClick"
       ></t-dot>
       <t-director dir="next" @dirClick="dirClick"></t-director>
