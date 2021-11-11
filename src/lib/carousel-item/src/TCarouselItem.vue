@@ -1,9 +1,9 @@
 <template>
-  <transition>
-    <div class="t-carousel-item" v-show="selfIndex === currentIndex">
-      <slot></slot>
-    </div>
-  </transition>
+  <div class="t-carousel-item" v-if="selfIndex === currentIndex">
+    <transition name="yun">
+      <img :src="imgUrl" alt="" />
+    </transition>
+  </div>
 </template>
 
 <script lang="ts">
@@ -17,6 +17,12 @@ import {
 
 export default defineComponent({
   name: "t-carousel-item",
+  props: {
+    imgUrl: {
+      type: String,
+      required: true,
+    },
+  },
   setup() {
     const instance = getCurrentInstance();
     const state = reactive({
@@ -34,6 +40,7 @@ export default defineComponent({
         state.currentIndex = value;
       }
     );
+
     return {
       ...toRefs(state),
     };
@@ -70,5 +77,24 @@ export default defineComponent({
   //   transform: translateX(-100%);
   // }
 
+  .yun-enter-from,
+  .yun-leave-to {
+    opacity: 0;
+  }
+
+  .yun-enter-active,
+  .yun-leave-active {
+    transition: opacity 700ms ease;
+  }
+
+  .yun-enter-to,
+  .yun-leave-from {
+    opacity: 1;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>
