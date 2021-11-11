@@ -18,6 +18,7 @@ import {
   watch,
 } from "vue";
 import { emitter } from "../../utils";
+import { dir, director } from "../type";
 
 export default defineComponent({
   name: "t-carousel-item",
@@ -29,24 +30,27 @@ export default defineComponent({
   },
   setup() {
     const instance = getCurrentInstance();
+    let animationName = ref("taRi");
+
     const state = reactive({
       selfIndex: instance.vnode.key,
       // @ts-ignore
       currentIndex: instance.parent.ctx.currentIndex,
     });
+
     watch(
       () => {
         // @ts-ignore
         return instance.parent.ctx.currentIndex;
       },
-      (value) => {
+      (value, oldVal) => {
         state.currentIndex = value;
+        animationName.value = value > oldVal ? dir.taRi : dir.taLf;
       }
     );
 
-    const animationName = ref("taRi");
     emitter.on("change:name", (dir: string) => {
-      animationName.value = dir === "prev" ? "taLf" : "taRi";
+      animationName.value = dir === director.prev ? "taLf" : "taRi";
     });
 
     return {
