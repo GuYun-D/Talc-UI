@@ -12,7 +12,7 @@
         :style="{
           backgroundColor: item - 1 === currentIndex ? dotBgColor : '#fff',
         }"
-        @click="dotClick(item - 1)"
+        @[trigger]="dotClick(item - 1)"
       ></a>
     </div>
   </div>
@@ -44,6 +44,10 @@ export default defineComponent({
     dotType: {
       type: String,
       default: "circle",
+    },
+    trigger: {
+      type: String,
+      default: "click",
     },
   },
   setup(props: IDotProps, { emit }) {

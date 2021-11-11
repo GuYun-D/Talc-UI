@@ -9,6 +9,7 @@
       :director="true"
       direction="next"
       dotType="rectangle"
+      trigger="hover"
     >
       <t-carousel-item
         v-for="(item, index) in carouselData"

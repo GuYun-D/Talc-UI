@@ -7,6 +7,7 @@
         :itemLength="itemLength"
         :currentIndex="currentIndex"
         :dotType="dotType"
+        :trigger="triggerType"
         @dotClick="dotClick"
       ></t-dot>
       <t-director dir="next" @dirClick="dirClick"></t-director>
@@ -24,6 +25,7 @@ import {
   reactive,
   toRefs,
   getCurrentInstance,
+  ref,
 } from "vue";
 
 import TDot from "./components/TDot.vue";
@@ -102,12 +104,16 @@ export default defineComponent({
       setIndex(dir);
     };
 
+    const triggerType =
+      props.trigger === "hover" ? "mouseenter" : props.trigger;
+
     return {
       ...toRefs(state),
       dotClick,
       mouseEnter,
       mouseLeave,
       dirClick,
+      triggerType,
     };
   },
 });

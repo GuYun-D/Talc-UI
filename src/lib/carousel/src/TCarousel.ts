@@ -1,4 +1,4 @@
-import { director, dotType } from './types'
+import { director, dotType, trigger } from './types'
 
 export const TCarouselProps = {
   autoplay: {
@@ -50,7 +50,19 @@ export const TCarouselProps = {
         throw Error(`The types of indicators are only circle and rectangle, 
           but you want ${value}. carousel does not support this type`)
       }
+    }
+  },
 
+  trigger: {
+    type: String,
+    default: 'click',
+    validator: (value: string) => {
+      if (trigger[value]) {
+        return true
+      } else {
+        throw Error(`The types of trigger are only click and hover, 
+          but you want ${value}. carousel does not support this type`)
+      }
     }
   }
 }

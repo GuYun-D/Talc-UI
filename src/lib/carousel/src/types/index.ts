@@ -8,6 +8,11 @@ export enum dotType {
   rectangle = "rectangle"
 }
 
+export enum trigger {
+  click = "click",
+  hover = "hover"
+}
+
 export interface ICarouselProps {
   autoplay: boolean
   duration: number
@@ -17,6 +22,7 @@ export interface ICarouselProps {
   dotBgColor: string
   direction: string
   dotType: string
+  trigger: string
 }
 
 export interface IDirectorProps {
