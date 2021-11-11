@@ -1,3 +1,3 @@
-import TCarouselItem from './src/t-carousel-item.vue'
+import TCarouselItem from './src/TCarouselItem.vue'
 
 export default TCarouselItem

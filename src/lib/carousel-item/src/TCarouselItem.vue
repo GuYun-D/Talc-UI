@@ -6,16 +6,15 @@
 
 <script lang="ts">
 import {
-  ComponentInternalInstance,
   defineComponent,
   getCurrentInstance,
   reactive,
   toRefs,
+  watch,
 } from "vue";
 
 export default defineComponent({
   name: "t-carousel-item",
-  props: {},
   setup() {
     const instance = getCurrentInstance();
     const state = reactive({
@@ -23,6 +22,16 @@ export default defineComponent({
       // @ts-ignore
       currentIndex: instance.parent.ctx.currentIndex,
     });
+
+    watch(
+      () => {
+        // @ts-ignore
+        return instance.parent.ctx.currentIndex;
+      },
+      (value) => {
+        state.currentIndex = value;
+      }
+    );
     return {
       ...toRefs(state),
     };
