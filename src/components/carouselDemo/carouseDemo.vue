@@ -1,20 +1,28 @@
 <template>
   <div>
     <h1>carousel 轮播组件</h1>
-    <t-carousel>
-      <t-carousel-item class="box">1</t-carousel-item>
-      <t-carousel-item class="box">2</t-carousel-item>
-      <t-carousel-item class="box">3</t-carousel-item>
+    <t-carousel
+      :autoplay="true"
+      :duration="3000"
+      :initial="1"
+      :dot="true"
+      :director="true"
+    >
+      <t-carousel-item v-for="(item, index) in carouselData" :key="index">
+        <img :src="item.img_url" />
+      </t-carousel-item>
     </t-carousel>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import carouselData from "./data/carousel";
 
 export default defineComponent({
   setup() {
-    return {};
+    console.log(carouselData);
+    return { carouselData };
   },
 });
 </script>
@@ -26,5 +34,9 @@ export default defineComponent({
   box-sizing: border-box;
   background-color: #ccc;
   border: 1px solid red;
+}
+
+img {
+  width: 200px;
 }
 </style>
