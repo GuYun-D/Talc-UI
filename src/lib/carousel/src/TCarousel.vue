@@ -53,19 +53,15 @@ export default defineComponent({
       }
     };
 
-    /**
-     * 设置当前轮播哪张图
-     * @param {String} dir 方向
-     */
-    const setIndex = (dir: string) => {
+    const setIndex = (dir: director) => {
       switch (dir) {
-        case director[props.direction]:
+        case director.next:
           state.currentIndex += 1;
           if (state.currentIndex === state.itemLength) {
             state.currentIndex = 0;
           }
           break;
-        case director[props.direction]:
+        case director.prev:
           state.currentIndex -= 1;
           if (state.currentIndex === -1) {
             state.currentIndex = state.itemLength - 1;
@@ -101,10 +97,9 @@ export default defineComponent({
       t = null;
     }
 
-    const dirClick = (dir: string) => {
+    const dirClick = (dir: director) => {
       setIndex(dir);
     };
-
     return {
       ...toRefs(state),
       dotClick,
@@ -112,7 +107,6 @@ export default defineComponent({
       mouseLeave,
       dirClick,
     };
-    
   },
 });
 </script>

@@ -3,6 +3,7 @@ import App from './App.vue'
 import { router } from './router'
 import Markdown from './components/markdown.vue'
 import './lib/iconfont/font/iconfont'
+import './lib/iconfont/font/font.css'
 import { registerTalc } from './utils/registerTalc'
 
 import 'github-markdown-css'

@@ -14,7 +14,7 @@ export interface ICarouselProps {
 }
 
 export interface IDirectorProps  {
-  dir: string
+  dir: director
 }
 
 export interface IDotProps {
