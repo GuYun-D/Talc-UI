@@ -11,6 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { IDirectorProps } from "../types";
 
 export default defineComponent({
   name: "t-director",
@@ -20,7 +21,7 @@ export default defineComponent({
       default: true,
     },
   },
-  setup(props, { emit }) {
+  setup(props: IDirectorProps, { emit }) {
     const dirClick = (dir: string) => {
       emit("dirClick", dir);
     };

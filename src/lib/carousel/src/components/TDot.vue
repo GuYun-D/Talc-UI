@@ -5,7 +5,7 @@
         href="javascript:;"
         class="dot-link"
         :style="{
-          backgroundColor: (item - 1) === currentIndex ? dotBgColor : '#fff',
+          backgroundColor: item - 1 === currentIndex ? dotBgColor : '#fff',
         }"
         @click="dotClick(item - 1)"
       ></a>
@@ -15,6 +15,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { IDotProps } from "../types";
 
 export default defineComponent({
   name: "t-dot",
@@ -36,11 +37,11 @@ export default defineComponent({
       default: "#fff",
     },
   },
-  setup(props, { emit }) {
-    const dotClick = (index) => {
+  setup(props: IDotProps, { emit }) {
+    const dotClick = (index: number) => {
       emit("dotClick", index);
     };
-    
+
     return { dotClick };
   },
 });
@@ -59,11 +60,11 @@ export default defineComponent({
   z-index: 1;
   margin-left: -39px;
 
-  .dot-item{
+  .dot-item {
     display: inline-flex;
     margin: 3px;
 
-    .dot-link{
+    .dot-link {
       display: block;
       padding-top: 8px;
       width: 8px;
@@ -71,7 +72,6 @@ export default defineComponent({
       height: 0;
       border-radius: 50%;
       background-color: rgb(255, 255, 255);
-
     }
   }
 }

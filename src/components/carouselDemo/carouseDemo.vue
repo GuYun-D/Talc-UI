@@ -7,6 +7,7 @@
       :initial="1"
       :dot="true"
       :director="true"
+      direction="next"
     >
       <t-carousel-item v-for="(item, index) in carouselData" :key="index">
         <img :src="item.img_url" />

@@ -8,7 +8,6 @@
         :currentIndex="currentIndex"
         @dotClick="dotClick"
       ></t-dot>
-
       <t-director dir="next" @dirClick="dirClick"></t-director>
       <t-director dir="prev" @dirClick="dirClick"></t-director>
       <slot></slot>
@@ -28,6 +27,8 @@ import {
 
 import TDot from "./components/TDot.vue";
 import TDirector from "./components/TDirector.vue";
+import { TCarouselProps } from "./TCarousel";
+import { ICarouselProps, director } from "./types/";
 
 export default defineComponent({
   name: "t-carousel",
@@ -35,33 +36,8 @@ export default defineComponent({
     TDot,
     TDirector,
   },
-  props: {
-    autoplay: {
-      type: Boolean,
-      default: true,
-    },
-    duration: {
-      type: Number,
-      default: 3000,
-    },
-    initial: {
-      type: Number,
-      default: 0,
-    },
-    dot: {
-      type: Boolean,
-      default: true,
-    },
-    director: {
-      type: Boolean,
-      default: true,
-    },
-    dotBgColor: {
-      type: String,
-      default: "#fff",
-    },
-  },
-  setup(props) {
+  props: TCarouselProps,
+  setup(props: ICarouselProps) {
     const instance = getCurrentInstance();
     const state = reactive({
       currentIndex: props.initial,
@@ -72,7 +48,7 @@ export default defineComponent({
     const autoplay = () => {
       if (props.autoplay) {
         t = setInterval(() => {
-          setIndex("prev");
+          setIndex(director[props.direction]);
         }, props.duration);
       }
     };
@@ -83,13 +59,13 @@ export default defineComponent({
      */
     const setIndex = (dir: string) => {
       switch (dir) {
-        case "next":
+        case director[props.direction]:
           state.currentIndex += 1;
           if (state.currentIndex === state.itemLength) {
             state.currentIndex = 0;
           }
           break;
-        case "prev":
+        case director[props.direction]:
           state.currentIndex -= 1;
           if (state.currentIndex === -1) {
             state.currentIndex = state.itemLength - 1;
@@ -104,7 +80,6 @@ export default defineComponent({
       state.itemLength = instance.slots.default()[0].children.length;
     });
 
-    // 卸载之前
     onBeforeUnmount(() => {
       _clearIntervalFn();
     });
@@ -122,7 +97,6 @@ export default defineComponent({
     };
 
     function _clearIntervalFn() {
-      // 清除定时器
       clearInterval(t);
       t = null;
     }
@@ -138,6 +112,7 @@ export default defineComponent({
       mouseLeave,
       dirClick,
     };
+    
   },
 });
 </script>
