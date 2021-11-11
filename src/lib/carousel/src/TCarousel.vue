@@ -1,5 +1,5 @@
 <template>
-  <div class="t-carousel">
+  <div class="t-carousel" @mouseenter="mouseEnter" @mouseleave="mouseLeave">
     <div class="inner">
       <t-dot
         dotBgColor="#f40"
@@ -101,18 +101,32 @@ export default defineComponent({
 
     // 卸载之前
     onBeforeUnmount(() => {
-      // 清除定时器
-      clearInterval(t);
-      t = null;
+      _clearIntervalFn();
     });
 
     const dotClick = (index: number) => {
       state.currentIndex = index;
     };
 
+    const mouseEnter = () => {
+      _clearIntervalFn();
+    };
+
+    const mouseLeave = () => {
+      autoplay();
+    };
+
+    function _clearIntervalFn() {
+      // 清除定时器
+      clearInterval(t);
+      t = null;
+    }
+
     return {
       ...toRefs(state),
       dotClick,
+      mouseEnter,
+      mouseLeave,
     };
   },
 });
