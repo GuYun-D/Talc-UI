@@ -1,10 +1,16 @@
 <template>
   <div class="t-director">
     <div class="dir-next dir" v-if="dir === 'next'">
-      <a href="javascript:;" @click="dirClick(dir)">&gt;</a>
+      <a href="javascript:;" class="talc ta-right-arrow" @click="dirClick(dir)"
+        ></a
+      >
     </div>
     <div class="dir-prev dir" v-if="dir === 'prev'">
-      <a href="javascript:;" @click="dirClick(dir)">&lt;</a>
+      <a
+        href="javascript:;"
+        class="talc ta-left-arrow"
+        @click="dirClick(dir)"
+      ></a>
     </div>
   </div>
 </template>
@@ -45,6 +51,9 @@ export default defineComponent({
 
   a {
     color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 
   &.dir-next {
