@@ -3,6 +3,11 @@ export enum director {
   prev = 'prev'
 }
 
+export enum dotType {
+  circle = "circle",
+  rectangle = "rectangle"
+}
+
 export interface ICarouselProps {
   autoplay: boolean
   duration: number
@@ -11,9 +16,10 @@ export interface ICarouselProps {
   director: boolean
   dotBgColor: string
   direction: string
+  dotType: string
 }
 
-export interface IDirectorProps  {
+export interface IDirectorProps {
   dir: director
 }
 
@@ -22,4 +28,5 @@ export interface IDotProps {
   hasDot: boolean
   currentIndex: Number
   dotBgColor: string
+  dotType: string
 }

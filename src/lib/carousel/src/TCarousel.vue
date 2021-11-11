@@ -6,6 +6,7 @@
         :hasDot="true"
         :itemLength="itemLength"
         :currentIndex="currentIndex"
+        dotType="rectangle"
         @dotClick="dotClick"
       ></t-dot>
       <t-director dir="next" @dirClick="dirClick"></t-director>
@@ -100,6 +101,7 @@ export default defineComponent({
     const dirClick = (dir: director) => {
       setIndex(dir);
     };
+
     return {
       ...toRefs(state),
       dotClick,

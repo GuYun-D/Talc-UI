@@ -47,7 +47,6 @@ export default defineComponent({
     const animationName = ref("taRi");
     emitter.on("change:name", (dir: string) => {
       animationName.value = dir === "prev" ? "taLf" : "taRi";
-      console.log(animationName.value);
     });
 
     return {

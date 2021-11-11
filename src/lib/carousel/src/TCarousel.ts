@@ -1,4 +1,4 @@
-import { director } from './types'
+import { director, dotType } from './types'
 
 export const TCarouselProps = {
   autoplay: {
@@ -39,4 +39,18 @@ export const TCarouselProps = {
       }
     },
   },
+
+  dotType: {
+    type: String,
+    default: 'circle',
+    validator: (value: any) => {
+      if (dotType[value]) {
+        return true
+      } else {
+        throw Error(`The types of indicators are only circle and rectangle, 
+          but you want ${value}. carousel does not support this type`)
+      }
+
+    }
+  }
 }

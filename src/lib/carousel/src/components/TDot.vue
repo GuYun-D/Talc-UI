@@ -1,6 +1,11 @@
 <template>
   <div class="t-dot" v-if="hasDot">
-    <div class="dot-item" v-for="item in itemLength" :key="item">
+    <div
+      class="dot-item"
+      :class="{ [dotType]: isCircle }"
+      v-for="item in itemLength"
+      :key="item"
+    >
       <a
         href="javascript:;"
         class="dot-link"
@@ -14,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { IDotProps } from "../types";
+import { defineComponent, onMounted, ref } from "vue";
+import { IDotProps, dotType } from "../types";
 
 export default defineComponent({
   name: "t-dot",
@@ -36,20 +41,47 @@ export default defineComponent({
       type: String,
       default: "#fff",
     },
+    dotType: {
+      type: String,
+      default: "circle",
+    },
   },
   setup(props: IDotProps, { emit }) {
     const dotClick = (index: number) => {
       emit("dotClick", index);
     };
 
-    return { dotClick };
+    const isCircle = ref(true);
+
+    const dotTypeInfo = {
+      circle: {
+        width: "8px",
+        marginTop: "8px",
+      },
+      rectangle: {
+        width: "26px",
+        marginTop: "3px",
+      },
+    };
+
+    onMounted(() => {
+      if (props.dotType === "circle") {
+        isCircle.value = false;
+      } else {
+        isCircle.value = true;
+      }
+    });
+
+    console.log(isCircle);
+
+    return { dotClick, isCircle };
   },
 });
 </script>
 
 <style scoped lang="scss">
 .t-dot {
-  width: 70px;
+  width: 100%;
   height: 13px;
   border-radius: 10px;
   position: absolute;
@@ -58,19 +90,26 @@ export default defineComponent({
   font-size: 0;
   left: 50%;
   z-index: 1;
-  margin-left: -39px;
+  transform: translateX(-50%);
 
   .dot-item {
     display: inline-flex;
     margin: 3px;
 
+    &.rectangle {
+      .dot-link {
+        width: 26px;
+        padding-top: 3px;
+      }
+    }
+
     .dot-link {
-      display: block;
+      display: inline-block;
       padding-top: 8px;
       width: 8px;
       height: 0;
       height: 0;
-      border-radius: 50%;
+      // border-radius: 50%;
       background-color: rgb(255, 255, 255);
     }
   }
