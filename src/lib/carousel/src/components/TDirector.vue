@@ -1,9 +1,11 @@
 <template>
   <div class="t-director">
     <div class="dir-next dir" v-if="dir === 'next'">
-      <a href="javascript:;" class="talc ta-right-arrow" @click="dirClick(dir)"
-        ></a
-      >
+      <a
+        href="javascript:;"
+        class="talc ta-right-arrow"
+        @click="dirClick(dir)"
+      ></a>
     </div>
     <div class="dir-prev dir" v-if="dir === 'prev'">
       <a
@@ -18,6 +20,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { IDirectorProps } from "../types";
+import { emitter } from "../../../utils";
 
 export default defineComponent({
   name: "t-director",
@@ -30,6 +33,7 @@ export default defineComponent({
   setup(props: IDirectorProps, { emit }) {
     const dirClick = (dir: string) => {
       emit("dirClick", dir);
+      emitter.emit("change:name", dir);
     };
     return { dirClick };
   },

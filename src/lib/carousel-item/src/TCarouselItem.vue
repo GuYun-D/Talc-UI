@@ -1,6 +1,6 @@
 <template>
   <div class="t-carousel-item">
-    <transition name="yun">
+    <transition :name="animationName">
       <div v-if="selfIndex === currentIndex">
         <img :src="imgUrl" alt="" />
       </div>
@@ -13,9 +13,11 @@ import {
   defineComponent,
   getCurrentInstance,
   reactive,
+  ref,
   toRefs,
   watch,
 } from "vue";
+import { emitter } from "../../utils";
 
 export default defineComponent({
   name: "t-carousel-item",
@@ -32,7 +34,6 @@ export default defineComponent({
       // @ts-ignore
       currentIndex: instance.parent.ctx.currentIndex,
     });
-
     watch(
       () => {
         // @ts-ignore
@@ -43,8 +44,15 @@ export default defineComponent({
       }
     );
 
+    const animationName = ref("taRi");
+    emitter.on("change:name", (dir: string) => {
+      animationName.value = dir === "prev" ? "taLf" : "taRi";
+      console.log(animationName.value);
+    });
+
     return {
       ...toRefs(state),
+      animationName,
     };
   },
 });
@@ -58,25 +66,46 @@ export default defineComponent({
   top: 0;
   left: 0;
 
-  .yun-enter-active,
-  .yun-leave-active {
+  .taRi-enter-active,
+  .taRi-leave-active {
     transition: all 300ms linear;
   }
 
-  .yun-enter-active {
+  .taRi-enter-active {
     transform: translateX(100%);
   }
 
-  .yun-enter-to {
+  .taRi-enter-to {
     transform: translateX(0);
   }
 
-  .yun-leave-active {
+  .taRi-leave-active {
     transform: translateX(0);
   }
 
-  .yun-leave-to {
+  .taRi-leave-to {
     transform: translateX(-100%);
+  }
+
+  .taLf-enter-active,
+  .taLf-leave-active {
+    transition: all 300ms linear;
+  }
+
+  .taLf-enter-active {
+    transform: translateX(-100%);
+  }
+
+  .taLf-enter-to {
+    transform: translateX(0);
+  }
+
+  .taLf-leave-active {
+    transform: translateX(0);
+  }
+
+  .taLf-leave-to {
+    transform: translateX(100%);
   }
 
   img {
