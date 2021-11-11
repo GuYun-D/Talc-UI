@@ -1,28 +1,15 @@
 <template>
   <div class="t-carousel">
-    <div class="t-carousel-window">
-      <slot></slot>
-    </div>
+    <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "t-carousel",
-  provide(){
-    return {
-    }
-  },
-  setup(props, { slots }) {
-    const childrens = slots.default();
-    onMounted(() => {
-      // @ts-ignore
-      childrens[0].type.setup().visible.value = true;
-      // @ts-ignore
-      console.log(childrens[0].type.setup().visible.value);
-    });
+  setup() {
     return {};
   },
 });
