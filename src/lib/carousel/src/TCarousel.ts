@@ -1,4 +1,4 @@
-import { director, dotType, trigger, carouselDirectionEnum } from './types'
+import { director, dotType, trigger, carouselDirectionEnum, switchTyleEnum } from './types'
 
 export const TCarouselProps = {
   autoplay: {
@@ -74,6 +74,19 @@ export const TCarouselProps = {
         return true
       } else {
         throw Error(`The types of carouselDirection are only transverse and vertical, 
+          but you want ${value}. carousel does not support this type`)
+      }
+    }
+  },
+
+  switchType: {
+    type: String,
+    default: 'slide',
+    validator: (value: string) => {
+      if (switchTyleEnum[value]) {
+        return true
+      } else {
+        throw Error(`The types of switchType are only opacity and slide, 
           but you want ${value}. carousel does not support this type`)
       }
     }

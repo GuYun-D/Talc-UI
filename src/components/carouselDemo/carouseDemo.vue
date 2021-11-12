@@ -2,7 +2,7 @@
   <div>
     <h1>carousel 轮播组件</h1>
     <t-carousel
-      :autoplay="false"
+      :autoplay="true"
       :duration="3000"
       :initial="1"
       :dot="true"
@@ -10,6 +10,7 @@
       direction="next"
       dotType="rectangle"
       trigger="hover"
+      switchType="opacity"
     >
       <t-carousel-item
         v-for="(item, index) in carouselData"

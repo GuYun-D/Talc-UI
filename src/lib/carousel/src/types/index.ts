@@ -23,6 +23,11 @@ export enum dotPositionEnum {
   right = "right"
 }
 
+export enum switchTyleEnum {
+  slide = "slide",
+  opacity = "opacity"
+}
+
 export interface ICarouselProps {
   autoplay: boolean
   duration: number
@@ -34,6 +39,7 @@ export interface ICarouselProps {
   dotType: string
   trigger: string
   carouselDirection: string
+  switchType: string
 }
 
 export interface IDirectorProps {

@@ -40,7 +40,11 @@ import {
 import TDot from "./components/TDot.vue";
 import TDirector from "./components/TDirector.vue";
 import { TCarouselProps } from "./TCarousel";
-import { ICarouselProps, director, carouselDirectionEnum } from "./types";
+import {
+  ICarouselProps,
+  director,
+  carouselDirectionEnum
+} from "./types";
 import { emitter } from "../../utils";
 
 export default defineComponent({
