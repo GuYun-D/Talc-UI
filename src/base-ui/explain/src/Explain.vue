@@ -21,5 +21,7 @@ export default defineComponent({
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   border-left: 3px solid rgb(185, 185, 185);
+  border-bottom: 1px solid #ccc;
+  line-height: 1.5;
 }
 </style>

@@ -86,7 +86,6 @@ export default defineComponent({
 .t-dot {
   width: 100%;
   height: 40px;
-  border-radius: 10px;
   position: absolute;
   bottom: -20px;
   text-align: center;
@@ -109,6 +108,7 @@ export default defineComponent({
       .dot-link {
         width: 26px;
         padding-top: 3px;
+        border-radius: 0;
       }
     }
 
@@ -118,7 +118,7 @@ export default defineComponent({
       width: 8px;
       height: 0;
       height: 0;
-      // border-radius: 50%;
+      border-radius: 50%;
       background-color: rgb(255, 255, 255);
     }
   }
