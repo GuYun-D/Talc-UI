@@ -1,4 +1,4 @@
-import { director, dotType, trigger } from './types'
+import { director, dotType, trigger, carouselDirectionEnum } from './types'
 
 export const TCarouselProps = {
   autoplay: {
@@ -61,6 +61,19 @@ export const TCarouselProps = {
         return true
       } else {
         throw Error(`The types of trigger are only click and hover, 
+          but you want ${value}. carousel does not support this type`)
+      }
+    }
+  },
+
+  carouselDirection: {
+    type: String,
+    default: 'transverse',
+    validator: (value: string) => {
+      if (carouselDirectionEnum[value]) {
+        return true
+      } else {
+        throw Error(`The types of carouselDirection are only transverse and vertical, 
           but you want ${value}. carousel does not support this type`)
       }
     }

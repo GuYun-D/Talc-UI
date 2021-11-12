@@ -13,6 +13,16 @@ export enum trigger {
   hover = "hover"
 }
 
+export enum carouselDirectionEnum {
+  transverse = "transverse",
+  vertical = "vertical"
+}
+
+export enum dotPositionEnum {
+  botton = "bottom",
+  right = "right"
+}
+
 export interface ICarouselProps {
   autoplay: boolean
   duration: number
@@ -23,6 +33,7 @@ export interface ICarouselProps {
   direction: string
   dotType: string
   trigger: string
+  carouselDirection: string
 }
 
 export interface IDirectorProps {
@@ -32,7 +43,8 @@ export interface IDirectorProps {
 export interface IDotProps {
   itemLength: number
   hasDot: boolean
-  currentIndex: Number
+  currentIndex: number
   dotBgColor: string
   dotType: string
+  dotPosition: string
 }

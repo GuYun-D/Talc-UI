@@ -31,6 +31,7 @@ export default defineComponent({
   setup() {
     const instance = getCurrentInstance();
     let animationName = ref("taRi");
+    let direction = ref(true);
 
     const state = reactive({
       selfIndex: instance.vnode.key,
@@ -45,12 +46,23 @@ export default defineComponent({
       },
       (value, oldVal) => {
         state.currentIndex = value;
-        animationName.value = value > oldVal ? dir.taRi : dir.taLf;
+        if (direction.value) {
+          animationName.value = value > oldVal ? dir.taBo : dir.taTo;
+        } else {
+          animationName.value = value > oldVal ? dir.taRi : dir.taLf;
+        }
       }
     );
 
     emitter.on("change:name", (dir: string) => {
       animationName.value = dir === director.prev ? "taLf" : "taRi";
+    });
+
+    emitter.on("change:direction", (value: string) => {
+      if (value === "vertical") {
+        animationName.value = "taTo";
+        direction.value = false;
+      }
     });
 
     return {
@@ -109,6 +121,49 @@ export default defineComponent({
 
   .taLf-leave-to {
     transform: translateX(100%);
+  }
+
+  // 着呢
+  .taTo-enter-active,
+  .taTo-leave-active {
+    transition: all 300ms linear;
+  }
+
+  .taTo-enter-active {
+    transform: translateY(-100%);
+  }
+
+  .taTo-enter-to {
+    transform: translateY(0);
+  }
+
+  .taTo-leave-active {
+    transform: translateY(0);
+  }
+
+  .taTo-leave-to {
+    transform: translateY(100%);
+  }
+
+  .taBo-enter-active,
+  .taBo-leave-active {
+    transition: all 300ms linear;
+  }
+
+  .taBo-enter-active {
+    transform: translateY(100%);
+  }
+
+  .taBo-enter-to {
+    transform: translateY(0);
+  }
+
+  .taBo-leave-active {
+    transform: translateY(0);
+  }
+
+  .taBo-leave-to {
+    transform: translateY(-100%);
   }
 
   img {

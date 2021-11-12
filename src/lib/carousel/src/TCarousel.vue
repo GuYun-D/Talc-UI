@@ -8,10 +8,19 @@
         :currentIndex="currentIndex"
         :dotType="dotType"
         :trigger="triggerType"
+        :dotPosition="dotPosition"
         @dotClick="dotClick"
       ></t-dot>
-      <t-director dir="next" @dirClick="dirClick"></t-director>
-      <t-director dir="prev" @dirClick="dirClick"></t-director>
+      <t-director
+        dir="next"
+        @dirClick="dirClick"
+        v-if="isDirector"
+      ></t-director>
+      <t-director
+        dir="prev"
+        @dirClick="dirClick"
+        v-if="isDirector"
+      ></t-director>
       <slot></slot>
     </div>
   </div>
@@ -31,7 +40,8 @@ import {
 import TDot from "./components/TDot.vue";
 import TDirector from "./components/TDirector.vue";
 import { TCarouselProps } from "./TCarousel";
-import { ICarouselProps, director } from "./types/";
+import { ICarouselProps, director, carouselDirectionEnum } from "./types";
+import { emitter } from "../../utils";
 
 export default defineComponent({
   name: "t-carousel",
@@ -107,6 +117,20 @@ export default defineComponent({
     const triggerType =
       props.trigger === "hover" ? "mouseenter" : props.trigger;
 
+    const isDirector = ref(true);
+    if (props.carouselDirection === carouselDirectionEnum.vertical) {
+      isDirector.value = false;
+      emitter.emit("change:direction", "vertical");
+    } else {
+      isDirector.value = true;
+      emitter.emit("change:direction", "transverse");
+    }
+
+    const dotPosition = ref("bottom");
+    if (props.carouselDirection === carouselDirectionEnum.vertical) {
+      dotPosition.value = carouselDirectionEnum.vertical;
+    }
+
     return {
       ...toRefs(state),
       dotClick,
@@ -114,6 +138,8 @@ export default defineComponent({
       mouseLeave,
       dirClick,
       triggerType,
+      isDirector,
+      dotPosition,
     };
   },
 });

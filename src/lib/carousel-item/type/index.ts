@@ -5,5 +5,7 @@ export enum director {
 
 export enum dir {
   taRi = "taRi",
-  taLf = "taLf"
+  taLf = "taLf",
+  taBo = "taBo",
+  taTo = "taTo"
 }
