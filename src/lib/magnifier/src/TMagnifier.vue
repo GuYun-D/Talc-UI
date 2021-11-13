@@ -1,6 +1,7 @@
 <template>
   <div
     class="t-magnifier"
+    v-magnifier
     :style="{
       width: imgWidth + 'px',
       height: imgHeight + 'px',
@@ -34,9 +35,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { magnifierProps } from "./type";
+import { magnifier } from "./directives";
 
 export default defineComponent({
   name: "t-magnifier",
+  directives: {
+    magnifier,
+  },
+
   props: {
     imgUrl: {
       type: String,
