@@ -31,6 +31,7 @@ import { defineComponent, PropType } from "vue";
 import type { IAttributeConfig } from "../types/types";
 
 export default defineComponent({
+  name: "Attribute",
   props: {
     attributeConfig: {
       type: Object as PropType<IAttributeConfig>,
@@ -85,9 +86,8 @@ footer {
         line-height: 5px;
         border-bottom: 1px dotted $borderColor;
 
-        &:nth-child(2n){
+        &:nth-child(2n) {
           background-color: rgb(250, 252, 249);
-          
         }
 
         span {

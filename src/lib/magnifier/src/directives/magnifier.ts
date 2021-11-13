@@ -1,5 +1,10 @@
 import { getStyle } from '../utils/tools'
 
+enum magnifierClassName {
+  normal="mag-wrap",
+  show=" show"
+}
+
 export default {
   mounted(el: HTMLElement) {
     let oImgWrap = el,
@@ -19,7 +24,7 @@ export default {
 
     function bindEvent() {
       oImgWrap.addEventListener('mouseover', function (e) {
-        oMagWrap.className += ' show'
+        oMagWrap.className += magnifierClassName.show
         showMag(getXY(e).x, getXY(e).y)
         document.addEventListener('mousemove', handleMouseMove, false)
       }, false)
@@ -33,7 +38,7 @@ export default {
     }
 
     function handleMouseOut() {
-      oMagWrap.className = 'mag-wrap'
+      oMagWrap.className = magnifierClassName.normal
       document.removeEventListener('mousemove', handleMouseMove, false)
     }
 
@@ -44,7 +49,7 @@ export default {
       oMagImg.style.top = -y + 'px'
 
       if (mouseX < 0 || mouseY < 0 || mouseX > imgWidth || mouseY > imgHeight) {
-        oMagWrap.className = 'mag-wrap'
+        oMagWrap.className = magnifierClassName.normal
         document.removeEventListener('mousemove', handleMouseMove, false)
       }
     }
