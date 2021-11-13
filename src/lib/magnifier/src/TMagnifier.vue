@@ -70,8 +70,15 @@ export default defineComponent({
       default: 100,
     },
     imgAlt: String,
+    radius: {
+      type: Boolean,
+      default: false
+    }
   },
   setup(props: magnifierProps) {
+    if(props.radius && props.magWidth != props.magHeight){
+      console.warn("magnifier warn：You want to use the radius attribute to change the round corner of the magnifier to 50%, but the size of your current magnifier is not square, which will affect the beauty of the magnifier")
+    }
     return {};
   },
 });
@@ -97,6 +104,7 @@ export default defineComponent({
     box-shadow: 0 0 3px #ccc;
     cursor: move;
     overflow: hidden;
+    border-radius: 50%;
 
     &.show {
       display: block;

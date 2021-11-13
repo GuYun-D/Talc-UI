@@ -7,4 +7,5 @@ export interface magnifierProps {
   magWidth: number
   magHeight: number
   imgAlt: string
+  radius: boolean
 }

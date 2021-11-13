@@ -9,8 +9,8 @@
       :magWidth="magWidth"
       :magHeight="magHeight"
       :imgAlt="imgAlt"
+      :radius="true"
     ></t-magnifier>
-
   </div>
 </template>
 
@@ -33,7 +33,6 @@ export default defineComponent({
     return {
       ...toRefs(state),
     };
-
   },
 });
 </script>
