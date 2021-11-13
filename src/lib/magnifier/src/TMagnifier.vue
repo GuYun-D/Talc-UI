@@ -14,6 +14,7 @@
       :style="{
         width: magWidth + 'px',
         height: magHeight + 'px',
+        borderRadius: radius ? '50%' : '0'
       }"
     >
       <img
