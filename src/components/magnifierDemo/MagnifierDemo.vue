@@ -10,7 +10,7 @@
       :magHeight="magHeight"
       :imgAlt="imgAlt"
     ></t-magnifier>
-    
+
   </div>
 </template>
 
@@ -25,8 +25,8 @@ export default defineComponent({
       link: "http://www.baidu.com",
       imgWidth: 656,
       imgHeight: 369,
-      magWidth: 150,
-      magHeight: 150,
+      magWidth: 100,
+      magHeight: 100,
       imgAlt: "风景",
     });
 

@@ -63,11 +63,11 @@ export default defineComponent({
     },
     magWidth: {
       type: Number,
-      default: 150,
+      default: 100,
     },
     magHeight: {
       type: Number,
-      default: 150,
+      default: 100,
     },
     imgAlt: String,
   },

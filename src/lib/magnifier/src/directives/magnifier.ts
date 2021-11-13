@@ -27,7 +27,7 @@ export default {
       oImgWrap.addEventListener('mouseout', handleMouseOut, false)
     }
 
-    function handleMouseMove(e) {
+    function handleMouseMove(e: MouseEvent) {
       const { x, y, mouseX, mouseY } = getXY(e)
       showMag(x, y, mouseX, mouseY)
     }
@@ -49,7 +49,7 @@ export default {
       }
     }
 
-    function getXY(e) {
+    function getXY(e: MouseEvent) {
       return {
         x: e.pageX - imgX - magWidth / 2,
         y: e.pageY - imgY - magHeight / 2,
