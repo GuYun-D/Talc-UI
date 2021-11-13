@@ -1,15 +1,39 @@
 <template>
   <div>
-    <t-magnifier></t-magnifier>
+    <t-magnifier
+      link="link"
+      :imgWidth="imgWidth"
+      :imgHeight="imgHeight"
+      :blank="blank"
+      :img-url="imgUrl"
+      :magWidth="magWidth"
+      :magHeight="magHeight"
+      :imgAlt="imgAlt"
+    ></t-magnifier>
+    
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const state = reactive({
+      imgUrl: "/magnifier/universe.jpg",
+      blank: true,
+      link: "http://www.baidu.com",
+      imgWidth: 656,
+      imgHeight: 369,
+      magWidth: 150,
+      magHeight: 150,
+      imgAlt: "风景",
+    });
+
+    return {
+      ...toRefs(state),
+    };
+
   },
 });
 </script>
