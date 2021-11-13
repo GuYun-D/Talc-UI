@@ -13,6 +13,7 @@ import TCasasder from '../lib/cascader/src/TCascader.vue'
 import TCascaderItem from '../lib/cascader-item/src/TCascaderItem.vue'
 import TCarousel from '../lib/carousel'
 import TCarouselItem from '../lib/carousel-item'
+import TMagnifier from '../lib/magnifier'
 
 const talcArr = [
   TLayout,
@@ -29,7 +30,8 @@ const talcArr = [
   TCasasder,
   TCascaderItem,
   TCarousel,
-  TCarouselItem
+  TCarouselItem,
+  TMagnifier
 ]
 
 export { talcArr }

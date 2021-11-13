@@ -68,6 +68,9 @@ export const siderConfig = [
       {
         name: "carousel 轮播",
         url: 'carousel'
+      }, {
+        name: "magnifier 放大镜",
+        url: 'magnifier'
       }
     ]
   }

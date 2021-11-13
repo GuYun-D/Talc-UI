@@ -18,6 +18,7 @@ import install from "../src/markdown/install.md";
 import getStarted from "../src/markdown/GetStarted.md";
 import Cascader from "../src/components/cascaderDemo/CascaderDemo.vue"
 import Carousel from '../src/components/carouselDemo/carouseDemo.vue'
+import Magnifier from "../src/components/magnifierDemo/MagnifierDemo.vue"
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -96,6 +97,9 @@ export const router = createRouter({
         }, {
           path: 'carousel',
           component: Carousel
+        }, {
+          path: 'magnifier',
+          component: Magnifier
         }
       ],
     },
