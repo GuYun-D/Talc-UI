@@ -1,4 +1,4 @@
 export interface rateProps {
-  number: number
+  num: number
   size: number
 }
