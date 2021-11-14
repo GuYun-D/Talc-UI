@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Rate 评分</h1>
-    <t-rate :num="3" :size="30" @getStarNum="getStarNum"></t-rate>
+    <t-rate :num="3" :size="30" @getStarNum="getStarNum" starColr="#f40"></t-rate>
   </div>
 </template>
 
