@@ -181,4 +181,8 @@ export const iconListConfig: iconList[] = [
     iconClass: "Interface-32",
     taName: "ta-Interface-32",
   },
+  {
+    iconClass: "star",
+    taName: "ta-star",
+  },
 ];

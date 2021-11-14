@@ -1,15 +1,16 @@
 <template>
   <div class="t-rate">
-    评分组件
+    
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { rateProps } from "./type";
 
 export default defineComponent({
   name: "t-rate",
-  setup() {
+  setup(props: rateProps) {
     return {};
   },
 });
