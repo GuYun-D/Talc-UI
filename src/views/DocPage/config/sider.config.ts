@@ -32,6 +32,9 @@ export const siderConfig = [
       }, {
         name: "cascader 级联选择器",
         url: "cascader"
+      }, {
+        name: "rate 评分",
+        url: "rate"
       }
     ]
   },
