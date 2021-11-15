@@ -2,11 +2,17 @@
   <div>
     <h1>Rate 评分</h1>
     <t-rate
-      :num="3"
       :size="30"
       @getStarNum="getStarNum"
       starColr="#f40"
-      readonyRate="3.5"
+      :num="4"
+    ></t-rate>
+
+    <t-rate
+      :size="30"
+      @getStarNum="getStarNum"
+      starColr="#f40"
+      :readonyRate="4"
     ></t-rate>
   </div>
 </template>

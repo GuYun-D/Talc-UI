@@ -1,87 +1,54 @@
 <template>
   <div class="t-rate">
-    <template v-if="!readonyRate">
-      <div class="rate-wrapper" v-for="num in 5" :key="num">
-        <span
-          class="talc ta-star rate-star"
-          :class="num <= starNum ? 'active' : ''"
-          :style="{ fontSize: size + 'px' }"
-          @click="setStarNum(num)"
-          @mousemove="currentIndex = num"
-        ></span>
-      </div>
+    <div
+      class="rate-wrapper"
+      v-for="num in completeStarNum === 0 ? 5 : completeStarNum"
+      :key="num"
+    >
+      <span
+        class="talc ta-star rate-star"
+        :class="
+          num <= (completeStarNum === 0 ? starNum : completeStarNum)
+            ? 'active'
+            : ''
+        "
+        :style="{ fontSize: size + 'px' }"
+        @click="setStarNum(num)"
+        @mousemove="mousemoveStar(num)"
+      ></span>
+    </div>
 
-      <div :style="{ fontSize: size + 'px' }">
-        {{ auxiliaryText[currentIndex - 1] }}
-      </div>
-    </template>
-    <template v-else>
-      <div class="rate-readonly">
-        <span
-          class="talc ta-star rate-star active"
-          :style="{ fontSize: size + 'px' }"
-          v-for="complete in score[0] * 1"
-          :key="complete"
-        ></span>
+    <div v-if="readonyRate && incompleteStarNum !== 0" class="rate-wrapper">
+      <span
+        v-rate:value="[incompleteStarNum, size]"
+        class="talc ta-star rate-star active pre"
+        :style="{ fontSize: size + 'px' }"
+      >
+        <span class="mark"></span>
+      </span>
+    </div>
 
-        <span
-          v-rate:value="[score[1], size]"
-          class="talc ta-star rate-star active pre"
-          :style="{ fontSize: size + 'px' }"
-        >
-          <span class="mark"></span>
-        </span>
-
-        <span :style="{ fontSize: size + 'px' }"> {{ readonyRate }} </span>
-      </div>
-    </template>
+    <div :style="{ fontSize: size + 'px' }" class="rate-text">
+      <template v-if="readonyRate">{{ readonyRate }}</template>
+      <template v-else>{{ auxiliaryText[currentIndex - 1] }}</template>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { rateProps } from "./type";
+import { ratePropsType } from "./type";
 import { useRate } from "../../hooks";
 import { rate } from "./directives";
+import rateProps from './TRate'
 
 export default defineComponent({
   name: "t-rate",
   directives: {
     rate,
   },
-  props: {
-    num: {
-      type: Number,
-      default: 0,
-    },
-    size: {
-      type: Number,
-      default: 16,
-    },
-    starColr: {
-      type: String,
-      default: "#fbab06",
-    },
-    auxiliaryText: {
-      type: Array,
-      default: ["极差", "失望", "一般", "满意", "惊喜"],
-      validator: (text: string[]) => {
-        if (text.length === 5 && text.length > 4) return true;
-        console.warn(
-          "rate component warn: Auxiliary text needs to be a string array containing five elements. If there are more than five elements, the elements other than the fifth will no longer be used"
-        );
-      },
-    },
-    readonyRate: {
-      type: String,
-      validator: (value: string) => {
-        let rate = value.split(".");
-        if (+rate[0] < 5 && +rate[0] >= 0) return true;
-        console.warn("rate component warn: the score ranges from 0 to 5");
-      },
-    },
-  },
-  setup(props: rateProps, { emit }) {
+  props: rateProps,
+  setup(props: ratePropsType, { emit }) {
     // const [starNum, setStarNum] = useRate(props.num, () => {
     //   console.log(starNum.value);
     // });
@@ -96,14 +63,34 @@ export default defineComponent({
       emit("getStarNum", starNum.value);
     });
 
-    let score: string[] = [];
-    if (props.readonyRate) {
-      score = props.readonyRate.split(".");
-      let rest = 5 - +score[0] - 1 + "";
-      score.push(rest);
+    if (props.num !== 0 && props.readonyRate) {
+      throw Error(
+        "Rate Component Error: If you want the current score to be read-only, please do not pass the num attribute"
+      );
     }
 
-    return { starNum, setStarNum, currentIndex, score };
+    let completeStarNum = ref(0);
+    let incompleteStarNum = ref(0);
+    if (props.readonyRate) {
+      completeStarNum.value = parseInt(props.readonyRate + "");
+      incompleteStarNum.value = parseInt(
+        props.readonyRate * 10 - completeStarNum.value * 10 + ""
+      );
+    }
+
+    const mousemoveStar = (num: number) => {
+      if (currentIndex.value === num || props.readonyRate) return;
+      currentIndex.value = num;
+    };
+
+    return {
+      starNum,
+      setStarNum,
+      currentIndex,
+      completeStarNum,
+      incompleteStarNum,
+      mousemoveStar,
+    };
   },
 });
 </script>
@@ -129,36 +116,23 @@ export default defineComponent({
       &.active {
         color: #fbab06;
       }
-    }
-  }
-
-  .rate-readonly {
-    display: flex;
-
-    .rate-star {
-      position: relative;
-      color: #999;
-      margin-right: 10px;
 
       &.pre {
         position: relative;
+
         .mark {
           position: absolute;
+          display: block;
+          background-color: #fff;
           right: 0;
           top: 0;
-          display: block;
-          background: #fff;
         }
       }
-
-      &.icon-star {
-        transition: all 0.3s;
-      }
-
-      &.active {
-        color: #fbab06;
-      }
     }
+  }
+
+  .rate-text{
+    padding: 0 10px;
   }
 }
 </style>

@@ -1,7 +1,7 @@
-export interface rateProps {
+export interface ratePropsType {
   num: number
   size: number
   starColr: string
   auxiliaryText: string[]
-  readonyRate: string
+  readonyRate: number
 }
