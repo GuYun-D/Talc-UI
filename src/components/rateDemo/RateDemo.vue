@@ -6,7 +6,7 @@
       :size="30"
       @getStarNum="getStarNum"
       starColr="#f40"
-      readonyRate="3.1"
+      readonyRate="3.5"
     ></t-rate>
   </div>
 </template>

@@ -32,12 +32,7 @@
           <span class="mark"></span>
         </span>
 
-        <span
-          class="talc ta-star rate-star"
-          :style="{ fontSize: size + 'px' }"
-          v-for="complete in score[2] * 1"
-          :key="complete"
-        ></span>
+        <span :style="{ fontSize: size + 'px' }"> {{ readonyRate }} </span>
       </div>
     </template>
   </div>
@@ -146,6 +141,7 @@ export default defineComponent({
       margin-right: 10px;
 
       &.pre {
+        position: relative;
         .mark {
           position: absolute;
           right: 0;
