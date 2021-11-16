@@ -4,7 +4,7 @@
 
 <template>
   <div class="carousel-demo">
-    <t-carousel :>
+    <t-carousel>
       <t-carousel-item
         v-for="(item, index) in carouselData"
         :imgUrl="item.img_url"

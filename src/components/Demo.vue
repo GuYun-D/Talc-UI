@@ -10,8 +10,9 @@
       </div>
 
       <div class="demo-actions" @click="codeVisible = !codeVisible">
-        {{ codeVisible ? "隐藏代码" : "查看代码" }}
+        {{ codeVisible ? "隐藏代码&lt;/&gt;" : "查看代码&lt;/&gt;" }} 
       </div>
+      
       <div class="demo-code" v-if="codeVisible">
         <pre v-html="html" />
       </div>
