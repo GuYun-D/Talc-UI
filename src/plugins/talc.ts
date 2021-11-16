@@ -15,6 +15,7 @@ import TCarousel from '../lib/carousel'
 import TCarouselItem from '../lib/carousel-item'
 import TMagnifier from '../lib/magnifier'
 import TRate from '../lib/rate'
+import TCard from '../lib/card'
 
 const talcArr = [
   TLayout,
@@ -33,7 +34,8 @@ const talcArr = [
   TCarousel,
   TCarouselItem,
   TMagnifier,
-  TRate
+  TRate,
+  TCard
 ]
 
 export { talcArr }

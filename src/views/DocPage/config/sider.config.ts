@@ -74,6 +74,9 @@ export const siderConfig = [
       }, {
         name: "magnifier 放大镜",
         url: 'magnifier'
+      }, {
+        name: "card 卡片",
+        url: 'card'
       }
     ]
   }
