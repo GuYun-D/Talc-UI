@@ -6,7 +6,7 @@
   <div>
     <t-rate :readonyRate="3.4"></t-rate>
     <t-rate :readonyRate="2.6"></t-rate>
-    <t-rate :readonyRate="4.8"></t-rate>
+    <t-rate :readonyRate="4.8" starColr="#f40"></t-rate>
     <t-rate :readonyRate="1.5"></t-rate>
   </div>
 </template>

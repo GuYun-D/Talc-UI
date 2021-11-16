@@ -30,7 +30,9 @@
 
     <div :style="{ fontSize: size + 'px' }" class="rate-text">
       <template v-if="readonyRate">{{ readonyRate }}</template>
-      <template v-else-if="auxiliaryTextVisible">{{ auxiliaryText[currentIndex - 1] }}</template>
+      <template v-else-if="auxiliaryTextVisible">{{
+        auxiliaryText[currentIndex - 1]
+      }}</template>
     </div>
   </div>
 </template>
@@ -40,7 +42,7 @@ import { defineComponent, ref } from "vue";
 import { ratePropsType } from "./type";
 import { useRate } from "../../hooks";
 import { rate } from "./directives";
-import rateProps from './TRate'
+import rateProps from "./TRate";
 
 export default defineComponent({
   name: "t-rate",
@@ -131,7 +133,7 @@ export default defineComponent({
     }
   }
 
-  .rate-text{
+  .rate-text {
     padding: 0 10px;
   }
 }
