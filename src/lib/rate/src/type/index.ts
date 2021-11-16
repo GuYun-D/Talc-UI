@@ -4,4 +4,5 @@ export interface ratePropsType {
   starColr: string
   auxiliaryText: string[]
   readonyRate: number
+  auxiliaryTextVisible: boolean
 }

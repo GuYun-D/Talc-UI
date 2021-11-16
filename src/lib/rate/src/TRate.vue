@@ -30,7 +30,7 @@
 
     <div :style="{ fontSize: size + 'px' }" class="rate-text">
       <template v-if="readonyRate">{{ readonyRate }}</template>
-      <template v-else>{{ auxiliaryText[currentIndex - 1] }}</template>
+      <template v-else-if="auxiliaryTextVisible">{{ auxiliaryText[currentIndex - 1] }}</template>
     </div>
   </div>
 </template>

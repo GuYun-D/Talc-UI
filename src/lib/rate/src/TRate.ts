@@ -28,4 +28,8 @@ export default {
       console.warn("Rate Component warn: the score ranges from 0 to 5");
     },
   },
+  auxiliaryTextVisible: {
+    type: Boolean,
+    default: false
+  }
 }
