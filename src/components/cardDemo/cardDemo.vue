@@ -1,54 +1,32 @@
 <template>
   <div>
     <h1>Card 卡片</h1>
+    <Demo :component="Card1Demo">
+      卡片视图，内置了header插槽，里面的布局默认是flex布局，当然你也可以不使用，就像右侧的简单卡片，通过cardWidth属性可以自定义card的宽度
+    </Demo>
 
-    <!-- <t-card
-      :cardWidth="200"
-      show-shadow="hover"
-      :commodityCard="true"
-      :imgSrc="'/card/1.jpg'"
-      imgLink="http://product.dangdang.com/23289047.html"
-    >
-      <template #header>
-        <span>胡大爷</span>
-        <t-button>操作</t-button>
-      </template>
-      <div v-for="item in 5" :key="item" class="card-text">
-        {{ Math.random().toString(36).substr(1) }}
-      </div>
+    <Demo :component="Card2Demo">
+      cart组件中同时也内置了CarDFooter插槽，通过配合commodityCard属性，开启商品卡片模式可以让card组件的内容更加丰富
+    </Demo>
 
-      <template #commodityCard>
-        <div>MOON映像 青春摄影集</div>
-        <em>￥22.00</em>
-      </template>
-    </t-card> -->
+    <Demo :component="Card3Demo"></Demo>
 
-    <t-card :cardWidth="200" show-shadow="hover">
-      <template #header>
-        <span>胡大爷</span>
-        <t-button>操作</t-button>
-      </template>
-      <div v-for="item in 5" :key="item" class="card-text">
-        {{ Math.random().toString(36).substr(1) }}
-      </div>
-
-      <template #cardFooter>
-        <div class="footer-op">
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-        </div>
-      </template>
-    </t-card>
+    <attribute :attributeConfig="attributeConfig"></attribute>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Demo from "../Demo.vue";
+import { Card1Demo, Card2Demo, Card3Demo } from "./demo";
+import { attributeConfig } from "./config";
 
 export default defineComponent({
+  components: {
+    Demo,
+  },
   setup() {
-    return {};
+    return { Card1Demo, Card2Demo, Card3Demo, attributeConfig };
   },
 });
 </script>
@@ -58,12 +36,12 @@ export default defineComponent({
   padding: 10px;
 }
 
-.footer-op{
+.footer-op {
   display: flex;
   align-items: center;
   padding: 10px;
 
-  div{
+  div {
     flex: 1;
     display: flex;
     align-items: center;
