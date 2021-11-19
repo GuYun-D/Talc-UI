@@ -6,16 +6,28 @@ export default {
       oPlaceHolder = oSelectInput.querySelector('label'),
       oIcon = oSelectInput.querySelector('span')
 
+    /**
+     * 使用原生dom控制menu组件的显示与隐藏，这样它的关闭早于vue，
+     * 在点击menu-item的时候，就直接关闭了
+     */
     oInput.addEventListener('focus', function () {
       oPlaceHolder.style.display = 'none'
       oIcon.className = 'talc ta-31sousuo'
-      oSelectmenu.style.display = 'block'
+      setTimeout(() => {
+        oSelectmenu.style.display = 'block'
+      }, 200);
     }, false)
 
     oInput.addEventListener('blur', function () {
       oPlaceHolder.style.display = 'block'
       oIcon.className = 'talc ta-xiajiantou'
-      oSelectmenu.style.display = 'none'
+      setTimeout(() => {
+        oSelectmenu.style.display = 'none'
+
+        if (this.validationMessage.length === 0) {
+          oPlaceHolder.style.display = 'block'
+        }
+      }, 200);
     }, false)
   },
 }

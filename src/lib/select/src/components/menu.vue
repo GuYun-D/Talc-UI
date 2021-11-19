@@ -1,24 +1,33 @@
 <template>
   <div class="t-select-menu">
-    <div class="t-select-menu-item" v-for="(item, index) in data" :key="index">
+    <div
+      class="t-select-menu-item"
+      v-for="(item, index) in data"
+      :key="index"
+      @click="setItemValue(item)"
+    >
       {{ item.text }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, PropType } from "vue";
+import { IMenuDataItem } from "../types";
 
 export default defineComponent({
   name: "t-select-menu",
   props: {
     data: {
-      type: Array,
+      type: Array as PropType<IMenuDataItem[]>,
       required: true,
     },
   },
-  setup() {
-    return {};
+  setup(props, { emit }) {
+    const setItemValue = (item: IMenuDataItem) => {
+      emit("setItemValue", item);
+    };
+    return { setItemValue };
   },
 });
 </script>
@@ -34,6 +43,8 @@ export default defineComponent({
   box-shadow: 0 0 10px #ddd;
   border-radius: 5px;
   cursor: pointer;
+  z-index: 10;
+
   .t-select-menu-item {
     height: 35px;
     text-align: center;
@@ -41,9 +52,9 @@ export default defineComponent({
     font-size: 14px;
     color: #666;
     margin: 10px 0;
-    transition: all .2s linear;
+    transition: all 0.2s linear;
 
-    &:hover{
+    &:hover {
       background-color: #ededed;
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="t-select" v-focus>
     <t-select-input :placeHolder="placeHolder"></t-select-input>
-    <t-select-menu :data="data"></t-select-menu>
+    <t-select-menu :data="data" @setItemValue="setItemValue"></t-select-menu>
   </div>
 </template>
 
@@ -9,6 +9,7 @@
 import { defineComponent } from "vue";
 import { TSelectInput, TSelectMenu } from "./components";
 import focus from "./directives/focus";
+import { IMenuDataItem } from "./types";
 
 export default defineComponent({
   name: "t-select",
@@ -23,8 +24,11 @@ export default defineComponent({
     TSelectInput,
     TSelectMenu,
   },
-  setup() {
-    return {};
+  setup(_, { emit }) {
+    const setItemValue = (item: IMenuDataItem) => {
+      emit("setItemValue", item);
+    };
+    return { setItemValue };
   },
 });
 </script>
