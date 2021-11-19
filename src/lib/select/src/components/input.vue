@@ -3,7 +3,12 @@
     <label class="t-placeHolder" @click="TSelectPlaceholderClick">{{
       placeHolder
     }}</label>
-    <input ref="tSelectInputRef" type="text" class="t-select-inner-input" />
+    <input
+      ref="tSelectInputRef"
+      type="text"
+      class="t-select-inner-input"
+      @input="searchOptions($event)"
+    />
     <span class="talc ta-xiajiantou"></span>
   </div>
 </template>
@@ -19,12 +24,16 @@ export default defineComponent({
       default: "请选择",
     },
   },
-  setup() {
+  setup(props, { emit }) {
     const tSelectInputRef = ref<HTMLInputElement>();
     const TSelectPlaceholderClick = () => {
       tSelectInputRef.value.focus();
     };
-    return { TSelectPlaceholderClick, tSelectInputRef };
+
+    const searchOptions = (e: Event) => {
+      emit("searchOptions", (e.target as HTMLInputElement).value);
+    };
+    return { TSelectPlaceholderClick, tSelectInputRef, searchOptions };
   },
 });
 </script>

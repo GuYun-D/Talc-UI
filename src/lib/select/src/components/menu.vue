@@ -2,7 +2,7 @@
   <div class="t-select-menu">
     <div
       class="t-select-menu-item"
-      v-for="(item, index) in data"
+      v-for="(item, index) in searchData"
       :key="index"
       @click="setItemValue(item)"
     >
@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, onMounted, PropType, ref, watch } from "vue";
 import { IMenuDataItem } from "../types";
 
 export default defineComponent({
@@ -22,12 +22,36 @@ export default defineComponent({
       type: Array as PropType<IMenuDataItem[]>,
       required: true,
     },
+    searchValue: String,
   },
   setup(props, { emit }) {
+    const searchData = ref<any[]>();
+    onMounted(() => {
+      searchData.value = props.data;
+    });
+
+    watch(
+      () => {
+        return props.searchValue;
+      },
+      (value: string) => {
+        filterData(value);
+      }
+    );
+
+    const filterData = (value: string) => {
+      searchData.value = props.data.filter((item) => {
+        return item.text
+          .toLowerCase()
+          .includes(props.searchValue.toLowerCase());
+      });
+    };
+
     const setItemValue = (item: IMenuDataItem) => {
       emit("setItemValue", item);
     };
-    return { setItemValue };
+
+    return { setItemValue, searchData };
   },
 });
 </script>

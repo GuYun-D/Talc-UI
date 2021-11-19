@@ -1,12 +1,20 @@
 <template>
   <div class="t-select" v-focus>
-    <t-select-input :placeHolder="placeHolder"></t-select-input>
-    <t-select-menu :data="data" @setItemValue="setItemValue"></t-select-menu>
+    <t-select-input
+      :placeHolder="placeHolder"
+      :value="inputValue"
+      @searchOptions="searchOptions"
+    ></t-select-input>
+    <t-select-menu
+      :searchValue="searchValue"
+      :data="data"
+      @setItemValue="setItemValue"
+    ></t-select-menu>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 import { TSelectInput, TSelectMenu } from "./components";
 import focus from "./directives/focus";
 import { IMenuDataItem } from "./types";
@@ -25,10 +33,20 @@ export default defineComponent({
     TSelectMenu,
   },
   setup(_, { emit }) {
+    const state = reactive({
+      inputValue: "",
+      searchValue: "",
+    });
+
     const setItemValue = (item: IMenuDataItem) => {
+      state.inputValue = item.text;
       emit("setItemValue", item);
     };
-    return { setItemValue };
+
+    const searchOptions = (value: string) => {
+      state.searchValue = value;
+    };
+    return { setItemValue, ...toRefs(state), searchOptions };
   },
 });
 </script>
