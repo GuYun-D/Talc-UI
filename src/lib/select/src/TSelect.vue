@@ -2,7 +2,7 @@
   <div class="t-select" v-focus>
     <t-select-input
       :placeHolder="placeHolder"
-      :value="inputValue"
+      :inputValue="inputValue"
       @searchOptions="searchOptions"
     ></t-select-input>
     <t-select-menu
@@ -37,9 +37,8 @@ export default defineComponent({
       inputValue: "",
       searchValue: "",
     });
-
     const setItemValue = (item: IMenuDataItem) => {
-      state.inputValue = item.text;
+      state.inputValue = item.value;
       emit("setItemValue", item);
     };
 

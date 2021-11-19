@@ -19,12 +19,11 @@ export default {
     }, false)
 
     oInput.addEventListener('blur', function () {
-      oPlaceHolder.style.display = 'block'
       oIcon.className = 'talc ta-xiajiantou'
       setTimeout(() => {
         oSelectmenu.style.display = 'none'
 
-        if (this.validationMessage.length === 0) {
+        if (this.value.length === 0) {
           oPlaceHolder.style.display = 'block'
         }
       }, 200);

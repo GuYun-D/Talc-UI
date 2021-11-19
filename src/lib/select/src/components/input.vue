@@ -6,6 +6,7 @@
     <input
       ref="tSelectInputRef"
       type="text"
+      :value="inputValue"
       class="t-select-inner-input"
       @input="searchOptions($event)"
     />
@@ -14,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   name: "t-selec-input",
@@ -23,6 +24,8 @@ export default defineComponent({
       type: String,
       default: "请选择",
     },
+
+    inputValue: String,
   },
   setup(props, { emit }) {
     const tSelectInputRef = ref<HTMLInputElement>();
