@@ -21,6 +21,7 @@ import Carousel from '../src/components/carouselDemo/carouseDemo.vue'
 import Magnifier from "../src/components/magnifierDemo/MagnifierDemo.vue"
 import Rate from "../src/components/rateDemo/RateDemo.vue"
 import Card from "../src/components/cardDemo/cardDemo.vue"
+import Select from '../src/components/selectDemo/SelectDemo.vue'
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -108,6 +109,9 @@ export const router = createRouter({
         }, {
           path: 'card',
           component: Card
+        }, {
+          path: 'select',
+          component: Select
         }
       ],
     },

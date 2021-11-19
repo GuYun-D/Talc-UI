@@ -35,6 +35,9 @@ export const siderConfig = [
       }, {
         name: "rate 评分",
         url: "rate"
+      }, {
+        name: 'select 选择器',
+        url: 'select'
       }
     ]
   },
