@@ -1,16 +1,17 @@
 <template>
   <div>
     <h1>select 选择器</h1>
-    <t-select placeHolder="请选择框架"></t-select>
+    <t-select placeHolder="请选择框架" :data="data"></t-select>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import data from "./data";
 
 export default defineComponent({
   setup() {
-    return {};
+    return { data };
   },
 });
 </script>
