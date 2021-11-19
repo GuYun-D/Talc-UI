@@ -9,13 +9,14 @@
       :value="inputValue"
       class="t-select-inner-input"
       @input="searchOptions($event)"
+      @focus="searchOptions($event)"
     />
     <span class="talc ta-xiajiantou"></span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "t-selec-input",
@@ -36,7 +37,12 @@ export default defineComponent({
     const searchOptions = (e: Event) => {
       emit("searchOptions", (e.target as HTMLInputElement).value);
     };
-    return { TSelectPlaceholderClick, tSelectInputRef, searchOptions };
+
+    return {
+      TSelectPlaceholderClick,
+      tSelectInputRef,
+      searchOptions,
+    };
   },
 });
 </script>
