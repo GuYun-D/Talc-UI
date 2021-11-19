@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>select 选择器</h1>
-    <t-select></t-select>
+    <t-select placeHolder="请选择框架"></t-select>
   </div>
 </template>
 

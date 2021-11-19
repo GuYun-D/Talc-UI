@@ -1,8 +1,8 @@
 @font-face {
   font-family: "talc"; /* Project id 2857757 */
-  src: url('//at.alicdn.com/t/font_2857757_wcpetz12jdr.woff2?t=1636864888101') format('woff2'),
-       url('//at.alicdn.com/t/font_2857757_wcpetz12jdr.woff?t=1636864888101') format('woff'),
-       url('//at.alicdn.com/t/font_2857757_wcpetz12jdr.ttf?t=1636864888101') format('truetype');
+  src: url('//at.alicdn.com/t/font_2857757_2y8h1jwce9s.woff2?t=1637312330064') format('woff2'),
+       url('//at.alicdn.com/t/font_2857757_2y8h1jwce9s.woff?t=1637312330064') format('woff'),
+       url('//at.alicdn.com/t/font_2857757_2y8h1jwce9s.ttf?t=1637312330064') format('truetype');
 }
 
 .talc {
@@ -11,6 +11,14 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.ta-xiajiantou:before {
+  content: "\e6cc";
+}
+
+.ta-xiangshangjiantou:before {
+  content: "\e65d";
 }
 
 .ta-star:before {
