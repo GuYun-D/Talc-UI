@@ -1,7 +1,8 @@
-import { ISelectInputProps } from './input'
+import { ISelectInputProps, ITSelectInputProps } from './input'
 import { IMenuDataItem } from './menu'
 
 export {
   ISelectInputProps,
-  IMenuDataItem
+  IMenuDataItem,
+  ITSelectInputProps
 }

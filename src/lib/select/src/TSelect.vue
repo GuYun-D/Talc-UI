@@ -1,9 +1,10 @@
 <template>
-  <div class="t-select" v-focus>
+  <div class="t-select" v-focus :style="{ width: width + 'px' }">
     <t-select-input
       :placeHolder="placeHolder"
       :inputValue="inputValue"
       @searchOptions="searchOptions"
+      :readonly="searchData ? false : true"
     ></t-select-input>
     <t-select-menu
       :searchValue="searchValue"
@@ -24,6 +25,11 @@ export default defineComponent({
   props: {
     placeHolder: String,
     data: Array,
+    width: [Number, String],
+    searchData: {
+      type: Boolean,
+      default: false,
+    },
   },
   directives: {
     focus,
@@ -32,7 +38,7 @@ export default defineComponent({
     TSelectInput,
     TSelectMenu,
   },
-  setup(_, { emit }) {
+  setup(props, { emit }) {
     const state = reactive({
       inputValue: "",
       searchValue: "",
@@ -43,7 +49,9 @@ export default defineComponent({
     };
 
     const searchOptions = (value: string) => {
-      state.searchValue = value;
+      if (props.searchData) {
+        state.searchValue = value;
+      }
     };
     return { setItemValue, ...toRefs(state), searchOptions };
   },

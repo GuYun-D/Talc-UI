@@ -9,7 +9,23 @@ export default [
     text: "CSS"
   }, {
     id: 775849021,
-    value: "javascipt",
+    value: "javascript",
     text: "JavaScript"
+  },{
+    id: 1256789,
+    value: "ecmacript",
+    text: "ECMAScript"
+  },{
+    id: 12568345,
+    value: "jquery",
+    text: "jQuery"
+  },{
+    id: 6783212,
+    value: "bootstrap",
+    text: "BootStrap"
+  },{
+    id: 456903212,
+    value: "node",
+    text: "Node"
   },
 ]

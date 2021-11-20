@@ -12,7 +12,11 @@ export default {
      */
     oInput.addEventListener('focus', function () {
       oPlaceHolder.style.display = 'none'
-      oIcon.className = 'talc ta-31sousuo'
+      if (this.readOnly) {
+        oIcon.className = 'talc ta-xiangshangjiantou'
+      } else {
+        oIcon.className = 'talc ta-31sousuo'
+      }
       setTimeout(() => {
         oSelectmenu.style.display = 'block'
       }, 200);

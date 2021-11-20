@@ -7,6 +7,7 @@
       ref="tSelectInputRef"
       type="text"
       :value="inputValue"
+      :readonly="readonly"
       class="t-select-inner-input"
       @input="searchOptions($event)"
       @focus="searchOptions($event)"
@@ -17,6 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { ITSelectInputProps } from "../types";
 
 export default defineComponent({
   name: "t-selec-input",
@@ -27,8 +29,9 @@ export default defineComponent({
     },
 
     inputValue: String,
+    readonly: Boolean,
   },
-  setup(props, { emit }) {
+  setup(props: ITSelectInputProps, { emit }) {
     const tSelectInputRef = ref<HTMLInputElement>();
     const TSelectPlaceholderClick = () => {
       tSelectInputRef.value.focus();
