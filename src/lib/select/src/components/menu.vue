@@ -1,19 +1,31 @@
 <template>
   <div class="t-select-menu">
-    <div
-      class="t-select-menu-item"
-      v-for="(item, index) in searchData"
-      :key="index"
-      @click="setItemValue(item)"
-    >
-      {{ item.text }}
-    </div>
+    <template v-if="searchData?.length > 0">
+      <div
+        class="t-select-menu-item"
+        v-for="(item, index) in searchData"
+        :key="index"
+        @click="setItemValue(item)"
+      >
+        {{ item.text }}
+      </div>
+    </template>
+
+    <TSelectNoDataTip v-else></TSelectNoDataTip>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  PropType,
+  ref,
+  watch,
+} from "vue";
 import { IMenuDataItem } from "../types";
+import TSelectNoDataTip from "./no-data.vue";
 
 export default defineComponent({
   name: "t-select-menu",
@@ -23,6 +35,9 @@ export default defineComponent({
       required: true,
     },
     searchValue: String,
+  },
+  components: {
+    TSelectNoDataTip,
   },
   setup(props, { emit }) {
     const searchData = ref<any[]>();
@@ -50,7 +65,7 @@ export default defineComponent({
     const setItemValue = (item: IMenuDataItem) => {
       emit("setItemValue", item);
     };
-
+    
     return { setItemValue, searchData };
   },
 });
