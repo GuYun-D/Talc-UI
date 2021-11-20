@@ -51,6 +51,9 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
+$textColor: #999;
+$border: #1890ff;
+
 .t-selec-input {
   position: relative;
   width: 100%;
@@ -60,7 +63,7 @@ export default defineComponent({
     position: absolute;
     left: 15px;
     top: 8px;
-    color: #999;
+    color: $textColor;
     cursor: text;
   }
 
@@ -68,7 +71,7 @@ export default defineComponent({
     position: absolute;
     right: 15px;
     top: 12px;
-    color: #999;
+    color: $textColor;
 
     &.ta-31sousuo {
       font-size: 22px;
@@ -79,17 +82,18 @@ export default defineComponent({
   .t-select-inner-input {
     width: 100%;
     height: 100%;
+    color: #666;
     padding: 0 15px;
     box-sizing: border-box;
     background-color: #fff;
-    border: 1px solid #999;
+    border: 1px solid $textColor;
     border-radius: 5px;
     outline: none;
     transition: all 0.2s linear;
 
     &:focus {
-      border-color: #1890ff;
-      box-shadow: 0 0 3px #1890ff;
+      border-color: $border;
+      box-shadow: 0 0 3px $border;
     }
   }
 }

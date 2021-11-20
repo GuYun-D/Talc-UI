@@ -9,6 +9,7 @@
     <t-select-menu
       :searchValue="searchValue"
       :data="data"
+      :inputValue="inputValue"
       @setItemValue="setItemValue"
     ></t-select-menu>
   </div>
