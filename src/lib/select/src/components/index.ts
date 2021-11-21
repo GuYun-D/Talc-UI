@@ -3,5 +3,5 @@ import TSelectMenu from './menu.vue'
 
 export {
   TSelectInput,
-  TSelectMenu
+  TSelectMenu,
 }

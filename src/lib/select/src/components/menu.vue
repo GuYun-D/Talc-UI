@@ -1,9 +1,12 @@
 <template>
-  <div class="t-select-menu">
+  <div class="t-select-menu" ref="tSelectMenuRef">
     <template v-if="searchData?.length > 0">
       <div
         class="t-select-menu-item"
-        :class="{ selected: inputValue === item.value }"
+        :class="{
+          selected: inputValue === item.value,
+          'selected-sider': instanceId === index,
+        }"
         v-for="(item, index) in searchData"
         :key="index"
         @click="setItemValue(item)"
@@ -27,6 +30,12 @@ import {
 } from "vue";
 import { IMenuDataItem } from "../types";
 import TSelectNoDataTip from "./no-data.vue";
+import { emitter } from "../../../utils";
+
+enum keyOpMenu {
+  addition = "addition",
+  subtraction = "subtraction",
+}
 
 export default defineComponent({
   name: "t-select-menu",
@@ -43,6 +52,9 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const searchData = ref<any[]>();
+    const tSelectMenuRef = ref<HTMLDivElement>();
+    let instanceId = ref(0);
+
     onMounted(() => {
       searchData.value = props.data;
     });
@@ -68,7 +80,59 @@ export default defineComponent({
       emit("setItemValue", item);
     };
 
-    return { setItemValue, searchData };
+    const searchDataLen = computed(() => {
+      return searchData.value.length;
+    });
+
+    let items: HTMLDivElement[];
+
+    onMounted(() => {
+      items = Array.prototype.slice.call(
+        tSelectMenuRef.value.getElementsByClassName("t-select-menu-item")
+      );
+
+      setInstacneIndex();
+
+      emitter.on("menu:select", (opTag: string) => {
+        switch (opTag) {
+          case keyOpMenu.addition:
+            instanceId.value++;
+            if (instanceId.value > searchDataLen.value) {
+              instanceId.value = 0;
+            }
+            break;
+          case keyOpMenu.subtraction:
+            instanceId.value--;
+            if (instanceId.value < 0) {
+              instanceId.value = searchDataLen.value;
+            }
+            break;
+        }
+      });
+
+      emitter.on("input:focus", () => {
+        setInstacneIndex();
+      });
+
+      emitter.on("menu:confirm", () => {
+        const arr = Array.prototype.slice.call(
+          tSelectMenuRef.value.children
+        ) as HTMLDivElement[];
+        let confirmIndex = arr.findIndex((item) => {
+          return item.className.includes("selected-sider");
+        });
+
+        emit("setItemValue", searchData.value[confirmIndex]);
+      });
+
+      function setInstacneIndex() {
+        instanceId.value = items.findIndex((item) => {
+          return item.className.includes("selected");
+        });
+      }
+    });
+
+    return { setItemValue, searchData, tSelectMenuRef, instanceId };
   },
 });
 </script>
@@ -93,6 +157,10 @@ $bgc: #ededed;
   .selected {
     color: #1890ff !important;
     font-weight: bold;
+    background-color: rgba(206, 226, 255, 0.5);
+  }
+
+  .selected-sider {
     background-color: $bgc;
   }
 

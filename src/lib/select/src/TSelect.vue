@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import { TSelectInput, TSelectMenu } from "./components";
-import focus from "./directives/focus";
+import { focus } from "./directives";
 import { IMenuDataItem } from "./types";
 
 export default defineComponent({

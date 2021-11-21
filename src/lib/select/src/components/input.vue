@@ -11,6 +11,9 @@
       class="t-select-inner-input"
       @input="searchOptions($event)"
       @focus="searchOptions($event)"
+      @keyup.enter="confirm"
+      @keyup.down="selectItem('addition')"
+      @keyup.up="selectItem('subtraction')"
     />
     <span class="talc ta-xiajiantou"></span>
   </div>
@@ -19,6 +22,7 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import { ITSelectInputProps } from "../types";
+import { emitter } from "../../../utils";
 
 export default defineComponent({
   name: "t-selec-input",
@@ -39,12 +43,23 @@ export default defineComponent({
 
     const searchOptions = (e: Event) => {
       emit("searchOptions", (e.target as HTMLInputElement).value);
+      emitter.emit('input:focus')
+    };
+
+    const confirm = () => {
+      emitter.emit("menu:confirm");
+    };
+
+    const selectItem = (opTag: string) => {
+      emitter.emit("menu:select", opTag);
     };
 
     return {
       TSelectPlaceholderClick,
       tSelectInputRef,
       searchOptions,
+      confirm,
+      selectItem,
     };
   },
 });
