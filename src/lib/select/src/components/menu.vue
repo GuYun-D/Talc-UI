@@ -124,6 +124,13 @@ export default defineComponent({
 
         emit("setItemValue", searchData.value[confirmIndex]);
       });
+      
+
+      emitter.on("menu:visible", (menuVisible: string) => {
+        menuVisible === "show"
+          ? (tSelectMenuRef.value.style.display = "block")
+          : (tSelectMenuRef.value.style.display = "none");
+      });
 
       function setInstacneIndex() {
         instanceId.value = items.findIndex((item) => {

@@ -1,8 +1,11 @@
 <template>
   <div class="t-selec-input">
-    <label class="t-placeHolder" @click="TSelectPlaceholderClick">{{
-      placeHolder
-    }}</label>
+    <label
+      class="t-placeHolder"
+      ref="inputPlaceholderRef"
+      @click="TSelectPlaceholderClick"
+      >{{ placeHolder }}</label
+    >
     <input
       ref="tSelectInputRef"
       type="text"
@@ -11,16 +14,17 @@
       class="t-select-inner-input"
       @input="searchOptions($event)"
       @focus="searchOptions($event)"
+      @blur="inputBlur"
       @keyup.enter="confirm"
       @keyup.down="selectItem('addition')"
       @keyup.up="selectItem('subtraction')"
     />
-    <span class="talc ta-xiajiantou"></span>
+    <span ref="inputIconRef" class="talc ta-xiajiantou"></span>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { ITSelectInputProps } from "../types";
 import { emitter } from "../../../utils";
 
@@ -37,13 +41,32 @@ export default defineComponent({
   },
   setup(props: ITSelectInputProps, { emit }) {
     const tSelectInputRef = ref<HTMLInputElement>();
+    const inputPlaceholderRef = ref<HTMLLabelElement>();
+    const inputIconRef = ref<HTMLSpanElement>();
+
     const TSelectPlaceholderClick = () => {
       tSelectInputRef.value.focus();
     };
 
     const searchOptions = (e: Event) => {
+      inputPlaceholderRef.value.style.display = "none";
+      if (tSelectInputRef.value.readOnly) {
+        inputIconRef.value.className = "talc ta-xiangshangjiantou";
+      } else {
+        inputIconRef.value.className = "talc ta-31sousuo";
+      }
+
+      setTimeout(() => {
+        emitter.emit("menu:visible", "show");
+      }, 200);
       emit("searchOptions", (e.target as HTMLInputElement).value);
-      emitter.emit('input:focus')
+    };
+
+    const inputBlur = () => {
+      setTimeout(() => {
+        inputIconRef.value.className = "talc ta-xiajiantou";
+        emitter.emit("menu:visible", "hidden");
+      }, 200);
     };
 
     const confirm = () => {
@@ -54,12 +77,17 @@ export default defineComponent({
       emitter.emit("menu:select", opTag);
     };
 
+    onMounted(() => {});
+
     return {
       TSelectPlaceholderClick,
       tSelectInputRef,
       searchOptions,
       confirm,
       selectItem,
+      inputPlaceholderRef,
+      inputIconRef,
+      inputBlur,
     };
   },
 });

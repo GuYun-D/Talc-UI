@@ -1,5 +1,5 @@
 <template>
-  <div class="t-select" v-focus :style="{ width: width + 'px' }">
+  <div class="t-select" :style="{ width: width + 'px' }">
     <t-select-input
       :placeHolder="placeHolder"
       :inputValue="inputValue"
@@ -18,7 +18,6 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import { TSelectInput, TSelectMenu } from "./components";
-import { focus } from "./directives";
 import { IMenuDataItem } from "./types";
 
 export default defineComponent({
@@ -31,9 +30,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-  },
-  directives: {
-    focus,
   },
   components: {
     TSelectInput,
