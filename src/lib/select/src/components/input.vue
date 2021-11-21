@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, nextTick, onMounted, ref } from "vue";
 import { ITSelectInputProps } from "../types";
 import { emitter } from "../../../utils";
 
@@ -48,18 +48,17 @@ export default defineComponent({
       tSelectInputRef.value.focus();
     };
 
-    const searchOptions = (e: Event) => {
+    const searchOptions = async (e: Event) => {
       inputPlaceholderRef.value.style.display = "none";
       if (tSelectInputRef.value.readOnly) {
         inputIconRef.value.className = "talc ta-xiangshangjiantou";
       } else {
         inputIconRef.value.className = "talc ta-31sousuo";
       }
-
-      setTimeout(() => {
-        emitter.emit("menu:visible", "show");
-      }, 200);
       emit("searchOptions", (e.target as HTMLInputElement).value);
+
+      await nextTick();
+      emitter.emit("menu:visible", "show");
     };
 
     const inputBlur = () => {
@@ -71,7 +70,7 @@ export default defineComponent({
      */
     const confirm = () => {
       emitter.emit("menu:confirm");
-      setInputBlur();
+      siderBlur()
     };
 
     /**
@@ -79,10 +78,17 @@ export default defineComponent({
      */
     function setInputBlur() {
       setTimeout(() => {
-        inputIconRef.value.className = "talc ta-xiajiantou";
-        emitter.emit("menu:visible", "hidden");
-        tSelectInputRef.value.blur();
+        siderBlur()
       }, 200);
+    }
+
+    function siderBlur() {
+      inputIconRef.value.className = "talc ta-xiajiantou";
+      if (tSelectInputRef.value.value === "") {
+        inputPlaceholderRef.value.style.display = "block";
+      }
+      emitter.emit("menu:visible", "hidden");
+      tSelectInputRef.value.blur();
     }
 
     /**
