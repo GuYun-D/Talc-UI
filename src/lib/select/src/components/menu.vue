@@ -5,11 +5,11 @@
         class="t-select-menu-item"
         :class="{
           selected: inputValue === item.value,
-          'selected-sider': instanceId === index,
+          'selected-sider': selctedIndex === index,
         }"
         v-for="(item, index) in searchData"
         :key="index"
-        @click="setItemValue(item)"
+        @click="setItemValue(item, index)"
       >
         {{ item.text }}
       </div>
@@ -21,20 +21,27 @@
 
 <script lang="ts">
 import {
-  computed,
   defineComponent,
+  nextTick,
   onMounted,
   PropType,
+  reactive,
   ref,
   watch,
+  toRefs,
 } from "vue";
 import { IMenuDataItem } from "../types";
 import TSelectNoDataTip from "./no-data.vue";
 import { emitter } from "../../../utils";
 
-enum keyOpMenu {
+enum keyOpEnum {
   addition = "addition",
   subtraction = "subtraction",
+}
+
+enum menuVisibleEnum {
+  show = "show",
+  hidden = "hidden",
 }
 
 export default defineComponent({
@@ -53,10 +60,11 @@ export default defineComponent({
   setup(props, { emit }) {
     const searchData = ref<any[]>();
     const tSelectMenuRef = ref<HTMLDivElement>();
-    let instanceId = ref(0);
 
-    onMounted(() => {
-      searchData.value = props.data;
+    const state = reactive({
+      selctedIndex: -1,
+      searchDataLen: 0,
+      items: [],
     });
 
     watch(
@@ -76,70 +84,69 @@ export default defineComponent({
       });
     };
 
-    const setItemValue = (item: IMenuDataItem) => {
+    const setItemValue = (item: IMenuDataItem, index: number) => {
       emit("setItemValue", item);
+      state.selctedIndex = index;
     };
 
-    const searchDataLen = computed(() => {
-      return searchData.value.length;
-    });
-
-    let items: HTMLDivElement[];
-
     onMounted(() => {
-      items = Array.prototype.slice.call(
-        tSelectMenuRef.value.getElementsByClassName("t-select-menu-item")
-      );
+      searchData.value = props.data;
+      state.searchDataLen = searchData.value.length;
 
-      setInstacneIndex();
+      /**
+       * 获取当前组件的子元素，也就是渲染出来的数据
+       * 并初始化当前选中数据的索引
+       */
+      setTimeout(async () => {
+        await nextTick();
+        state.items = Array.prototype.slice.call(tSelectMenuRef.value.children);
+        state.selctedIndex = state.items.findIndex((item: HTMLDivElement) => {
+          return item.className.includes("selected");
+        });
+      });
 
-      emitter.on("menu:select", (opTag: string) => {
-        switch (opTag) {
-          case keyOpMenu.addition:
-            instanceId.value++;
-            if (instanceId.value > searchDataLen.value) {
-              instanceId.value = 0;
-            }
+      /**
+       * 文本框聚焦和失去焦点时控制本组件的显示与隐藏
+       */
+      emitter.on("menu:visible", (menuVisible: menuVisibleEnum) => {
+        switch (menuVisible) {
+          case menuVisibleEnum.show:
+            tSelectMenuRef.value.style.display = "block";
             break;
-          case keyOpMenu.subtraction:
-            instanceId.value--;
-            if (instanceId.value < 0) {
-              instanceId.value = searchDataLen.value;
-            }
+
+          case menuVisibleEnum.hidden:
+            tSelectMenuRef.value.style.display = "none";
             break;
         }
       });
 
-      emitter.on("input:focus", () => {
-        setInstacneIndex();
+      /**
+       * @param opTag 指示按了键盘上键还是下键
+       */
+      emitter.on("menuKey:select", (opTag: keyOpEnum) => {
+        if (opTag === keyOpEnum.addition) {
+          state.selctedIndex++;
+          if (state.selctedIndex > state.items.length) {
+            state.selctedIndex = 0;
+          }
+        } else if (opTag === keyOpEnum.subtraction) {
+          state.selctedIndex--;
+          if (state.selctedIndex < 0) {
+            state.selctedIndex = state.items.length;
+          }
+        }
       });
 
+      /**
+       * 用户点击了enter
+       */
       emitter.on("menu:confirm", () => {
-        const arr = Array.prototype.slice.call(
-          tSelectMenuRef.value.children
-        ) as HTMLDivElement[];
-        let confirmIndex = arr.findIndex((item) => {
-          return item.className.includes("selected-sider");
-        });
-
-        emit("setItemValue", searchData.value[confirmIndex]);
+        if (state.selctedIndex === -1) return;
+        emit("setItemValue", searchData.value[state.selctedIndex]);
       });
-      
-
-      emitter.on("menu:visible", (menuVisible: string) => {
-        menuVisible === "show"
-          ? (tSelectMenuRef.value.style.display = "block")
-          : (tSelectMenuRef.value.style.display = "none");
-      });
-
-      function setInstacneIndex() {
-        instanceId.value = items.findIndex((item) => {
-          return item.className.includes("selected");
-        });
-      }
     });
 
-    return { setItemValue, searchData, tSelectMenuRef, instanceId };
+    return { setItemValue, searchData, tSelectMenuRef, ...toRefs(state) };
   },
 });
 </script>
@@ -191,7 +198,7 @@ $bgc: #ededed;
     font-size: 14px;
     color: #666;
     margin: 10px 0;
-    transition: all 0.2s linear;
+    transition: background-color 0.2s linear;
 
     &:hover {
       background-color: $bgc;

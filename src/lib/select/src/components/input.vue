@@ -63,21 +63,35 @@ export default defineComponent({
     };
 
     const inputBlur = () => {
+      setInputBlur();
+    };
+
+    /**
+     * 用户点击enter键，发送事件给menu
+     */
+    const confirm = () => {
+      emitter.emit("menu:confirm");
+      setInputBlur();
+    };
+
+    /**
+     * 输入框失去焦点的操作
+     */
+    function setInputBlur() {
       setTimeout(() => {
         inputIconRef.value.className = "talc ta-xiajiantou";
         emitter.emit("menu:visible", "hidden");
+        tSelectInputRef.value.blur();
       }, 200);
-    };
+    }
 
-    const confirm = () => {
-      emitter.emit("menu:confirm");
-    };
-
+    /**
+     * 用户使用键盘进行上下选择，发送事件给menu组件，做出相应操作
+     * @param opTag 上键还是下键
+     */
     const selectItem = (opTag: string) => {
-      emitter.emit("menu:select", opTag);
+      emitter.emit("menuKey:select", opTag);
     };
-
-    onMounted(() => {});
 
     return {
       TSelectPlaceholderClick,
