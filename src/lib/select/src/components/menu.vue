@@ -1,5 +1,5 @@
 <template>
-  <div class="t-select-menu" ref="tSelectMenuRef">
+  <div class="t-select-menu" ref="tSelectMenuRef" @click="clickMenu">
     <template v-if="searchData?.length > 0">
       <div
         class="t-select-menu-item"
@@ -89,6 +89,20 @@ export default defineComponent({
       state.selctedIndex = index;
     };
 
+    /**
+     * 点击menu面板，不关闭
+     */
+    const clickMenu = (e: MouseEvent) => {
+      let targetEl = e.target as HTMLDivElement;
+      let classesName = targetEl.className.split(" ");
+
+      if (classesName.includes("t-select-menu")) {
+        emitter.emit("menu:close", true);
+      } else {
+        emitter.emit("menu:close", false);
+      }
+    };
+
     onMounted(() => {
       searchData.value = props.data;
       state.searchDataLen = searchData.value.length;
@@ -146,7 +160,13 @@ export default defineComponent({
       });
     });
 
-    return { setItemValue, searchData, tSelectMenuRef, ...toRefs(state) };
+    return {
+      setItemValue,
+      searchData,
+      tSelectMenuRef,
+      ...toRefs(state),
+      clickMenu,
+    };
   },
 });
 </script>
@@ -165,7 +185,6 @@ $bgc: #ededed;
   background-color: $main;
   box-shadow: 0 0 10px $shadowColor;
   border-radius: 5px;
-  cursor: pointer;
   z-index: 10;
 
   .selected {
@@ -198,6 +217,7 @@ $bgc: #ededed;
     font-size: 14px;
     color: #666;
     margin: 10px 0;
+    cursor: pointer;
     transition: background-color 0.2s linear;
 
     &:hover {

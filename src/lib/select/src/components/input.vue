@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, onMounted, ref } from "vue";
+import { defineComponent, nextTick, onMounted, reactive, ref } from "vue";
 import { ITSelectInputProps } from "../types";
 import { emitter } from "../../../utils";
 
@@ -43,6 +43,9 @@ export default defineComponent({
     const tSelectInputRef = ref<HTMLInputElement>();
     const inputPlaceholderRef = ref<HTMLLabelElement>();
     const inputIconRef = ref<HTMLSpanElement>();
+    const state = reactive({
+      menuVisible: false,
+    });
 
     const TSelectPlaceholderClick = () => {
       tSelectInputRef.value.focus();
@@ -70,7 +73,7 @@ export default defineComponent({
      */
     const confirm = () => {
       emitter.emit("menu:confirm");
-      siderBlur()
+      siderBlur();
     };
 
     /**
@@ -78,11 +81,15 @@ export default defineComponent({
      */
     function setInputBlur() {
       setTimeout(() => {
-        siderBlur()
+        siderBlur();
       }, 200);
     }
 
     function siderBlur() {
+      if (state.menuVisible === true) {
+        tSelectInputRef.value.focus();
+        return;
+      }
       inputIconRef.value.className = "talc ta-xiajiantou";
       if (tSelectInputRef.value.value === "") {
         inputPlaceholderRef.value.style.display = "block";
@@ -98,6 +105,12 @@ export default defineComponent({
     const selectItem = (opTag: string) => {
       emitter.emit("menuKey:select", opTag);
     };
+
+    onMounted(() => {
+      emitter.on("menu:close", (tag: boolean) => {
+        state.menuVisible = tag;
+      });
+    });
 
     return {
       TSelectPlaceholderClick,

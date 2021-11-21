@@ -50,6 +50,8 @@ export default defineComponent({
         state.searchValue = value;
       }
     };
+
+
     return { setItemValue, ...toRefs(state), searchOptions };
   },
 });
