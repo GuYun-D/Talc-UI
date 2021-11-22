@@ -19,7 +19,12 @@
       @keyup.down="selectItem('addition')"
       @keyup.up="selectItem('subtraction')"
     />
-    <span ref="inputIconRef" class="talc ta-xiajiantou"></span>
+    <span
+      ref="inputIconRef"
+      class="talc"
+      :class="{ 'ta-delete': clearable, 'ta-xiajiantou': !clearable }"
+      @click="talcIconClick"
+    ></span>
   </div>
 </template>
 
@@ -35,9 +40,9 @@ export default defineComponent({
       type: String,
       default: "请选择",
     },
-
     inputValue: String,
     readonly: Boolean,
+    clearable: Boolean,
   },
   setup(props: ITSelectInputProps, { emit }) {
     const tSelectInputRef = ref<HTMLInputElement>();
@@ -85,16 +90,22 @@ export default defineComponent({
       }, 200);
     }
 
+    /**
+     * 失去焦点
+     */
     async function siderBlur() {
       if (state.menuVisible === true) {
         tSelectInputRef.value.focus();
         return;
       }
-      inputIconRef.value.className = "talc ta-xiajiantou";
+
+      props.clearable
+        ? (inputIconRef.value.className = "talc ta-delete")
+        : (inputIconRef.value.className = "talc ta-xiajiantou");
 
       emitter.emit("menu:visible", "hidden");
       tSelectInputRef.value.blur();
-      
+
       await nextTick();
       if (tSelectInputRef.value.value === "") {
         inputPlaceholderRef.value.style.display = "block";
@@ -115,6 +126,20 @@ export default defineComponent({
       });
     });
 
+    /**
+     * 点击图标
+     */
+    const talcIconClick = (e: MouseEvent) => {
+      let eventEl = e.target as HTMLSpanElement;
+      const iconClassNameArr: string[] = Array.prototype.slice.call(
+        eventEl.classList
+      );
+      if (iconClassNameArr.includes("ta-delete")) {
+        emit("clear:inputValue");
+        inputPlaceholderRef.value.style.display = "block";
+      }
+    };
+
     return {
       TSelectPlaceholderClick,
       tSelectInputRef,
@@ -124,6 +149,7 @@ export default defineComponent({
       inputPlaceholderRef,
       inputIconRef,
       inputBlur,
+      talcIconClick,
     };
   },
 });
@@ -151,6 +177,7 @@ $border: #1890ff;
     right: 15px;
     top: 12px;
     color: $textColor;
+    cursor: pointer;
 
     &.ta-31sousuo {
       font-size: 22px;
@@ -169,6 +196,7 @@ $border: #1890ff;
     border-radius: 5px;
     outline: none;
     transition: all 0.2s linear;
+    cursor: pointer;
 
     &:focus {
       border-color: $border;

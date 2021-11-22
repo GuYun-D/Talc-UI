@@ -5,6 +5,8 @@
       :inputValue="inputValue"
       @searchOptions="searchOptions"
       :readonly="searchData ? false : true"
+      :clearable="clearable"
+      @clear:inputValue="clearInputValue"
     ></t-select-input>
     <t-select-menu
       :searchValue="searchValue"
@@ -30,6 +32,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     TSelectInput,
@@ -51,8 +57,13 @@ export default defineComponent({
       }
     };
 
+    // 清除值
+    const clearInputValue = () => {
+      if (state.inputValue === "") return;
+      state.inputValue = "";
+    };
 
-    return { setItemValue, ...toRefs(state), searchOptions };
+    return { setItemValue, ...toRefs(state), searchOptions, clearInputValue };
   },
 });
 </script>
