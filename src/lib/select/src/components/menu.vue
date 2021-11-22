@@ -67,6 +67,7 @@ export default defineComponent({
       searchDataLen: getSearchDataLen(searchData.value),
       items: [],
       currentClickItem: {},
+      disabledItems: [],
     });
 
     watch(
@@ -118,7 +119,11 @@ export default defineComponent({
         return searchData.value;
       },
       (value) => {
+        state.disabledItems = [];
         state.searchDataLen = getSearchDataLen(value);
+        searchData.value.forEach((item, index) => {
+          item.disabled ? state.disabledItems.push(index) : "";
+        });
       }
     );
 
@@ -160,11 +165,17 @@ export default defineComponent({
       emitter.on("menuKey:select", (opTag: keyOpEnum) => {
         if (opTag === keyOpEnum.addition) {
           state.selctedIndex++;
+          if (state.disabledItems.includes(state.selctedIndex)) {
+            state.selctedIndex++;
+          }
           if (state.selctedIndex > state.searchDataLen) {
             state.selctedIndex = 0;
           }
         } else if (opTag === keyOpEnum.subtraction) {
           state.selctedIndex--;
+          if (state.disabledItems.includes(state.selctedIndex)) {
+            state.selctedIndex--;
+          }
           if (state.selctedIndex < 0) {
             state.selctedIndex = state.searchDataLen;
           }
