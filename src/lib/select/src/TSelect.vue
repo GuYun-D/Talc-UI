@@ -3,10 +3,11 @@
     <t-select-input
       :placeHolder="placeHolder"
       :inputValue="inputValue"
-      @searchOptions="searchOptions"
       :readonly="searchData ? false : true"
       :clearable="clearable"
+      :disabled="disabled"
       @clear:inputValue="clearInputValue"
+      @searchOptions="searchOptions"
     ></t-select-input>
     <t-select-menu
       :searchValue="searchValue"
@@ -33,6 +34,10 @@ export default defineComponent({
       default: false,
     },
     clearable: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },

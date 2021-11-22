@@ -11,7 +11,9 @@
       type="text"
       :value="inputValue"
       :readonly="readonly"
+      :disabled="disabled"
       class="t-select-inner-input"
+      :class="{ 't-select-input-disabled': disabled }"
       @input="searchOptions($event)"
       @focus="searchOptions($event)"
       @blur="inputBlur"
@@ -43,6 +45,7 @@ export default defineComponent({
     inputValue: String,
     readonly: Boolean,
     clearable: Boolean,
+    disabled: Boolean,
   },
   setup(props: ITSelectInputProps, { emit }) {
     const tSelectInputRef = ref<HTMLInputElement>();
@@ -172,6 +175,7 @@ $border: #1890ff;
     cursor: text;
   }
 
+
   .talc {
     position: absolute;
     right: 15px;
@@ -197,6 +201,11 @@ $border: #1890ff;
     outline: none;
     transition: all 0.2s linear;
     cursor: pointer;
+
+    &.t-select-input-disabled{
+      background-color: rgba(226, 226, 226, 0.3);
+      cursor: not-allowed;
+    }
 
     &:focus {
       border-color: $border;

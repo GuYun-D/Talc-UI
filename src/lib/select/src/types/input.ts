@@ -7,6 +7,7 @@ interface ITSelectInputProps {
   inputValue: string
   readonly: boolean
   clearable: boolean
+  disabled: boolean
 }
 
 export {

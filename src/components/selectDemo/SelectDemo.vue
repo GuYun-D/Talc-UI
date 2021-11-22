@@ -7,6 +7,7 @@
       :data="data"
       :width="400"
       :searchData="true"
+      :disabled="true"
     ></t-select>
   </div>
 </template>
