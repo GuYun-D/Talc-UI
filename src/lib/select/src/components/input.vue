@@ -85,17 +85,20 @@ export default defineComponent({
       }, 200);
     }
 
-    function siderBlur() {
+    async function siderBlur() {
       if (state.menuVisible === true) {
         tSelectInputRef.value.focus();
         return;
       }
       inputIconRef.value.className = "talc ta-xiajiantou";
+
+      emitter.emit("menu:visible", "hidden");
+      tSelectInputRef.value.blur();
+      
+      await nextTick();
       if (tSelectInputRef.value.value === "") {
         inputPlaceholderRef.value.style.display = "block";
       }
-      emitter.emit("menu:visible", "hidden");
-      tSelectInputRef.value.blur();
     }
 
     /**

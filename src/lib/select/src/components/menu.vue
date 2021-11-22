@@ -63,7 +63,7 @@ export default defineComponent({
 
     const state = reactive({
       selctedIndex: -1,
-      searchDataLen: 0,
+      searchDataLen: getSearchDataLen(searchData.value),
       items: [],
     });
 
@@ -103,6 +103,18 @@ export default defineComponent({
       }
     };
 
+    /**
+     * 当searchData数据发生变化时，重置数据
+     */
+    watch(
+      () => {
+        return searchData.value;
+      },
+      (value) => {
+        state.searchDataLen = getSearchDataLen(value);
+      }
+    );
+
     onMounted(() => {
       searchData.value = props.data;
       state.searchDataLen = searchData.value.length;
@@ -129,6 +141,7 @@ export default defineComponent({
             break;
 
           case menuVisibleEnum.hidden:
+            state.selctedIndex = -1;
             tSelectMenuRef.value.style.display = "none";
             break;
         }
@@ -140,13 +153,13 @@ export default defineComponent({
       emitter.on("menuKey:select", (opTag: keyOpEnum) => {
         if (opTag === keyOpEnum.addition) {
           state.selctedIndex++;
-          if (state.selctedIndex > state.items.length) {
+          if (state.selctedIndex > state.searchDataLen) {
             state.selctedIndex = 0;
           }
         } else if (opTag === keyOpEnum.subtraction) {
           state.selctedIndex--;
           if (state.selctedIndex < 0) {
-            state.selctedIndex = state.items.length;
+            state.selctedIndex = state.searchDataLen;
           }
         }
       });
@@ -159,6 +172,13 @@ export default defineComponent({
         emit("setItemValue", searchData.value[state.selctedIndex]);
       });
     });
+
+    /**
+     * 获取searchData的长度
+     */
+    function getSearchDataLen(currentData) {
+      return currentData?.length;
+    }
 
     return {
       setItemValue,
