@@ -6,6 +6,7 @@
         :class="{
           selected: inputValue === item.value,
           'selected-sider': selctedIndex === index,
+          't-menu-disabled': item.disabled,
         }"
         v-for="(item, index) in searchData"
         :key="index"
@@ -65,6 +66,7 @@ export default defineComponent({
       selctedIndex: -1,
       searchDataLen: getSearchDataLen(searchData.value),
       items: [],
+      currentClickItem: {},
     });
 
     watch(
@@ -85,6 +87,11 @@ export default defineComponent({
     };
 
     const setItemValue = (item: IMenuDataItem, index: number) => {
+      state.currentClickItem = item;
+      if (item.disabled) {
+        emitter.emit("menu:close", true);
+        return;
+      }
       emit("setItemValue", item);
       state.selctedIndex = index;
     };
@@ -95,10 +102,10 @@ export default defineComponent({
     const clickMenu = (e: MouseEvent) => {
       let targetEl = e.target as HTMLDivElement;
       let classesName = targetEl.className.split(" ");
-
       if (classesName.includes("t-select-menu")) {
         emitter.emit("menu:close", true);
-      } else {
+        // @ts-ignore
+      } else if (!state.currentClickItem?.disabled || false) {
         emitter.emit("menu:close", false);
       }
     };
@@ -176,7 +183,7 @@ export default defineComponent({
     /**
      * 获取searchData的长度
      */
-    function getSearchDataLen(currentData) {
+    function getSearchDataLen(currentData: any) {
       return currentData?.length;
     }
 
@@ -242,6 +249,15 @@ $bgc: #ededed;
 
     &:hover {
       background-color: $bgc;
+    }
+
+    &.t-menu-disabled {
+      color: #c0c4cc;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
     }
   }
 }

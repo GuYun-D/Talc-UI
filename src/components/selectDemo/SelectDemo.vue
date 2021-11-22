@@ -6,6 +6,7 @@
       :clearable="true"
       :data="data"
       :width="400"
+      :searchData="true"
     ></t-select>
   </div>
 </template>
