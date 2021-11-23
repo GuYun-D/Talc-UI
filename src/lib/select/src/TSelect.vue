@@ -19,8 +19,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, watch } from "vue";
 import { TSelectInput, TSelectMenu } from "./components";
+import inputVue from "./components/input.vue";
 import { IMenuDataItem } from "./types";
 
 export default defineComponent({
@@ -40,6 +41,9 @@ export default defineComponent({
     disabled: {
       type: Boolean,
       default: false,
+    },
+    modelValue: {
+      type: [String, Array]
     },
   },
   components: {
@@ -67,6 +71,16 @@ export default defineComponent({
       if (state.inputValue === "") return;
       state.inputValue = "";
     };
+
+    /**
+     * 监听inputValue的值
+     */
+    watch(
+      () => state.inputValue,
+      (value) => {
+        emit("update:modelValue", value);
+      }
+    );
 
     return { setItemValue, ...toRefs(state), searchOptions, clearInputValue };
   },

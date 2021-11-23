@@ -7,18 +7,22 @@
       :data="data"
       :width="400"
       :searchData="true"
-      :disabled="true"
+      :disabled="false"
+      v-model="mySelecct"
     ></t-select>
+
+    {{ mySelecct }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import data from "./data";
 
 export default defineComponent({
   setup() {
-    return { data };
+    const mySelecct = ref("");
+    return { data, mySelecct };
   },
 });
 </script>
