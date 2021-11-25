@@ -12,7 +12,7 @@
         :style="{
           backgroundColor: item - 1 === currentIndex ? dotBgColor : '#fff',
         }"
-        @[trigger]="dotClick(item - 1)"
+        @click="dotClick(item - 1)"
       ></a>
     </div>
   </div>
@@ -76,6 +76,7 @@ export default defineComponent({
 
     if (props.dotPosition === carouselDirectionEnum.vertical) {
     }
+
 
     return { dotClick, isCircle };
   },

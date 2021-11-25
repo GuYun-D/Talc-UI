@@ -53,4 +53,5 @@ export interface IDotProps {
   dotBgColor: string
   dotType: string
   dotPosition: string
+  trigger: string
 }

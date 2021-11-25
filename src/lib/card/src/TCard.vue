@@ -69,11 +69,11 @@ export default defineComponent({
     const cardHeaderRef = ref<HTMLDivElement>();
     const cardFooterRef = ref<HTMLDivElement>();
     onMounted(() => {
-      if (cardHeaderRef.value?.innerHTML === "") {
+      if (cardHeaderRef.value && cardHeaderRef.value.innerHTML === "") {
         cardHeaderRef.value.style.display = "none";
       }
 
-      if (cardFooterRef.value?.innerHTML !== "") {
+      if (cardFooterRef.value && cardFooterRef.value.innerHTML !== "") {
         cardFooterRef.value.style.borderTop = "1px solid #e4e7ed";
       }
     });

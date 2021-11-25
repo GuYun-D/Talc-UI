@@ -1,6 +1,8 @@
 <template>
   <div class="t-select-menu" ref="tSelectMenuRef" @click="clickMenu">
-    <template v-if="searchData?.length > 0">
+    <template
+      v-if="searchData !== undefined && searchData && searchData.length > 0"
+    >
       <div
         class="t-select-menu-item"
         :class="{
@@ -59,6 +61,7 @@ export default defineComponent({
     TSelectNoDataTip,
   },
   setup(props, { emit }) {
+    // @ts-nocheck
     const searchData = ref<any[]>();
     const tSelectMenuRef = ref<HTMLDivElement>();
 
@@ -106,7 +109,7 @@ export default defineComponent({
       if (classesName.includes("t-select-menu")) {
         emitter.emit("menu:close", true);
         // @ts-ignore
-      } else if (!state.currentClickItem?.disabled || false) {
+      } else if (!state.currentClickItem.disabled || false) {
         emitter.emit("menu:close", false);
       }
     };
@@ -129,7 +132,7 @@ export default defineComponent({
 
     onMounted(() => {
       searchData.value = props.data;
-      state.searchDataLen = searchData.value?.length;
+      state.searchDataLen = searchData.value.length || 0;
 
       /**
        * 获取当前组件的子元素，也就是渲染出来的数据
@@ -195,7 +198,11 @@ export default defineComponent({
      * 获取searchData的长度
      */
     function getSearchDataLen(currentData: any) {
-      return currentData?.length;
+      if (currentData !== undefined) {
+        return currentData.length;
+      }
+
+      return 0;
     }
 
     return {
