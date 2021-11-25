@@ -21,7 +21,6 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs, watch } from "vue";
 import { TSelectInput, TSelectMenu } from "./components";
-import inputVue from "./components/input.vue";
 import { IMenuDataItem } from "./types";
 
 export default defineComponent({

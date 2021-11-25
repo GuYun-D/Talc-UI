@@ -1,28 +1,45 @@
 <template>
   <div>
     <h1>select 选择器</h1>
-    <t-select
-      placeHolder="请选择框架"
-      :clearable="true"
-      :data="data"
-      :width="400"
-      :searchData="true"
-      :disabled="false"
-      v-model="mySelecct"
-    ></t-select>
 
-    {{ mySelecct }}
+    <demo :component="Select1Demo"></demo>
+
+    <demo :component="Select2Demo"></demo>
+
+    <demo :component="Select3Demo"></demo>
+
+    <demo :component="Select4Demo"></demo>
+
+    <demo :component="Select5Demo"></demo>
+
+    <Attribute :attributeConfig="attributeConfig"></Attribute>
   </div>
 </template>
 
+
 <script lang="ts">
-import { defineComponent, ref } from "vue";
-import data from "./data";
+import { defineComponent } from "vue";
+import Demo from "../Demo.vue";
+import Select1Demo from "./demo/select1.demo.vue";
+import Select2Demo from "./demo/select2.demo.vue";
+import Select3Demo from "./demo/select3.demo.vue";
+import Select4Demo from "./demo/select4.demo.vue";
+import Select5Demo from "./demo/select5.demo.vue";
+import { attributeConfig } from "./config/attribute.config";
 
 export default defineComponent({
+  components: {
+    Demo,
+  },
   setup() {
-    const mySelecct = ref("");
-    return { data, mySelecct };
+    return {
+      attributeConfig,
+      Select1Demo,
+      Select2Demo,
+      Select3Demo,
+      Select4Demo,
+      Select5Demo,
+    };
   },
 });
 </script>

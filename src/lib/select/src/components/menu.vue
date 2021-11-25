@@ -129,7 +129,7 @@ export default defineComponent({
 
     onMounted(() => {
       searchData.value = props.data;
-      state.searchDataLen = searchData.value.length;
+      state.searchDataLen = searchData.value?.length;
 
       /**
        * 获取当前组件的子元素，也就是渲染出来的数据

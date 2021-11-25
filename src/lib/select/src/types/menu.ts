@@ -1,8 +1,8 @@
 interface IMenuDataItem {
   id?: number
-  value: string,
-  text: string
-  disabled: boolean
+  value?: string,
+  text?: string
+  disabled?: boolean
 }
 
 
