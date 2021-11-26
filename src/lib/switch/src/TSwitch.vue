@@ -2,7 +2,7 @@
   <button
     class="t-switch"
     :class="{ 't-checked': modelValue }"
-    @click="$emit('update:modelValue', !modelValue)"
+    @click="switchClick"
   >
     <span></span>
   </button>
@@ -51,8 +51,13 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props: ISwitchProps) {
-    return {};
+  setup(props: ISwitchProps, { emit }) {
+    const switchClick = () => {
+      if (props.disabled) return;
+      emit("update:modelValue", !props.modelValue);
+      emit("switch-change", !props.modelValue);
+    };
+    return { switchClick };
   },
 });
 </script>
@@ -68,6 +73,9 @@ export default defineComponent({
 
   > span {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 2px;
     left: 2px;
     height: 18px;
