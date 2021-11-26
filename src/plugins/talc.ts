@@ -17,6 +17,7 @@ import TMagnifier from '../lib/magnifier'
 import TRate from '../lib/rate'
 import TCard from '../lib/card'
 import TSelext from '../lib/select'
+import TSwitch from '../lib/switch'
 
 const talcArr = [
   TLayout,
@@ -37,7 +38,8 @@ const talcArr = [
   TMagnifier,
   TRate,
   TCard,
-  TSelext
+  TSelext,
+  TSwitch
 ]
 
 export { talcArr }

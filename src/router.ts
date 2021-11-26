@@ -1,5 +1,5 @@
 import { createWebHashHistory, createRouter } from "vue-router";
-import Switch from "./components/SwitchDemo.vue";
+import Switch from "./components/switchDemo/SwitchDemo.vue";
 import Button from "./components/buttonDemo/ButtonDemo.vue";
 import Dialog from "./components/DialogDemo.vue";
 import Tabs from "./components/demoUI/Tabs/Tabs1.demo.vue";
