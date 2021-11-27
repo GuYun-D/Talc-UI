@@ -1,7 +1,7 @@
 <template>
   <div>
     <t-switch
-      :disabled="false"
+      :disabled="true"
       v-model="isSwitch"
       @switch-change="change"
       active-color="#f40"

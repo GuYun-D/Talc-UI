@@ -6,7 +6,7 @@
     <button
       ref="btnRef"
       class="t-switch-btn"
-      :class="{ 't-checked': modelValue }"
+      :class="{ 't-checked': modelValue, 't-switch-disabled': disabled }"
       @click="switchClick"
     >
       <span></span>
@@ -109,6 +109,11 @@ export default defineComponent({
     border: none;
     border-radius: 11px;
     position: relative;
+
+    &.t-switch-disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
     > span {
       position: absolute;
