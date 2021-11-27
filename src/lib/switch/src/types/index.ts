@@ -6,6 +6,7 @@ export interface ISwitchProps {
   inactiveText: string
   disabled: boolean
   modelValue: boolean
+  activeTextColor: string
 }
 
 export enum ESwitchSize {

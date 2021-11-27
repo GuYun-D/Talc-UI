@@ -1,15 +1,21 @@
 <template>
-  <button
-    class="t-switch"
-    :class="{ 't-checked': modelValue }"
-    @click="switchClick"
-  >
-    <span></span>
-  </button>
+  <div class="t-switch">
+    <div class="t-switch-text">
+      {{ inactiveText }}
+    </div>
+    <button
+      class="t-switch-btn"
+      :class="{ 't-checked': modelValue }"
+      @click="switchClick"
+    >
+      <span></span>
+    </button>
+    <div class="t-switch-text" ref="activeRef">{{ activeText }}</div>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch, reactive, toRefs, ref } from "vue";
 import { ISwitchProps, ESwitchSize } from "./types";
 
 export default defineComponent({
@@ -28,7 +34,7 @@ export default defineComponent({
 
     activeColor: {
       type: String,
-      default: "",
+      default: "#1890ff",
     },
     activeText: {
       type: String,
@@ -36,7 +42,7 @@ export default defineComponent({
     },
     inactiveColor: {
       type: String,
-      default: "",
+      default: "#bfbfbf",
     },
     inactiveText: {
       type: String,
@@ -50,62 +56,96 @@ export default defineComponent({
       type: Boolean,
       required: true,
     },
+    activeTextColor: {
+      type: String,
+      default: "#1890ff",
+    },
   },
   setup(props: ISwitchProps, { emit }) {
+    const activeRef = ref<HTMLDivElement>();
+
+    const state = reactive({
+      Active: false,
+      inActive: false,
+    });
+
+    (function () {
+      state.Active = props.modelValue;
+      state.inActive = !props.modelValue;
+    })();
+
     const switchClick = () => {
       if (props.disabled) return;
       emit("update:modelValue", !props.modelValue);
       emit("switch-change", !props.modelValue);
     };
-    return { switchClick };
+
+    watch(
+      () => props.modelValue,
+      (value: boolean) => {
+        if (value) {
+          activeRef.value.style.color = props.activeTextColor;
+        } else {
+          activeRef.value.style.color = "";
+        }
+      }
+    );
+
+    return { switchClick, ...toRefs(state), activeRef };
   },
 });
 </script>
 
 <style scoped lang="scss">
 .t-switch {
-  height: 22px;
-  width: 44px;
-  border: none;
-  background: #bfbfbf;
-  border-radius: 11px;
-  position: relative;
+  display: flex;
+  align-items: center;
 
-  > span {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 2px;
-    left: 2px;
-    height: 18px;
-    width: 18px;
-    background: white;
-    border-radius: 9px;
-    transition: all 0.3s;
+  .t-switch-text {
+    margin: 0 10px;
   }
 
-  &:focus {
-    outline: none;
-  }
+  .t-switch-btn {
+    height: 22px;
+    width: 44px;
+    border: none;
+    background: #bfbfbf;
+    border-radius: 11px;
+    position: relative;
 
-  &:active {
     > span {
-      width: 22px;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      height: 18px;
+      width: 18px;
+      background: white;
+      border-radius: 9px;
+      transition: all 0.3s;
     }
-  }
 
-  &.t-checked {
-    background: #1890ff;
-    > span {
-      left: calc(100% - 20px);
+    &:focus {
+      outline: none;
     }
-  }
 
-  &.t-checked:active {
-    > span {
-      width: 18px + 4px;
-      margin-left: -4px;
+    &:active {
+      > span {
+        width: 22px;
+      }
+    }
+
+    &.t-checked {
+      background: #1890ff;
+      > span {
+        left: calc(100% - 20px);
+      }
+    }
+
+    &.t-checked:active {
+      > span {
+        width: 18px + 4px;
+        margin-left: -4px;
+      }
     }
   }
 }
