@@ -17,22 +17,11 @@
 
 <script lang="ts">
 import { defineComponent, watch, ref, onMounted } from "vue";
-import { ISwitchProps, ESwitchSize } from "./types";
+import { ISwitchProps } from "./types";
 
 export default defineComponent({
   name: "t-switch",
   props: {
-    size: {
-      type: String,
-      default: "normal",
-      validator: (value: string) => {
-        if (ESwitchSize[value]) return true;
-        console.warn(
-          "[Switch Component Warn]: The size of the switch is only big, normal, small and mini"
-        );
-      },
-    },
-
     activeColor: {
       type: String,
       default: "#1890ff",
@@ -144,7 +133,7 @@ export default defineComponent({
 
     &.t-checked:active {
       > span {
-        width: 18px + 4px;
+        width: 22px;
         margin-left: -4px;
       }
     }
