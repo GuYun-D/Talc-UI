@@ -4,6 +4,8 @@
       :disabled="false"
       v-model="isSwitch"
       @switch-change="change"
+      active-color="#f40"
+      inactive-color="#409eff"
     ></t-switch>
   </div>
 </template>

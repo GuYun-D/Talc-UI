@@ -4,6 +4,7 @@
       {{ inactiveText }}
     </div>
     <button
+      ref="btnRef"
       class="t-switch-btn"
       :class="{ 't-checked': modelValue }"
       @click="switchClick"
@@ -15,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, reactive, toRefs, ref } from "vue";
+import { defineComponent, watch, ref, onMounted } from "vue";
 import { ISwitchProps, ESwitchSize } from "./types";
 
 export default defineComponent({
@@ -63,16 +64,7 @@ export default defineComponent({
   },
   setup(props: ISwitchProps, { emit }) {
     const activeRef = ref<HTMLDivElement>();
-
-    const state = reactive({
-      Active: false,
-      inActive: false,
-    });
-
-    (function () {
-      state.Active = props.modelValue;
-      state.inActive = !props.modelValue;
-    })();
+    const btnRef = ref<HTMLButtonElement>();
 
     const switchClick = () => {
       if (props.disabled) return;
@@ -80,18 +72,24 @@ export default defineComponent({
       emit("switch-change", !props.modelValue);
     };
 
-    watch(
-      () => props.modelValue,
-      (value: boolean) => {
-        if (value) {
-          activeRef.value.style.color = props.activeTextColor;
-        } else {
-          activeRef.value.style.color = "";
+    onMounted(() => {
+      watch(
+        () => props.modelValue,
+        (value: boolean) => {
+          if (value) {
+            activeRef.value.style.color = props.activeTextColor;
+            btnRef.value.style.backgroundColor = props.activeColor;
+          } else {
+            activeRef.value.style.color = "";
+            btnRef.value.style.backgroundColor = props.inactiveColor;
+          }
+        },
+        {
+          immediate: true,
         }
-      }
-    );
-
-    return { switchClick, ...toRefs(state), activeRef };
+      );
+    });
+    return { switchClick, activeRef, btnRef };
   },
 });
 </script>
@@ -109,7 +107,6 @@ export default defineComponent({
     height: 22px;
     width: 44px;
     border: none;
-    background: #bfbfbf;
     border-radius: 11px;
     position: relative;
 
@@ -135,7 +132,6 @@ export default defineComponent({
     }
 
     &.t-checked {
-      background: #1890ff;
       > span {
         left: calc(100% - 20px);
       }
