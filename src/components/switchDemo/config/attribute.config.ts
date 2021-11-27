@@ -49,6 +49,12 @@ export const attributeConfig = {
       type: "Boolean",
       value: "_",
       defaultValue: "false",
+    }, {
+      name: "textVisible",
+      desc: "显示辅助文字",
+      type: "Boolean",
+      value: "_",
+      defaultValue: "false",
     }
   ],
 };

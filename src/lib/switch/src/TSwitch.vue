@@ -1,6 +1,6 @@
 <template>
   <div class="t-switch">
-    <div class="t-switch-text">
+    <div class="t-switch-text" v-show="textVisible">
       {{ inactiveText }}
     </div>
     <button
@@ -11,7 +11,9 @@
     >
       <span></span>
     </button>
-    <div class="t-switch-text" ref="activeRef">{{ activeText }}</div>
+    <div class="t-switch-text" ref="activeRef" v-show="textVisible">
+      {{ activeText }}
+    </div>
   </div>
 </template>
 
@@ -49,6 +51,10 @@ export default defineComponent({
     activeTextColor: {
       type: String,
       default: "#1890ff",
+    },
+    textVisible: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props: ISwitchProps, { emit }) {

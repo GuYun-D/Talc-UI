@@ -5,7 +5,8 @@
 <template>
   <div>
     <em>默认</em>
-    <t-switch v-model="switchDemo4"></t-switch>
+
+    <t-switch v-model="switchDemo4" :text-visible="true"></t-switch>
 
     <em>自定义辅助文字</em>
     <t-switch
@@ -13,6 +14,7 @@
       inactive-text="极差"
       active-text="优秀"
       active-text-color="pink"
+      :text-visible="true"
     ></t-switch>
   </div>
 </template>

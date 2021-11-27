@@ -6,4 +6,5 @@ export interface ISwitchProps {
   disabled: boolean
   modelValue: boolean
   activeTextColor: string
+  textVisible: boolean
 }
