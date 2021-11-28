@@ -12,8 +12,6 @@
       有些时候你可能需要加提示文字，组件提供了开关处于开和关时的状态的提示文字，同时你也可以定义开关为开时的文字颜色
     </Demo>
 
-    <Attribute :attributeConfig="attributeConfig"></Attribute>
-
     <t-switch
       v-model="isSwitch"
       @switch-change="change"
@@ -21,7 +19,10 @@
       inactive-color="#409eff"
       size="small"
       :text-visible="true"
+      :width="30"
     ></t-switch>
+
+    <Attribute :attributeConfig="attributeConfig"></Attribute>
   </div>
 </template>
 

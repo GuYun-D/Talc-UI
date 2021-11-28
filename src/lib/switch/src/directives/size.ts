@@ -12,10 +12,11 @@ const sizes = {
   }
 }
 
-const getElement = (el: Element, size: string) => {
+const getElement = (el: Element, size: number | string) => {
   let oSwitchBtn: HTMLButtonElement = el.querySelector('#t-switch-btn')
   let oSpan = oSwitchBtn.querySelector('span')
-  let currentHeight = sizes[size].height
+
+  let currentHeight = typeof size === 'number' ? size : sizes[size].height
   let spanSize = currentHeight - 4
 
   return {
@@ -27,7 +28,7 @@ const getElement = (el: Element, size: string) => {
 }
 
 export default {
-  mounted(el: HTMLDivElement, binding: DirectiveBinding<string>) {
+  mounted(el: HTMLDivElement, binding: DirectiveBinding<any>) {
     let { oSwitchBtn, oSpan, currentHeight, spanSize } = getElement(el, binding.value)
 
     oSwitchBtn.style.height = currentHeight + 'px'
@@ -41,8 +42,6 @@ export default {
 
   updated(el: HTMLDivElement, binding: DirectiveBinding<string>) {
     let { oSwitchBtn, oSpan, currentHeight, spanSize } = getElement(el, binding.value)
-
-
 
     if (oSwitchBtn.getAttribute('class').includes('t-checked')) {
       oSpan.style.left = currentHeight * 2 - spanSize - 2 + 'px'

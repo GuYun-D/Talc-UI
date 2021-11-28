@@ -1,5 +1,5 @@
 <template>
-  <div class="t-switch" v-size:value="size">
+  <div class="t-switch" v-size:value="finalSize">
     <div class="t-switch-text" v-show="textVisible">
       {{ inactiveText }}
     </div>
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref, onMounted } from "vue";
+import { defineComponent, watch, ref, onMounted, computed } from "vue";
 import { ISwitchProps, ESwitchSize } from "./types";
 import { size } from "./directives";
 
@@ -71,6 +71,7 @@ export default defineComponent({
         );
       },
     },
+    width: Number,
   },
   setup(props: ISwitchProps, { emit }) {
     const activeRef = ref<HTMLDivElement>();
@@ -81,6 +82,10 @@ export default defineComponent({
       emit("update:modelValue", !props.modelValue);
       emit("switch-change", !props.modelValue);
     };
+
+    const finalSize = computed(() => {
+      return props.width ? props.width : props.size;
+    });
 
     onMounted(() => {
       watch(
@@ -99,7 +104,7 @@ export default defineComponent({
         }
       );
     });
-    return { switchClick, activeRef, btnRef };
+    return { switchClick, activeRef, btnRef, finalSize };
   },
 });
 </script>
@@ -129,7 +134,6 @@ export default defineComponent({
       background: white;
       transition: all 0.3s;
     }
-
 
     &:focus {
       outline: none;
