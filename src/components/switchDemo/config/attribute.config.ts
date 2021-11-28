@@ -55,6 +55,18 @@ export const attributeConfig = {
       type: "Boolean",
       value: "_",
       defaultValue: "false",
+    }, {
+      name: "size",
+      desc: "switch内置尺寸",
+      type: "String",
+      value: "big|normal|small",
+      defaultValue: "normal",
+    }, {
+      name: "height",
+      desc: "switch自定义尺寸",
+      type: "Number",
+      value: "_",
+      defaultValue: "_",
     }
   ],
 };

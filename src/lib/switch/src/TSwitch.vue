@@ -71,7 +71,7 @@ export default defineComponent({
         );
       },
     },
-    width: Number,
+    height: Number,
   },
   setup(props: ISwitchProps, { emit }) {
     const activeRef = ref<HTMLDivElement>();
@@ -84,7 +84,7 @@ export default defineComponent({
     };
 
     const finalSize = computed(() => {
-      return props.width ? props.width : props.size;
+      return props.height ? props.height : props.size;
     });
 
     onMounted(() => {

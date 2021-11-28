@@ -8,7 +8,7 @@ export interface ISwitchProps {
   activeTextColor: string
   textVisible: boolean
   size: string
-  width: number
+  height: number
 }
 
 export enum ESwitchSize {
