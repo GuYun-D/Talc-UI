@@ -19,6 +19,7 @@
 
     <Attribute :attributeConfig="attributeConfig"> </Attribute>
 
+    <Event :eventConfig="eventConfig"></Event>
   </div>
 </template>
 
@@ -30,7 +31,7 @@ import Switch3Demo from "./demo/switch3.demo.vue";
 import Switch4Demo from "./demo/switch4.demo.vue";
 import Switch5Demo from "./demo/switch5.demo.vue";
 import Demo from "../Demo.vue";
-import { attributeConfig } from "./config/attribute.config";
+import { attributeConfig, eventConfig } from "./config";
 
 export default defineComponent({
   components: {
@@ -50,6 +51,7 @@ export default defineComponent({
       Switch4Demo,
       Switch5Demo,
       attributeConfig,
+      eventConfig,
     };
   },
 });

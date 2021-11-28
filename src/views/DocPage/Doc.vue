@@ -113,7 +113,7 @@ aside {
   &::-webkit-scrollbar-thumb {
     min-height: 20px;
     background-clip: content-box;
-    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.171) inset;
+    box-shadow: 0 0 0 5px #42b983 inset;
   }
 
   &::-webkit-scrollbar-corner {

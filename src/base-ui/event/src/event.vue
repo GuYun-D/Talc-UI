@@ -1,7 +1,7 @@
 <template>
   <footer>
     <div class="itemAttribute">
-      <div class="title">{{ attributeTitle }}</div>
+      <div class="title">{{ eventTitle }}</div>
       <div class="attr-container">
         <div class="itemHeader">
           <span>Event Name</span>
@@ -11,7 +11,7 @@
         </div>
         <div
           class="itemMain"
-          v-for="eventItem in attributeItems"
+          v-for="eventItem in eventItems"
           :key="eventItem.eventName"
         >
           <span>{{ eventItem.eventName }}</span>
@@ -24,20 +24,21 @@
   </footer>
 </template>
 
+
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import type { IAttributeConfig } from "../types/types";
+import type { eventConfig } from "../types/types";
 
 export default defineComponent({
   name: "Event",
   props: {
-    attributeConfig: {
-      type: Object as PropType<IAttributeConfig>,
+    eventConfig: {
+      type: Object as PropType<eventConfig>,
       required: true,
     },
   },
   setup(props) {
-    const { eventTitle, eventItems } = props.attributeConfig;
+    const { eventTitle, eventItems } = props.eventConfig;
     return { eventTitle, eventItems };
   },
 });
@@ -70,12 +71,11 @@ footer {
 
         span {
           display: inline-block;
-          width: 20%;
+          width: 25%;
           min-width: 151px;
           color: #474747;
         }
       }
-
       .itemMain {
         min-width: 796px;
         width: 100%;
@@ -90,7 +90,7 @@ footer {
 
         span {
           display: inline-block;
-          width: 20%;
+          width: 25%;
           min-width: 151px;
           font-size: 16px;
           color: rgb(78, 78, 78);

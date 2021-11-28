@@ -44,7 +44,6 @@ $main: #4fc08d;
     font-size: 23px;
     font-family: ItalianDemo;
     color: rgb(97, 97, 97);
-    
     user-select: none;
   }
   li {

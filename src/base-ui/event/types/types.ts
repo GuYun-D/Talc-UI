@@ -1,4 +1,4 @@
-export interface IAttributeConfig {
+export interface eventConfig {
   eventTitle: string;
   eventItems: eventItems[];
 }
