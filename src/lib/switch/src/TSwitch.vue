@@ -1,11 +1,12 @@
 <template>
-  <div class="t-switch">
+  <div class="t-switch" v-size:value="size">
     <div class="t-switch-text" v-show="textVisible">
       {{ inactiveText }}
     </div>
     <button
       ref="btnRef"
       class="t-switch-btn"
+      id="t-switch-btn"
       :class="{ 't-checked': modelValue, 't-switch-disabled': disabled }"
       @click="switchClick"
     >
@@ -19,10 +20,14 @@
 
 <script lang="ts">
 import { defineComponent, watch, ref, onMounted } from "vue";
-import { ISwitchProps } from "./types";
+import { ISwitchProps, ESwitchSize } from "./types";
+import { size } from "./directives";
 
 export default defineComponent({
   name: "t-switch",
+  directives: {
+    size,
+  },
   props: {
     activeColor: {
       type: String,
@@ -55,6 +60,16 @@ export default defineComponent({
     textVisible: {
       type: Boolean,
       default: false,
+    },
+    size: {
+      type: String,
+      default: "normal",
+      validator: (value: string) => {
+        if (ESwitchSize[value]) return true;
+        console.warn(
+          "[Switch Component Warn]: The size of the switch is only big, normal, small"
+        );
+      },
     },
   },
   setup(props: ISwitchProps, { emit }) {
@@ -99,10 +114,7 @@ export default defineComponent({
   }
 
   .t-switch-btn {
-    height: 22px;
-    width: 44px;
     border: none;
-    border-radius: 11px;
     position: relative;
 
     &.t-switch-disabled {
@@ -114,34 +126,13 @@ export default defineComponent({
       position: absolute;
       top: 2px;
       left: 2px;
-      height: 18px;
-      width: 18px;
       background: white;
-      border-radius: 9px;
       transition: all 0.3s;
     }
 
+
     &:focus {
       outline: none;
-    }
-
-    &:active {
-      > span {
-        width: 22px;
-      }
-    }
-
-    &.t-checked {
-      > span {
-        left: calc(100% - 20px);
-      }
-    }
-
-    &.t-checked:active {
-      > span {
-        width: 22px;
-        margin-left: -4px;
-      }
     }
   }
 }

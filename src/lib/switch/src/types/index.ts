@@ -7,4 +7,11 @@ export interface ISwitchProps {
   modelValue: boolean
   activeTextColor: string
   textVisible: boolean
+  size: string
+}
+
+export enum ESwitchSize {
+  big = 'big',
+  normal = "normal",
+  small = "small"
 }

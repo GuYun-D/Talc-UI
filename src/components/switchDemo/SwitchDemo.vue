@@ -14,13 +14,14 @@
 
     <Attribute :attributeConfig="attributeConfig"></Attribute>
 
-    <!-- <t-switch
-      :disabled="true"
+    <t-switch
       v-model="isSwitch"
       @switch-change="change"
       active-color="#f40"
       inactive-color="#409eff"
-    ></t-switch> -->
+      size="small"
+      :text-visible="true"
+    ></t-switch>
   </div>
 </template>
 
