@@ -6,6 +6,8 @@
     <t-radio v-model="checked2" size="big" :disabled="true">男</t-radio>
 
     <t-radio v-model="checked3" size="small" :disabled="true">男</t-radio>
+
+    <t-radio v-model="checked4" active-color="#f40">男</t-radio>
   </div>
 </template>
 
@@ -14,10 +16,11 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    let checked = ref(false);
+    let checked = ref(true);
     let checked2 = ref(true);
     let checked3 = ref(true);
-    return { checked, checked2, checked3 };
+    let checked4 = ref(false);
+    return { checked, checked2, checked3, checked4 };
   },
 });
 </script>

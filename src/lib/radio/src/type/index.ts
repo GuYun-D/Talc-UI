@@ -2,6 +2,7 @@ export interface IRadioProps {
   modelValue: boolean
   disabled: boolean
   size: string
+  activeColor: string
 }
 
 export interface IElementCollectionObj {

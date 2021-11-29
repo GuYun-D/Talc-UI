@@ -1,5 +1,5 @@
 <template>
-  <div class="t-radio" v-radio="modelValue">
+  <div class="t-radio" v-radio:[activeColor]="modelValue">
     <label>
       <span
         :class="{ 't-radio-instructions-disabled': disabled }"
@@ -41,6 +41,11 @@ export default defineComponent({
           "[Radio Component Warn]: The only types of size are big, normal and small"
         );
       },
+    },
+
+    activeColor: {
+      type: String,
+      default: "#00cb51",
     },
   },
   directives: {
