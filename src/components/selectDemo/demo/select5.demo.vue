@@ -5,7 +5,7 @@
 <template>
   <div>
     <t-select
-      v-model="mySelecct"
+      v-model="mySelecct5"
       :data="data"
       :clearable="true"
       :search-data="true"
@@ -18,23 +18,26 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    const mySelecct = ref("");
+    const mySelecct5 = ref("");
     const data = [
       {
+        id: 346748596978,
         value: "html",
         text: "HTML",
       },
       {
+        id: 89048596978,
         value: "css",
         text: "CSS",
         disabled: true,
       },
       {
+        id: 1458596978,
         value: "javascript",
         text: "JavaScript",
       },
     ];
-    return { data, mySelecct };
+    return { data, mySelecct5 };
   },
 });
 </script>

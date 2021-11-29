@@ -11,7 +11,7 @@
           't-menu-disabled': item.disabled,
         }"
         v-for="(item, index) in searchData"
-        :key="index"
+        :key="item.id"
         @click="setItemValue(item, index)"
       >
         {{ item.text }}

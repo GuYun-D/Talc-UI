@@ -27,7 +27,16 @@ export default defineComponent({
   name: "t-select",
   props: {
     placeHolder: String,
-    data: Array,
+    data: {
+      type: Array,
+      required: true,
+      validator: (value: []) => {
+        if (value.length) return true;
+        console.error(
+          "[Select Component Warn]: It is necessary to provide a data array for the select component"
+        );
+      },
+    },
     width: [Number, String],
     searchData: {
       type: Boolean,
@@ -42,7 +51,7 @@ export default defineComponent({
       default: false,
     },
     modelValue: {
-      type: [String, Array]
+      type: [String, Array],
     },
   },
   components: {

@@ -22,13 +22,11 @@ export default defineComponent({
       },
       {
         id: 2,
-
         value: "css",
         text: "CSS",
       },
       {
         id: 2,
-
         value: "javascript",
         text: "JavaScript",
       },

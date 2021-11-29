@@ -4,7 +4,7 @@
 
 <template>
   <div>
-    <t-select v-model="mySelecct" :data="data"></t-select>
+    <t-select v-model="mySelecct2" :data="data"></t-select>
   </div>
 </template>
 
@@ -13,23 +13,26 @@ import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    const mySelecct = ref("");
+    const mySelecct2 = ref("");
     const data = [
       {
+        id: 65748596978,
         value: "html",
         text: "HTML",
       },
       {
+        id: 657485969348,
         value: "css",
         text: "CSS",
         disabled: true,
       },
       {
+        id: 657647596978,
         value: "javascript",
         text: "JavaScript",
       },
     ];
-    return { data, mySelecct };
+    return { data, mySelecct2 };
   },
 });
 </script>
