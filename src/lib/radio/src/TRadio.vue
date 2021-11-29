@@ -2,13 +2,14 @@
   <div class="t-radio" v-radio="modelValue">
     <label>
       <span
+        :class="{ 't-radio-instructions-disabled': disabled }"
         @click="setRaio"
         class="t-radio-instructions"
       ></span>
-      <span @click="setRaio">
+      <span @click="setRaio" :class="{ 't-radio-text-disabled': disabled }">
         <slot></slot>
       </span>
-      <input class="t-radio-inp" type="radio" />
+      <input class="t-radio-inp" type="radio" :disabled="disabled" />
     </label>
   </div>
 </template>
@@ -23,12 +24,17 @@ export default defineComponent({
   emits: ["update:modelValue"],
   props: {
     modelValue: Boolean,
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   directives: {
     radio,
   },
   setup(props: IRadioProps, { emit }) {
     const setRaio = () => {
+      if (props.disabled) return;
       emit("update:modelValue", !props.modelValue);
     };
     return { setRaio };
@@ -52,7 +58,7 @@ export default defineComponent({
       border-radius: 50%;
       border: 1px solid #dcdfe6;
       margin: 0 5px;
-      transition: background-color .3s;
+      transition: background-color 0.3s;
 
       &::after {
         content: "";
@@ -66,6 +72,14 @@ export default defineComponent({
         transform: translateX(-50%) translateY(-51%);
         background-color: rgb(255, 255, 255);
       }
+
+      &.t-radio-instructions-disabled {
+        background-color: #e7e7e7;
+      }
+    }
+
+    .t-radio-text-disabled {
+      color: #c0c4cc;
     }
 
     .t-radio-inp {
