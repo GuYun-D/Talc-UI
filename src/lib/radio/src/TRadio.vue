@@ -84,6 +84,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .t-radio {
   margin: 5px;
+  display: inline-flex;
 
   label {
     display: flex;
