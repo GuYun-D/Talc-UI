@@ -55,8 +55,8 @@ export default defineComponent({
     //   console.log(starNum.value);
     // });
 
-    const currentIndex = ref(props.num);
-    const [starNum, setStarNum] = useRate(props.num, () => {
+    const currentIndex = ref(props.modelValue);
+    const [starNum, setStarNum] = useRate(props.modelValue, () => {
       /**
        * starNum.value 通过回调返回出来的ref数据，存在value属性的，但是编辑器报错，
        * 运行无异常
@@ -65,7 +65,7 @@ export default defineComponent({
       emit("getStarNum", starNum.value);
     });
 
-    if (props.num !== 0 && props.readonyRate) {
+    if (props.modelValue !== 0 && props.readonyRate) {
       throw Error(
         "Rate Component Error: If you want the current score to be read-only, please do not pass the num attribute"
       );

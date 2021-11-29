@@ -17,7 +17,7 @@
     </Demo>
 
     <Attribute :attributeConfig="attributeConfig"></Attribute>
-    <Attribute :attributeConfig="attributeEventConfig"></Attribute>
+    <Event :eventConfig="attributeEventConfig"></Event>
   </div>
 </template>
 

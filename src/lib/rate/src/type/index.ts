@@ -1,5 +1,5 @@
 export interface ratePropsType {
-  num: number
+  modelValue: number
   size: number
   starColr: string
   auxiliaryText: string[]

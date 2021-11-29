@@ -1,5 +1,5 @@
 export default {
-  num: {
+  modelValue: {
     type: Number,
     default: 0,
   },
@@ -17,7 +17,7 @@ export default {
     validator: (text: string[]) => {
       if (text.length === 5 && text.length > 4) return true;
       console.warn(
-        "Rate Component warn: Auxiliary text needs to be a string array containing five elements. If there are more than five elements, the elements other than the fifth will no longer be used"
+        "[Rate Component warn]: Auxiliary text needs to be a string array containing five elements. If there are more than five elements, the elements other than the fifth will no longer be used"
       );
     },
   },
@@ -25,7 +25,7 @@ export default {
     type: Number,
     validator: (value: number) => {
       if (value < 5 && value >= 0) return true;
-      console.warn("Rate Component warn: the score ranges from 0 to 5");
+      console.warn("[Rate Component warn]: the score ranges from 0 to 5");
     },
   },
   auxiliaryTextVisible: {

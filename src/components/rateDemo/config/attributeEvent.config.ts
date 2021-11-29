@@ -1,13 +1,11 @@
-
 export const attributeEventConfig = {
-  attributeTitle: "Rate Event",
-  attributeItems: [
+  eventTitle: "Rate Event",
+  eventItems: [
     {
-      name: "getStarNum",
+      eventName: "get-star-num",
       desc: "评分发生变化时触发",
-      type: "_",
-      value: "_",
-      defaultValue: "_",
+      param: "当前评分",
+      paramType: "Number",
     }
   ],
 };
