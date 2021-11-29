@@ -3,6 +3,10 @@
     <label>
       <span
         :class="{ 't-radio-instructions-disabled': disabled }"
+        :style="{
+          width: radioSize + 'px',
+          height: radioSize + 'px',
+        }"
         @click="setRaio"
         class="t-radio-instructions"
       ></span>
@@ -15,8 +19,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { IRadioProps } from "./type";
+import { computed, defineComponent } from "vue";
+import { IRadioProps, ERadioSizeType } from "./type";
 import { radio } from "./directives";
 
 export default defineComponent({
@@ -28,6 +32,16 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    size: {
+      type: String,
+      default: "normal",
+      validator: (value: string) => {
+        if (ERadioSizeType[value]) return true;
+        console.warn(
+          "[Radio Component Warn]: The only types of size are big, normal and small"
+        );
+      },
+    },
   },
   directives: {
     radio,
@@ -37,7 +51,17 @@ export default defineComponent({
       if (props.disabled) return;
       emit("update:modelValue", !props.modelValue);
     };
-    return { setRaio };
+
+    const sizes = {
+      big: 18,
+      normal: 16,
+      small: 14,
+    };
+
+    const radioSize = computed(() => {
+      return sizes[props.size];
+    });
+    return { setRaio, radioSize };
   },
 });
 </script>
@@ -53,8 +77,6 @@ export default defineComponent({
     .t-radio-instructions {
       position: relative;
       display: inline-block;
-      width: 16px;
-      height: 16px;
       border-radius: 50%;
       border: 1px solid #dcdfe6;
       margin: 0 5px;
