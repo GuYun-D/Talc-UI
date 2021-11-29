@@ -1,10 +1,9 @@
 <template>
-  <div class="t-radio">
+  <div class="t-radio" v-radio="modelValue">
     <label>
       <span
         @click="setRaio"
         class="t-radio-instructions"
-        :class="{ 't-radio-check': modelValue ? true : false }"
       ></span>
       <span @click="setRaio">
         <slot></slot>
@@ -17,12 +16,16 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { IRadioProps } from "./type";
+import { radio } from "./directives";
 
 export default defineComponent({
   name: "t-radio",
   emits: ["update:modelValue"],
   props: {
     modelValue: Boolean,
+  },
+  directives: {
+    radio,
   },
   setup(props: IRadioProps, { emit }) {
     const setRaio = () => {
@@ -42,15 +45,26 @@ export default defineComponent({
     align-items: center;
 
     .t-radio-instructions {
+      position: relative;
       display: inline-block;
-      width: 14px;
-      height: 14px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
-      border: 1px solid #111;
+      border: 1px solid #dcdfe6;
       margin: 0 5px;
+      transition: background-color .3s;
 
-      &.t-radio-check{
-        background-color: #afa;
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 40%;
+        height: 40%;
+        top: 50%;
+        left: 50%;
+        border-radius: inherit;
+        transform: translateX(-50%) translateY(-51%);
+        background-color: rgb(255, 255, 255);
       }
     }
 
