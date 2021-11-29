@@ -1,15 +1,17 @@
 <template>
   <div>
-    <t-radio></t-radio>
+    <h1>radio 单选</h1>
+    <t-radio v-model="checked">男</t-radio>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    let checked = ref(true);
+    return { checked };
   },
 });
 </script>
