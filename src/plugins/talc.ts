@@ -18,6 +18,7 @@ import TRate from '../lib/rate'
 import TCard from '../lib/card'
 import TSelext from '../lib/select'
 import TSwitch from '../lib/switch'
+import TRadio from '../lib/radio'
 
 const talcArr = [
   TLayout,
@@ -39,7 +40,8 @@ const talcArr = [
   TRate,
   TCard,
   TSelext,
-  TSwitch
+  TSwitch,
+  TRadio
 ]
 
 export { talcArr }

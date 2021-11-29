@@ -38,6 +38,9 @@ export const siderConfig = [
       }, {
         name: 'select 选择器',
         url: 'select'
+      }, {
+        name: 'radio 单选',
+        url: 'radio'
       }
     ]
   },
