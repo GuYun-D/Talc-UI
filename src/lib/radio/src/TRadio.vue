@@ -1,5 +1,5 @@
 <template>
-  <div class="t-radio" v-radio:[activeColor]="modelValue">
+  <div class="t-radio" v-radio:[activeColor]="radioState">
     <label>
       <span
         :class="{ 't-radio-instructions-disabled': disabled }"
@@ -11,7 +11,7 @@
         class="t-radio-instructions"
       ></span>
       <span @click="setRaio" :class="{ 't-radio-text-disabled': disabled }">
-        <slot></slot>
+        {{ option.label }}
       </span>
       <input class="t-radio-inp" type="radio" :disabled="disabled" />
     </label>
@@ -19,15 +19,15 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from "vue";
-import { IRadioProps, ERadioSizeType } from "./type";
+import { computed, defineComponent, PropType, ref } from "vue";
+import { IRadioProps, ERadioSizeType, IOptionProp, AllType } from "./type";
 import { radio } from "./directives";
 
 export default defineComponent({
   name: "t-radio",
   emits: ["update:modelValue"],
   props: {
-    modelValue: Boolean,
+    modelValue: AllType,
     disabled: {
       type: Boolean,
       default: false,
@@ -47,14 +47,23 @@ export default defineComponent({
       type: String,
       default: "#00cb51",
     },
+
+    option: {
+      type: Object as PropType<IOptionProp>,
+      required: true,
+    },
   },
   directives: {
     radio,
   },
   setup(props: IRadioProps, { emit }) {
+    let radioState = ref(false);
+
     const setRaio = () => {
       if (props.disabled) return;
-      emit("update:modelValue", !props.modelValue);
+      radioState.value = !radioState.value;
+      let checkedValue = radioState.value ? props.option.value : "";
+      emit("update:modelValue", checkedValue);
     };
 
     const sizes = {
@@ -66,7 +75,8 @@ export default defineComponent({
     const radioSize = computed(() => {
       return sizes[props.size];
     });
-    return { setRaio, radioSize };
+
+    return { setRaio, radioSize, radioState };
   },
 });
 </script>
@@ -101,7 +111,7 @@ export default defineComponent({
       }
 
       &.t-radio-instructions-disabled {
-        background-color: #e7e7e7;
+        background-color: #e7e7e7 !important;
       }
     }
 
