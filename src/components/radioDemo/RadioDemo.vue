@@ -1,6 +1,15 @@
 <template>
   <div>
     <h1>radio 单选</h1>
+    <t-radio
+      :option="{
+        label: '哈哈哈',
+        value: '12345',
+      }"
+      v-model="tySelect"
+    ></t-radio>
+
+    {{ tySelect }}
 
     <div>
       <t-radio-group v-model="checked">
@@ -36,7 +45,9 @@ export default defineComponent({
       },
     ];
 
-    return { checked, options };
+    let tySelect = ref();
+
+    return { checked, options, tySelect };
   },
 });
 </script>

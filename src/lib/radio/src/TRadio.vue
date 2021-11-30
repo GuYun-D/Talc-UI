@@ -26,9 +26,14 @@ import {
   ref,
   getCurrentInstance,
   watch,
+  reactive,
+  onMounted,
+  toRefs,
+  ComputedRef,
 } from "vue";
 import { IRadioProps, ERadioSizeType, IOptionProp, AllType } from "./type";
 import { radio } from "./directives";
+import TRadioGroup from "../../radio-group";
 
 export default defineComponent({
   name: "t-radio",
@@ -64,46 +69,40 @@ export default defineComponent({
     radio,
   },
   setup(props: IRadioProps, { emit }) {
+    const state = reactive({
+      thisKey: null,
+      radioState: false,
+      isRadioGroup: false,
+    });
+
     /**
      * 获取当前组件的实例
      */
     let instance = getCurrentInstance();
 
     // 获取父组件的modelValue数据
-    let parentKey = computed(() => {
-      // @ts-ignore
-      return instance.parent.ctx.currentKey;
-    });
+    let parentKey: ComputedRef;
 
     // 获取当前组件的key
     let thisKey = instance.vnode.key;
 
-    let radioState = ref(thisKey === parentKey.value);
-
-    watch(
-      () => parentKey.value,
-      (value: any) => {
-        if (thisKey === value) {
-          radioState.value = true;
-        } else {
-          radioState.value = false;
-        }
-      }
-    );
+    // let radioState = ref(thisKey === parentKey.value);
 
     // radio的点击事件
     const setRaio = () => {
       if (props.disabled) return;
-      radioState.value = !radioState.value;
-      let checkedValue = radioState.value ? props.option.value : "";
+      state.radioState = !state.radioState;
+      let checkedValue = state.radioState ? props.option.value : "";
       emit("update:modelValue", checkedValue);
 
-      /**
-       * 当前radio发生点击，调用父组件的方法
-       * 同样是调用父组件的ctx编辑器插件报错，故而使用了@ts-ignore，因为浏览器运行无误
-       */
-      // @ts-ignore
-      instance.parent.ctx.setCurrrentValue(props.option.value, thisKey);
+      if (state.isRadioGroup) {
+        /**
+         * 当前radio发生点击，调用父组件的方法
+         * 同样是调用父组件的ctx编辑器插件报错，故而使用了@ts-ignore，因为浏览器运行无误
+         */
+        // @ts-ignore
+        instance.parent.ctx.setCurrrentValue(props.option.value, thisKey);
+      }
     };
 
     const sizes = {
@@ -117,7 +116,34 @@ export default defineComponent({
       return sizes[props.size];
     });
 
-    return { setRaio, radioSize, radioState };
+    onMounted(() => {
+      state.isRadioGroup = instance.parent.type === TRadioGroup;
+      if (state.isRadioGroup) {
+        parentKey = getParentCurrentKey();
+
+        watch(
+          () => parentKey.value,
+          (value: any) => {
+            if (thisKey === value) {
+              state.radioState = true;
+            } else {
+              state.radioState = false;
+            }
+          }
+        );
+
+        state.radioState = thisKey === parentKey.value;
+      }
+    });
+
+    function getParentCurrentKey() {
+      return computed(() => {
+        // @ts-ignore
+        return instance.parent.ctx.currentKey;
+      });
+    }
+
+    return { setRaio, radioSize, ...toRefs(state) };
   },
 });
 </script>
