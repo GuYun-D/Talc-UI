@@ -11,7 +11,7 @@
         class="t-radio-instructions"
       ></span>
       <span @click="setRaio" :class="{ 't-radio-text-disabled': disabled }">
-        {{ option.label }}
+        {{ option && option.label }}
       </span>
       <input class="t-radio-inp" type="radio" :disabled="disabled" />
     </label>
@@ -19,7 +19,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from "vue";
+import {
+  computed,
+  defineComponent,
+  PropType,
+  ref,
+  getCurrentInstance,
+  watch,
+} from "vue";
 import { IRadioProps, ERadioSizeType, IOptionProp, AllType } from "./type";
 import { radio } from "./directives";
 
@@ -57,13 +64,46 @@ export default defineComponent({
     radio,
   },
   setup(props: IRadioProps, { emit }) {
-    let radioState = ref(false);
+    /**
+     * 获取当前组件的实例
+     */
+    let instance = getCurrentInstance();
 
+    // 获取父组件的modelValue数据
+    let parentKey = computed(() => {
+      // @ts-ignore
+      return instance.parent.ctx.currentKey;
+    });
+
+    // 获取当前组件的key
+    let thisKey = instance.vnode.key;
+
+    let radioState = ref(thisKey === parentKey.value);
+
+    watch(
+      () => parentKey.value,
+      (value: any) => {
+        if (thisKey === value) {
+          radioState.value = true;
+        } else {
+          radioState.value = false;
+        }
+      }
+    );
+
+    // radio的点击事件
     const setRaio = () => {
       if (props.disabled) return;
       radioState.value = !radioState.value;
       let checkedValue = radioState.value ? props.option.value : "";
       emit("update:modelValue", checkedValue);
+
+      /**
+       * 当前radio发生点击，调用父组件的方法
+       * 同样是调用父组件的ctx编辑器插件报错，故而使用了@ts-ignore，因为浏览器运行无误
+       */
+      // @ts-ignore
+      instance.parent.ctx.setCurrrentValue(props.option.value, thisKey);
     };
 
     const sizes = {
@@ -72,6 +112,7 @@ export default defineComponent({
       small: 14,
     };
 
+    // 计算radio尺寸大小
     const radioSize = computed(() => {
       return sizes[props.size];
     });
