@@ -1,15 +1,18 @@
 <template>
   <div>
     <h1>radio 单选</h1>
-    <t-radio
-      :option="{
-        label: '哈哈哈',
-        value: '12345',
-      }"
-      v-model="tySelect"
-    ></t-radio>
+    <div>
+      <t-radio
+        :option="{
+          label: '哈哈哈',
+          value: '12345',
+        }"
+        v-model="tySelect"
+        :border="true"
+      ></t-radio>
 
-    {{ tySelect }}
+      {{ tySelect }}
+    </div>
 
     <div>
       <t-radio-group v-model="checked">

@@ -1,5 +1,10 @@
 <template>
-  <div class="t-radio" v-radio:[activeColor]="radioState">
+  <div
+    class="t-radio"
+    v-radio:[activeColor]="radioState"
+    :class="{ 't-radio-border': border }"
+    ref="TRadioRef"
+  >
     <label>
       <span
         :class="{ 't-radio-instructions-disabled': disabled }"
@@ -64,6 +69,11 @@ export default defineComponent({
       type: Object as PropType<IOptionProp>,
       required: true,
     },
+
+    border: {
+      type: Boolean,
+      default: false,
+    },
   },
   directives: {
     radio,
@@ -74,6 +84,8 @@ export default defineComponent({
       radioState: false,
       isRadioGroup: false,
     });
+
+    const TRadioRef = ref<HTMLDivElement>();
 
     /**
      * 获取当前组件的实例
@@ -103,6 +115,14 @@ export default defineComponent({
         // @ts-ignore
         instance.parent.ctx.setCurrrentValue(props.option.value, thisKey);
       }
+
+      if (props.border && state.radioState) {
+        TRadioRef.value.style.borderColor = props.activeColor;
+        TRadioRef.value.style.color = props.activeColor;
+      } else {
+        TRadioRef.value.style.borderColor = "";
+        TRadioRef.value.style.color = "";
+      }
     };
 
     const sizes = {
@@ -118,17 +138,16 @@ export default defineComponent({
 
     onMounted(() => {
       state.isRadioGroup = instance.parent.type === TRadioGroup;
+      if (props.border) {
+        TRadioRef.value.addEventListener("click", setRaio);
+      }
       if (state.isRadioGroup) {
         parentKey = getParentCurrentKey();
 
         watch(
           () => parentKey.value,
           (value: any) => {
-            if (thisKey === value) {
-              state.radioState = true;
-            } else {
-              state.radioState = false;
-            }
+            state.radioState = thisKey === value;
           }
         );
 
@@ -143,7 +162,7 @@ export default defineComponent({
       });
     }
 
-    return { setRaio, radioSize, ...toRefs(state) };
+    return { setRaio, radioSize, ...toRefs(state), TRadioRef };
   },
 });
 </script>
@@ -153,9 +172,23 @@ export default defineComponent({
   margin: 5px;
   display: inline-flex;
 
+  &.t-radio-border {
+    padding: 10px;
+    border: 1px solid #c0c4cc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
   label {
     display: flex;
     align-items: center;
+
+    span {
+      cursor: pointer;
+      color: inherit;
+      transition: background-color 0.3s;
+    }
 
     .t-radio-instructions {
       position: relative;
@@ -163,7 +196,7 @@ export default defineComponent({
       border-radius: 50%;
       border: 1px solid #dcdfe6;
       margin: 0 5px;
-      transition: background-color 0.3s;
+      transition: background-color 0.2s;
 
       &::after {
         content: "";

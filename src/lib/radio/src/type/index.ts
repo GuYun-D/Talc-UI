@@ -4,6 +4,7 @@ export interface IRadioProps {
   size: string
   activeColor: string
   option: IOptionProp
+  border: boolean
 }
 
 export interface IElementCollectionObj {
