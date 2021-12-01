@@ -12,7 +12,6 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, toRefs } from "vue";
 import TRadio from "../../radio";
-import { radio } from "../../radio/src/directives";
 import { AllType } from "../../radio/src/type";
 
 export default defineComponent({
@@ -23,6 +22,10 @@ export default defineComponent({
     vertical: {
       type: Boolean,
       default: false,
+    },
+    radioType: {
+      type: String,
+      default: "normal",
     },
   },
   setup(props, { slots, emit }) {
@@ -54,6 +57,8 @@ export default defineComponent({
     const state = reactive({
       currentKey: "",
       currentValue: "",
+      firstRadioKey: -1,
+      lastRadioKey: -1,
     });
 
     const setCurrrentValue = (
@@ -66,6 +71,16 @@ export default defineComponent({
         emit("update:modelValue", value);
       }
     };
+
+    if (props.vertical && props.radioType === "button") {
+      throw new Error(
+        "[RadioGroup Component Error]: Vertical property cannot exist with radiotype='button'"
+      );
+      return;
+    }
+
+    state.firstRadioKey = defaults[0].key as number;
+    state.lastRadioKey = defaults[defaults.length - 1].key as number;
 
     setCurrrentValue();
 

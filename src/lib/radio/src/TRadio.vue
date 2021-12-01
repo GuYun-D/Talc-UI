@@ -7,6 +7,7 @@
   >
     <label>
       <span
+        v-if="!isButton"
         :class="{ 't-radio-instructions-disabled': disabled }"
         :style="{
           width: radioSize + 'px',
@@ -15,7 +16,17 @@
         @click="setRaio"
         class="t-radio-instructions"
       ></span>
-      <span @click="setRaio" :class="{ 't-radio-text-disabled': disabled }">
+      <span
+        @click="setRaio"
+        :class="{
+          't-radio-text-disabled': disabled,
+          't-radio-button': isButton,
+          't-radio-first-radio': isFirstRadio,
+          't-radio-last-radio': isLastRadio,
+        }"
+        style="t-radio-label-text"
+        ref="labelRef"
+      >
         {{ option && option.label }}
       </span>
       <input class="t-radio-inp" type="radio" :disabled="disabled" />
@@ -80,12 +91,15 @@ export default defineComponent({
   },
   setup(props: IRadioProps, { emit }) {
     const state = reactive({
-      thisKey: null,
       radioState: false,
       isRadioGroup: false,
+      isButton: false,
+      isFirstRadio: false,
+      isLastRadio: false,
     });
 
     const TRadioRef = ref<HTMLDivElement>();
+    const labelRef = ref<HTMLSpanElement>();
 
     /**
      * 获取当前组件的实例
@@ -101,7 +115,7 @@ export default defineComponent({
     // let radioState = ref(thisKey === parentKey.value);
 
     // radio的点击事件
-    const setRaio = () => {
+    const setRaio = ($event: MouseEvent) => {
       if (props.disabled) return;
       state.radioState = !state.radioState;
       let checkedValue = state.radioState ? props.option.value : "";
@@ -123,7 +137,22 @@ export default defineComponent({
         TRadioRef.value.style.borderColor = "";
         TRadioRef.value.style.color = "";
       }
+
+      // 获取事件源对象
+      let el = $event.target as HTMLSpanElement;
+      if (el.className.includes("t-radio-button") && state.radioState) {
+        el.style.color = "#fff";
+      }
     };
+
+    watch(
+      () => state.radioState,
+      (value) => {
+        if (!value) {
+          labelRef.value.style.color = "";
+        }
+      }
+    );
 
     const sizes = {
       big: 18,
@@ -141,6 +170,7 @@ export default defineComponent({
       if (props.border) {
         TRadioRef.value.addEventListener("click", setRaio);
       }
+
       if (state.isRadioGroup) {
         parentKey = getParentCurrentKey();
 
@@ -152,6 +182,20 @@ export default defineComponent({
         );
 
         state.radioState = thisKey === parentKey.value;
+
+        // 获取父组件的radio样式
+        // @ts-ignore
+        state.isButton = instance.parent.ctx.radioType === "button";
+
+        if (state.isButton) {
+          state.isFirstRadio =
+            // @ts-ignore
+            thisKey === instance.parent.ctx.firstRadioKey;
+
+          state.isLastRadio =
+            // @ts-ignore
+            thisKey === instance.parent.ctx.lastRadioKey;
+        }
       }
     });
 
@@ -162,14 +206,13 @@ export default defineComponent({
       });
     }
 
-    return { setRaio, radioSize, ...toRefs(state), TRadioRef };
+    return { setRaio, radioSize, ...toRefs(state), TRadioRef, labelRef };
   },
 });
 </script>
 
 <style scoped lang="scss">
 .t-radio {
-  margin: 5px;
   display: inline-flex;
 
   &.t-radio-border {
@@ -188,6 +231,22 @@ export default defineComponent({
       cursor: pointer;
       color: inherit;
       transition: background-color 0.3s;
+
+      &.t-radio-button {
+        padding: 10px;
+        border: 1px solid #c0c4cc;
+        margin: 0;
+        border-right: none;
+
+        &.t-radio-first-radio {
+          border-radius: 4px 0 0 4px;
+        }
+
+        &.t-radio-last-radio {
+          border-radius: 0 4px 4px 0;
+          border-right: 1px solid #c0c4cc;
+        }
+      }
     }
 
     .t-radio-instructions {
@@ -221,7 +280,7 @@ export default defineComponent({
     }
 
     .t-radio-inp {
-      opacity: 0;
+      display: none;
     }
   }
 }
