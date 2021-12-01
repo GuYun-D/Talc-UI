@@ -15,7 +15,7 @@
     </div>
 
     <div>
-      <t-radio-group v-model="checked">
+      <t-radio-group v-model="checked" :vertical="true">
         <t-radio
           v-for="(item, index) in options"
           :key="index"

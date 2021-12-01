@@ -1,5 +1,10 @@
 <template>
-  <div class="t-radio-group">
+  <div
+    class="t-radio-group"
+    :class="{
+      't-radio-vertical': vertical,
+    }"
+  >
     <slot></slot>
   </div>
 </template>
@@ -15,6 +20,10 @@ export default defineComponent({
   emits: ["update:modelValue"],
   props: {
     modelValue: AllType,
+    vertical: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, { slots, emit }) {
     if (!slots.default) {
@@ -54,7 +63,7 @@ export default defineComponent({
       if (value && radioKey !== undefined) {
         state.currentKey = radioKey;
         state.currentValue = value;
-        emit('update:modelValue', value)
+        emit("update:modelValue", value);
       }
     };
 
@@ -65,5 +74,11 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.t-radio-group {
+  &.t-radio-vertical {
+    display: flex;
+    flex-direction: column;
+  }
+}
 </style>
