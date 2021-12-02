@@ -41,6 +41,9 @@ export const siderConfig = [
       }, {
         name: 'radio 单选',
         url: 'radio'
+      }, {
+        name: "input number 计数器",
+        url: "input-number"
       }
     ]
   },

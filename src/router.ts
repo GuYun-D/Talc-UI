@@ -23,6 +23,7 @@ import Rate from "../src/components/rateDemo/RateDemo.vue"
 import Card from "../src/components/cardDemo/cardDemo.vue"
 import Select from '../src/components/selectDemo/SelectDemo.vue'
 import Radio from '../src/components/radioDemo/RadioDemo.vue'
+import InputNumber from "../src/components/inputNumberDemo/InputNumberDemo.vue"
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -116,6 +117,9 @@ export const router = createRouter({
         }, {
           path: 'radio',
           component: Radio
+        }, {
+          path: 'input-number',
+          component: InputNumber
         }
       ],
     },
