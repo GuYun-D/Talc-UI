@@ -1,56 +1,56 @@
 <template>
   <div>
     <h1>radio 单选</h1>
-    <div>
-      <t-radio
-        :option="{
-          label: '哈哈哈',
-          value: '12345',
-        }"
-        v-model="tySelect"
-        :border="true"
-      ></t-radio>
 
-      {{ tySelect }}
-    </div>
+    <Demo :component="Radio1Demo"></Demo>
 
-    <div>
-      <t-radio-group v-model="checked" :vertical="false" radio-type="button">
-        <t-radio
-          v-for="(item, index) in options"
-          :key="index"
-          :option="item"
-        ></t-radio>
-      </t-radio-group>
-    </div>
+    <Demo :component="Radio2Demo"></Demo>
+
+    <Demo :component="Radio3Demo"></Demo>
+
+    <Demo :component="Radio4Demo"></Demo>
+
+    <Demo :component="Radio5Demo"></Demo>
+
+    <Demo :component="Radio6Demo"></Demo>
+
+    <Attribute :attributeConfig="radioPropsConfig"></Attribute>
+    <Attribute :attributeConfig="radioGroupPropsConfig"></Attribute>
+    <Event :eventConfig="attributeEventConfig"></Event>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import Demo from "../Demo.vue";
+import Radio1Demo from "./demo/radio1.demo.vue";
+import Radio2Demo from "./demo/radio2.demo.vue";
+import Radio3Demo from "./demo/radio3.demo.vue";
+import Radio4Demo from "./demo/radio4.demo.vue";
+import Radio5Demo from "./demo/radio5.demo.vue";
+import Radio6Demo from "./demo/radio6.demo.vue";
+import {
+  radioGroupPropsConfig,
+  radioPropsConfig,
+  attributeEventConfig,
+} from "./config";
 
 export default defineComponent({
+  components: {
+    Demo,
+  },
   setup() {
-    let checked = ref();
-
-    const options = [
-      {
-        label: "男",
-        value: "male",
-      },
-      {
-        label: "女",
-        value: "female",
-      },
-      {
-        label: "人妖",
-        value: "male && female",
-      },
-    ];
-
-    let tySelect = ref();
-
-    return { checked, options, tySelect };
+    return {
+      Radio1Demo,
+      Radio2Demo,
+      Radio3Demo,
+      Radio4Demo,
+      Radio5Demo,
+      Radio6Demo,
+      radioGroupPropsConfig,
+      radioPropsConfig,
+      attributeEventConfig,
+    };
   },
 });
 </script>

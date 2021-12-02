@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 import TRadio from "../../radio";
 import { AllType } from "../../radio/src/type";
 
 export default defineComponent({
   name: "t-radio-group",
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   props: {
     modelValue: AllType,
     vertical: {
@@ -69,6 +69,7 @@ export default defineComponent({
         state.currentKey = radioKey;
         state.currentValue = value;
         emit("update:modelValue", value);
+        emit("change", value);
       }
     };
 

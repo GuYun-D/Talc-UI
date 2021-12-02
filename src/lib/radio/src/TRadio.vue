@@ -53,7 +53,7 @@ import TRadioGroup from "../../radio-group";
 
 export default defineComponent({
   name: "t-radio",
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   props: {
     modelValue: AllType,
     disabled: {
@@ -120,6 +120,7 @@ export default defineComponent({
       state.radioState = !state.radioState;
       let checkedValue = state.radioState ? props.option.value : "";
       emit("update:modelValue", checkedValue);
+      emit("change", checkedValue);
 
       if (state.isRadioGroup) {
         /**
@@ -272,6 +273,7 @@ export default defineComponent({
 
       &.t-radio-instructions-disabled {
         background-color: #e7e7e7 !important;
+        cursor: not-allowed;
       }
     }
 
