@@ -1,15 +1,17 @@
 <template>
   <div>
-    <t-input-number></t-input-number>
+    <t-input-number v-model="number"></t-input-number>
+    当前值： {{ number }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const number = ref(0);
+    return { number };
   },
 });
 </script>

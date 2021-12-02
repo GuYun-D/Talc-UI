@@ -3,7 +3,14 @@
     class="t-input-number-button"
     :class="{ 't-inpur-number-decrease': icon == 'decrease' }"
   >
-    {{ icon === "add" ? "+" : "-" }}
+    <span
+      class="talc"
+      :class="{
+        'ta-zengjia': icon === 'add',
+        'ta-jian': icon === 'decrease',
+      }"
+      @click="btnClick"
+    ></span>
   </div>
 </template>
 
@@ -12,14 +19,18 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "t-input-number-button",
+  emits: ["update:value"],
   props: {
     icon: {
       type: String,
       default: "add",
     },
   },
-  setup() {
-    return {};
+  setup(props, { emit }) {
+    const btnClick = () => {
+      emit("update:value", props.icon);
+    };
+    return { btnClick };
   },
 });
 </script>
