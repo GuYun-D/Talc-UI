@@ -1,5 +1,12 @@
 export interface IInputNumberProps {
   modelValue: number
+  disabled: boolean
+}
+
+export interface IInputButtonProps {
+  disabled: boolean
+  icon: ETag
+
 }
 
 export interface IMouseInfo {

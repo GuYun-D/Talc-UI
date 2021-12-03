@@ -1,7 +1,11 @@
 <template>
   <div
     class="t-input-number-button"
-    :class="{ 't-inpur-number-decrease': icon == 'decrease' }"
+    :class="{
+      't-inpur-number-decrease': icon == 'decrease',
+      't-input-number-button-disabled': disabled,
+    }"
+    @click="btnClick"
     @mousemove="mouseOp(EMouseTag.enter)"
     @mouseleave="mouseOp(EMouseTag.out)"
   >
@@ -11,14 +15,13 @@
         'ta-zengjia': icon === 'add',
         'ta-jian': icon === 'decrease',
       }"
-      @click="btnClick"
     ></span>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { EMouseTag } from "../types";
+import { EMouseTag, IInputButtonProps } from "../types";
 
 export default defineComponent({
   name: "t-input-number-button",
@@ -28,8 +31,9 @@ export default defineComponent({
       type: String,
       default: "add",
     },
+    disabled: Boolean,
   },
-  setup(props, { emit }) {
+  setup(props: IInputButtonProps, { emit }) {
     const btnClick = () => {
       emit("update:value", props.icon);
     };
@@ -47,14 +51,22 @@ export default defineComponent({
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 100%;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   cursor: pointer;
-  border-right: 1px solid #666;
+  border-right: 1px solid #b1b1b1;
 
   &.t-inpur-number-decrease {
     border: none;
-    border-left: 1px solid #666;
+    border-left: 1px solid #b1b1b1;
   }
+
+  &.t-input-number-button-disabled {
+    background-color: #eaeaea;
+    cursor: not-allowed;
+    color: #c5c5c5;
+  }
+
 }
 </style>
