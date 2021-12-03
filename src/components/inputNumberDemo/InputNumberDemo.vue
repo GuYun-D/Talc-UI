@@ -4,6 +4,7 @@
       v-model="number"
       :disabled="false"
       :step="5"
+      :step-strictly="false"
     ></t-input-number>
     当前值： {{ number }}
   </div>

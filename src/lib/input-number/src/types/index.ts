@@ -2,6 +2,7 @@ export interface IInputNumberProps {
   modelValue: number
   disabled: boolean
   step: number
+  stepStrictly: boolean
 }
 
 export interface IInputButtonProps {

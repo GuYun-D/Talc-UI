@@ -47,13 +47,17 @@ export default defineComponent({
       type: Number,
       default: 1,
     },
+    stepStrictly: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     TInputNumberButton,
   },
   setup(props: IInputNumberProps, { emit }) {
     const state = reactive({
-      value: props.modelValue,
+      value: props.modelValue * 1,
       borderVisible: false,
       isFocus: false,
     });
@@ -62,20 +66,25 @@ export default defineComponent({
       if (props.disabled) return;
       switch (tag) {
         case ETag.add:
-          state.value = state.value + props.step;
-          emit("update:modelValue", state.value);
+          state.value = state.value * 1 + props.step;
+
+          emit("update:modelValue", state.value * 1);
           break;
 
         case ETag.decrease:
-          state.value = state.value - props.step;
-          emit("update:modelValue", state.value);
+          state.value = state.value * 1 - props.step;
+          emit("update:modelValue", state.value * 1);
           break;
       }
     };
 
     const changeBorder = (mouseInfo: IMouseInfo) => {
       if (state.value !== props.modelValue) {
-        emit("update:modelValue", +state.value);
+        if (props.stepStrictly) {
+          emit("update:modelValue", state.value * 1);
+        }
+
+        emit("update:modelValue", state.value * 1);
       }
 
       if (mouseInfo.type === "btn") {
@@ -90,8 +99,29 @@ export default defineComponent({
       }
     };
 
+    /**
+     * 控制外border的显示与隐藏
+     */
     function changeRootShadow(tag: EMouseTag) {
       state.borderVisible = tag === EMouseTag.enter;
+    }
+
+    /**
+     * 当step strictly 是ture时，保证当前value是step的倍数
+     * @param  value 原始数值
+     * @returns  最终的数值
+     */
+    function handleStepStrictly(value: number): number {
+      let finalNum = 0;
+      let result = (value / props.step) * 10;
+      let intNum = parseInt(result / 10 + "");
+      let flotNum = result % 10;
+
+      if (flotNum && flotNum >= 5) {
+        finalNum = (intNum + 1) * props.step;
+      }
+      finalNum = intNum * props.step;
+      return finalNum;
     }
 
     return { ...toRefs(state), updateModelValue, changeBorder };
