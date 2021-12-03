@@ -1,6 +1,10 @@
 <template>
   <div>
-    <t-input-number v-model="number" :disabled="true"></t-input-number>
+    <t-input-number
+      v-model="number"
+      :disabled="false"
+      :step="5"
+    ></t-input-number>
     当前值： {{ number }}
   </div>
 </template>

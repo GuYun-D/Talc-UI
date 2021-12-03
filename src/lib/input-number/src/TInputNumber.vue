@@ -43,6 +43,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    step: {
+      type: Number,
+      default: 1,
+    },
   },
   components: {
     TInputNumberButton,
@@ -58,11 +62,13 @@ export default defineComponent({
       if (props.disabled) return;
       switch (tag) {
         case ETag.add:
-          emit("update:modelValue", ++state.value);
+          state.value = state.value + props.step;
+          emit("update:modelValue", state.value);
           break;
 
         case ETag.decrease:
-          emit("update:modelValue", --state.value);
+          state.value = state.value - props.step;
+          emit("update:modelValue", state.value);
           break;
       }
     };
