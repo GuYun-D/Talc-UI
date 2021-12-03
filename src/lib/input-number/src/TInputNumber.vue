@@ -9,7 +9,7 @@
     ></TInputNumberButton>
     <input
       type="text"
-      :value="value"
+      v-model="value"
       @focus="changeBorder({ type: 'input', tag: 'enter' })"
       @blur="changeBorder({ type: 'input', tag: 'out' })"
     />
@@ -55,6 +55,10 @@ export default defineComponent({
     };
 
     const changeBorder = (mouseInfo: IMouseInfo) => {
+      if (state.value !== props.modelValue) {
+        emit("update:modelValue", +state.value);
+      }
+
       if (mouseInfo.type === "btn") {
         if (!state.isFocus) {
           changeRootShadow(mouseInfo.tag);
