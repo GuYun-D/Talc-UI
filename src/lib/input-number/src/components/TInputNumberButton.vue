@@ -2,6 +2,8 @@
   <div
     class="t-input-number-button"
     :class="{ 't-inpur-number-decrease': icon == 'decrease' }"
+    @mousemove="mouseOp(EMouseTag.enter)"
+    @mouseleave="mouseOp(EMouseTag.out)"
   >
     <span
       class="talc"
@@ -16,10 +18,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { EMouseTag } from "../types";
 
 export default defineComponent({
   name: "t-input-number-button",
-  emits: ["update:value"],
+  emits: ["update:value", "change:border"],
   props: {
     icon: {
       type: String,
@@ -30,7 +33,11 @@ export default defineComponent({
     const btnClick = () => {
       emit("update:value", props.icon);
     };
-    return { btnClick };
+
+    const mouseOp = (tag: EMouseTag) => {
+      emit("change:border", { type: "btn", tag: tag });
+    };
+    return { btnClick, mouseOp, EMouseTag };
   },
 });
 </script>
