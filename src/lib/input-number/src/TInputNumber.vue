@@ -83,29 +83,24 @@ export default defineComponent({
       switch (tag) {
         case ETag.add:
           state.value = state.value * 1 + props.step;
-          limitValue(state.value);
-          emit("update:modelValue", state.value * 1);
+          sentToFatherComponent();
           break;
 
         case ETag.decrease:
           state.value = state.value * 1 - props.step;
-          limitValue(state.value);
-          emit("update:modelValue", state.value * 1);
+          sentToFatherComponent();
+
           break;
       }
     };
-  
 
     const changeBorder = (mouseInfo: IMouseInfo) => {
       if (state.value !== props.modelValue) {
         if (props.stepStrictly) {
           state.value = handleStepStrictly(state.value);
-          limitValue(state.value);
-          emit("update:modelValue", state.value * 1);
+          sentToFatherComponent();
         }
-
-        limitValue(state.value);
-        emit("update:modelValue", state.value * 1);
+        sentToFatherComponent();
       }
 
       if (mouseInfo.type === "btn") {
@@ -153,10 +148,19 @@ export default defineComponent({
       if (props.min && value < props.min) {
         res = props.min;
       }
+
       if (props.max && value > props.max) {
         res = props.max;
       }
       state.value = res;
+    }
+
+    /**
+     * 发送事件，通知父组件，数值发生修改
+     */
+    function sentToFatherComponent() {
+      limitValue(state.value);
+      emit("update:modelValue", state.value * 1);
     }
 
     return { ...toRefs(state), updateModelValue, changeBorder };
