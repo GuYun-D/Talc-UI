@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 import { EMouseTag, IInputButtonProps } from "../types";
 
 export default defineComponent({
@@ -63,10 +63,9 @@ export default defineComponent({
   }
 
   &.t-input-number-button-disabled {
-    background-color: #eaeaea;
+    background-color: rgba(234, 235, 234, 0.52);
     cursor: not-allowed;
     color: #c5c5c5;
   }
-
 }
 </style>

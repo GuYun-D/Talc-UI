@@ -9,6 +9,7 @@
       :max="30"
     ></t-input-number>
     当前值： {{ number }}
+    
   </div>
 </template>
 

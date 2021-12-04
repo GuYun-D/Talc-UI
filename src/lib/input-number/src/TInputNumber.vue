@@ -6,7 +6,7 @@
     }"
   >
     <TInputNumberButton
-      :disabled="disabled"
+      :disabled="leftBtnOperability"
       @change:border="changeBorder"
       @update:value="updateModelValue"
     ></TInputNumberButton>
@@ -21,24 +21,18 @@
       @blur="changeBorder({ type: 'input', tag: 'out' })"
     />
     <TInputNumberButton
-      :disabled="disabled"
-      @update:value="updateModelValue"
+      :disabled="rightBtnOperability"
       icon="decrease"
+      @update:value="updateModelValue"
       @change:border="changeBorder"
     ></TInputNumberButton>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { computed, defineComponent, reactive, toRefs, watch } from "vue";
 import TInputNumberButton from "./components/TInputNumberButton.vue";
-import {
-  IInputNumberProps,
-  ETag,
-  EMouseTag,
-  IMouseInfo,
-  EMaxMin,
-} from "./types";
+import { IInputNumberProps, ETag, EMouseTag, IMouseInfo } from "./types";
 
 export default defineComponent({
   name: "t-input-number",
@@ -74,6 +68,8 @@ export default defineComponent({
       value: props.modelValue * 1,
       borderVisible: false,
       isFocus: false,
+      leftBtnOperability: props.disabled,
+      rightBtnOperability: props.disabled,
     });
 
     limitValue(state.value);
@@ -145,21 +141,35 @@ export default defineComponent({
      */
     function limitValue(value: number) {
       let res = value;
-      if (props.min && value < props.min) {
+      if (props.min && value <= props.min) {
         res = props.min;
+        state.rightBtnOperability = true;
       }
 
-      if (props.max && value > props.max) {
+      if (props.max && value >= props.max) {
         res = props.max;
+        state.leftBtnOperability = true;
       }
       state.value = res;
     }
 
     /**
      * 发送事件，通知父组件，数值发生修改
+     * 根据当前state.value设置当前按钮的可操作性
      */
     function sentToFatherComponent() {
       limitValue(state.value);
+
+      state.leftBtnOperability =
+        state.leftBtnOperability && state.value < props.max
+          ? false
+          : state.leftBtnOperability;
+
+      state.rightBtnOperability =
+        state.rightBtnOperability && state.value > props.min
+          ? false
+          : state.rightBtnOperability;
+
       emit("update:modelValue", state.value * 1);
     }
 
@@ -193,7 +203,7 @@ export default defineComponent({
 
     &.t-input-number-disabled {
       cursor: not-allowed;
-      background-color: #eaeaea;
+      background-color: rgba(234, 235, 234, 0.52);
       color: #c5c5c5;
     }
   }
