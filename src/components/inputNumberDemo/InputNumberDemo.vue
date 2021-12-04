@@ -5,6 +5,8 @@
       :disabled="false"
       :step="5"
       :step-strictly="false"
+      :min="10"
+      :max="30"
     ></t-input-number>
     当前值： {{ number }}
   </div>

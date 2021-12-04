@@ -3,6 +3,8 @@ export interface IInputNumberProps {
   disabled: boolean
   step: number
   stepStrictly: boolean
+  max: number
+  min: number
 }
 
 export interface IInputButtonProps {
@@ -24,4 +26,9 @@ export enum ETag {
 export enum EMouseTag {
   enter = "enter",
   out = "out"
+}
+
+export enum EMaxMin {
+  max = "max",
+  min = "min"
 }

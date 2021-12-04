@@ -32,7 +32,13 @@
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
 import TInputNumberButton from "./components/TInputNumberButton.vue";
-import { IInputNumberProps, ETag, EMouseTag, IMouseInfo } from "./types";
+import {
+  IInputNumberProps,
+  ETag,
+  EMouseTag,
+  IMouseInfo,
+  EMaxMin,
+} from "./types";
 
 export default defineComponent({
   name: "t-input-number",
@@ -51,6 +57,14 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    max: {
+      type: Number,
+      default: null,
+    },
+    min: {
+      type: Number,
+      default: null,
+    },
   },
   components: {
     TInputNumberButton,
@@ -62,28 +76,35 @@ export default defineComponent({
       isFocus: false,
     });
 
+    limitValue(state.value);
+
     const updateModelValue = (tag: string) => {
       if (props.disabled) return;
       switch (tag) {
         case ETag.add:
           state.value = state.value * 1 + props.step;
-
+          limitValue(state.value);
           emit("update:modelValue", state.value * 1);
           break;
 
         case ETag.decrease:
           state.value = state.value * 1 - props.step;
+          limitValue(state.value);
           emit("update:modelValue", state.value * 1);
           break;
       }
     };
+  
 
     const changeBorder = (mouseInfo: IMouseInfo) => {
       if (state.value !== props.modelValue) {
         if (props.stepStrictly) {
+          state.value = handleStepStrictly(state.value);
+          limitValue(state.value);
           emit("update:modelValue", state.value * 1);
         }
 
+        limitValue(state.value);
         emit("update:modelValue", state.value * 1);
       }
 
@@ -122,6 +143,20 @@ export default defineComponent({
       }
       finalNum = intNum * props.step;
       return finalNum;
+    }
+
+    /**
+     * 限制当前的值的范围
+     */
+    function limitValue(value: number) {
+      let res = value;
+      if (props.min && value < props.min) {
+        res = props.min;
+      }
+      if (props.max && value > props.max) {
+        res = props.max;
+      }
+      state.value = res;
     }
 
     return { ...toRefs(state), updateModelValue, changeBorder };
