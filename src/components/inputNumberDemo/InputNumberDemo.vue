@@ -16,6 +16,8 @@
     <Demo :component="InputNumber5Demo"></Demo>
 
     <attribute :attributeConfig="attributeConfig"></attribute>
+
+    <Event :eventConfig="attributeEventConfig"></Event>
   </div>
 </template>
 
@@ -28,6 +30,7 @@ import InputNumber3Demo from "./Demo/inputNumber3.demo.vue";
 import InputNumber4Demo from "./Demo/inputNumber4.demo.vue";
 import InputNumber5Demo from "./Demo/inputNumber5.demo.vue";
 import { attributeConfig } from "./config/attribute.config";
+import { attributeEventConfig } from "./config/event.config";
 
 export default defineComponent({
   components: {
@@ -40,7 +43,8 @@ export default defineComponent({
       InputNumber3Demo,
       InputNumber4Demo,
       InputNumber5Demo,
-      attributeConfig
+      attributeConfig,
+      attributeEventConfig,
     };
   },
 });

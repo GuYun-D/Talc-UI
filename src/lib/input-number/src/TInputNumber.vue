@@ -11,6 +11,7 @@
       @update:value="updateModelValue"
     ></TInputNumberButton>
     <input
+      ref="inputRef"
       type="text"
       v-model="value"
       :class="{
@@ -19,6 +20,7 @@
       :readonly="disabled"
       @focus="changeBorder({ type: 'input', tag: 'enter' })"
       @blur="changeBorder({ type: 'input', tag: 'out' })"
+      @keyup.enter="confirmValue"
     />
     <TInputNumberButton
       :disabled="rightBtnOperability"
@@ -30,13 +32,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs, watch } from "vue";
+import { defineComponent, reactive, ref, toRefs, watch } from "vue";
 import TInputNumberButton from "./components/TInputNumberButton.vue";
 import { IInputNumberProps, ETag, EMouseTag, IMouseInfo } from "./types";
 
 export default defineComponent({
   name: "t-input-number",
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   props: {
     modelValue: Number,
     disabled: {
@@ -71,6 +73,8 @@ export default defineComponent({
       leftBtnOperability: props.disabled,
       rightBtnOperability: props.disabled,
     });
+
+    const inputRef = ref<HTMLInputElement>();
 
     limitValue(state.value);
 
@@ -154,6 +158,14 @@ export default defineComponent({
     }
 
     /**
+     * 键入确定
+     */
+    const confirmValue = () => {
+      if (props.disabled) return;
+      changeBorder({ type: "input", tag: EMouseTag.out });
+    };
+
+    /**
      * 发送事件，通知父组件，数值发生修改
      * 根据当前state.value设置当前按钮的可操作性
      */
@@ -171,9 +183,16 @@ export default defineComponent({
           : state.rightBtnOperability;
 
       emit("update:modelValue", state.value * 1);
+      emit("change", state.value * 1);
     }
 
-    return { ...toRefs(state), updateModelValue, changeBorder };
+    return {
+      ...toRefs(state),
+      updateModelValue,
+      changeBorder,
+      confirmValue,
+      inputRef,
+    };
   },
 });
 </script>
