@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, reactive, toRefs, watch } from "vue";
+import { defineComponent, reactive, toRefs, watch } from "vue";
 import TInputNumberButton from "./components/TInputNumberButton.vue";
 import { IInputNumberProps, ETag, EMouseTag, IMouseInfo } from "./types";
 
