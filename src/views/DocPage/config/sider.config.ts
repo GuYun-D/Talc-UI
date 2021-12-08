@@ -51,8 +51,11 @@ export const siderConfig = [
     titleName: "data",
     list: [
       {
-        name: "tab 标签",
+        name: "tab 栏",
         url: 'tabs'
+      }, {
+        name: "tag 标签",
+        url: "tag"
       }
     ]
   },

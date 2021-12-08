@@ -24,6 +24,7 @@ import Card from "../src/components/cardDemo/cardDemo.vue"
 import Select from '../src/components/selectDemo/SelectDemo.vue'
 import Radio from '../src/components/radioDemo/RadioDemo.vue'
 import InputNumber from "../src/components/inputNumberDemo/InputNumberDemo.vue"
+import Tag from "../src/components/tagDemo/TagDemo.vue"
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -120,6 +121,9 @@ export const router = createRouter({
         }, {
           path: 'input-number',
           component: InputNumber
+        }, {
+          path: "tag",
+          component: Tag
         }
       ],
     },
