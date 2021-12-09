@@ -7,6 +7,8 @@
     <t-tag type="danger">1234</t-tag>
     <t-tag type="info">34567</t-tag>
     <t-tag type="warning">6789</t-tag>
+
+    <t-tag-input></t-tag-input>
   </div>
 </template>
 

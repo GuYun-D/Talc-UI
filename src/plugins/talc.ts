@@ -22,6 +22,7 @@ import TRadio from '../lib/radio'
 import TRadioGroup from '../lib/radio-group'
 import TInputNumber from "../lib/input-number"
 import TTag from '../lib/tag'
+import TTagInput from '../lib/tag-input'
 
 const talcArr = [
   TLayout,
@@ -47,7 +48,8 @@ const talcArr = [
   TRadio,
   TRadioGroup,
   TInputNumber,
-  TTag
+  TTag,
+  TTagInput
 ]
 
 export { talcArr }
