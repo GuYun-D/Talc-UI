@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="addBtnRef"
     class="t-tag-input"
     :class="isFocus ? 't-tag-border' : 't-tag-none'"
     @click="addNewTag"
@@ -20,12 +21,14 @@ import { defineComponent, reactive, toRefs, ref, nextTick, watch } from "vue";
 
 export default defineComponent({
   name: "t-tag-input",
-  setup() {
+  setup(props, { emit }) {
     const newInputRef = ref<HTMLInputElement>();
+    const addBtnRef = ref<HTMLDivElement>();
 
     const state = reactive({
       currentType: "span",
       isFocus: false,
+      isAdd: true,
     });
 
     /**
@@ -46,16 +49,11 @@ export default defineComponent({
       state.isFocus = false;
       state.currentType = "span";
       if (newInputRef.value.value) {
-        _addNewTag(newInputRef.value.value);
+        emit("addTag", newInputRef.value.value);
       }
 
       newInputRef.value.value = "";
     };
-
-    /**
-     * @param value 要添加的内容
-     */
-    function _addNewTag(value: string) {}
 
     return {
       ...toRefs(state),
