@@ -56,6 +56,9 @@ export const siderConfig = [
       }, {
         name: "tag 标签",
         url: "tag"
+      }, {
+        name: "progress 进度条",
+        url: "progress"
       }
     ]
   },

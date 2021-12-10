@@ -25,6 +25,7 @@ import Select from '../src/components/selectDemo/SelectDemo.vue'
 import Radio from '../src/components/radioDemo/RadioDemo.vue'
 import InputNumber from "../src/components/inputNumberDemo/InputNumberDemo.vue"
 import Tag from "../src/components/tagDemo/TagDemo.vue"
+import Progress from "../src/components/progressDemo/ProgressDemo.vue"
 
 const mdPath = (string) => h(Markdown, { content: string, key: string });
 
@@ -124,6 +125,9 @@ export const router = createRouter({
         }, {
           path: "tag",
           component: Tag
+        }, {
+          path: 'progress',
+          component: Progress
         }
       ],
     },

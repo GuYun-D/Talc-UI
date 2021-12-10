@@ -23,6 +23,7 @@ import TRadioGroup from '../lib/radio-group'
 import TInputNumber from "../lib/input-number"
 import TTag from '../lib/tag'
 import TTagInput from '../lib/tag-input'
+import TProgress from '../lib/progress-bar'
 
 const talcArr = [
   TLayout,
@@ -49,7 +50,8 @@ const talcArr = [
   TRadioGroup,
   TInputNumber,
   TTag,
-  TTagInput
+  TTagInput,
+  TProgress
 ]
 
 export { talcArr }
