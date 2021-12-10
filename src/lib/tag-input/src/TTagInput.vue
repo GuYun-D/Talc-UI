@@ -12,6 +12,7 @@
       type="text"
       class="t-tag-new-input"
       @blur="tagInputBlur"
+      @keyup.enter="tagInputBlur"
     />
   </div>
 </template>
