@@ -8,6 +8,11 @@
     :class="{ 't-tag-disabled': disabled }"
     v-if="tagVisiable"
   >
+    <span
+      v-if="icon"
+      class="talc t-tag-icon"
+      :class="`ta-${icon}`"
+    ></span>
     <slot></slot>
     <span class="talc ta-delete clear-btn" @click="closeTag"></span>
   </div>
@@ -40,6 +45,7 @@ export default defineComponent({
       default: false,
     },
     disabled: Boolean,
+    icon: String,
   },
   setup(props: ITagProps, { emit }) {
     const state = reactive({
@@ -94,12 +100,16 @@ export default defineComponent({
   border-radius: 4px;
   transition: all 300ms;
 
+  .t-tag-icon{
+    margin: 0 2px;
+  }
+
   &.t-tag-disabled {
     opacity: 0.4;
     cursor: not-allowed;
 
-    .clear-btn{
-      &:hover{
+    .clear-btn {
+      &:hover {
         cursor: not-allowed;
       }
     }
