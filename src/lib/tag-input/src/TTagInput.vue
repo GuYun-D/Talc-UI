@@ -22,9 +22,8 @@ import { defineComponent, reactive, toRefs, ref, nextTick, watch } from "vue";
 
 export default defineComponent({
   name: "t-tag-input",
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     const newInputRef = ref<HTMLInputElement>();
-    const addBtnRef = ref<HTMLDivElement>();
 
     const state = reactive({
       currentType: "span",
@@ -73,6 +72,7 @@ export default defineComponent({
   align-items: center;
   height: 32px;
   width: 102px;
+  margin: 5px;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 4px;
   color: rgb(136, 136, 136);

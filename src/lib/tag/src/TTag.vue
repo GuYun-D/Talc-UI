@@ -14,7 +14,7 @@
       :class="`ta-${icon}`"
     ></span>
     <slot></slot>
-    <span class="talc ta-delete clear-btn" @click="closeTag"></span>
+    <span v-if="closeable" class="talc ta-delete clear-btn" @click="closeTag"></span>
   </div>
 </template>
 
@@ -96,6 +96,7 @@ export default defineComponent({
   align-items: center;
   height: 32px;
   padding: 8px;
+  margin: 5px;
   background-color: #f40;
   border-radius: 4px;
   transition: all 300ms;
