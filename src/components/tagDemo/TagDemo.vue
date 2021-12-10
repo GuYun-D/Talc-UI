@@ -3,7 +3,7 @@
     <h1>tag 标签</h1>
     <br />
     <t-tag @beforeTagClose="gfye">123</t-tag>
-    <t-tag type="success">1234</t-tag>
+    <t-tag type="success" :disabled="true">1234</t-tag>
     <t-tag type="danger">1234</t-tag>
     <t-tag type="info">34567</t-tag>
     <t-tag type="warning">6789</t-tag>

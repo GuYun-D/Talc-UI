@@ -3,6 +3,7 @@ export interface ITagProps {
   tagColor: string
   tagBgcolor: string
   closeable: boolean
+  disabled: boolean
 }
 
 export enum ETagType {

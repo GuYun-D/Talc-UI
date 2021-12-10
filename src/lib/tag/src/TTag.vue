@@ -5,6 +5,7 @@
       color: tagColor,
       backgroundColor: tagBgcolor,
     }"
+    :class="{ 't-tag-disabled': disabled }"
     v-if="tagVisiable"
   >
     <slot></slot>
@@ -38,6 +39,7 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    disabled: Boolean,
   },
   setup(props: ITagProps, { emit }) {
     const state = reactive({
@@ -60,7 +62,7 @@ export default defineComponent({
      */
     const closeTag = () => {
       emit("beforeTagClose", _close);
-      if (state.isImplement) return;
+      if (state.isImplement || props.disabled) return;
       state.tagVisiable = false;
     };
 
@@ -91,6 +93,17 @@ export default defineComponent({
   background-color: #f40;
   border-radius: 4px;
   transition: all 300ms;
+
+  &.t-tag-disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+
+    .clear-btn{
+      &:hover{
+        cursor: not-allowed;
+      }
+    }
+  }
 
   .clear-btn {
     cursor: pointer;
