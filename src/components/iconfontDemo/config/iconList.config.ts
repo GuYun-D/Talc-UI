@@ -192,5 +192,17 @@ export const iconListConfig: iconList[] = [
   {
     iconClass: "jian",
     taName: "ta-jian",
+  }, {
+    iconClass: "gantanhao",
+    taName: "ta-gantanhao",
+  }, {
+    iconClass: "chahao",
+    taName: "ta-chahao",
+  }, {
+    iconClass: "kongxinduigou",
+    taName: "ta-kongxinduigou",
+  }, {
+    iconClass: "xinxikongxin",
+    taName: "ta-xinxikongxin",
   },
 ];
