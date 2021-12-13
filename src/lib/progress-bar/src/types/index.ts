@@ -3,6 +3,7 @@ export interface IProgressProps {
   percentage: number
   status: string
   height: number
+  textInside: boolean
 }
 
 export interface ILineBarProps {
@@ -10,6 +11,7 @@ export interface ILineBarProps {
   statusColor: string
   height: number
   statusTipType: string
+  textInside: boolean
 }
 
 export enum EProgressType {

@@ -5,6 +5,7 @@
       :statusColor="statusColor"
       :height="height"
       :statusTipType="statusTipType"
+      :textInside="textInside"
     ></t-line-bar>
   </div>
 </template>
@@ -46,6 +47,11 @@ export default defineComponent({
       type: String,
       default: "normal",
     },
+
+    textInside: {
+      tpe: Boolean,
+      default: false
+    }
   },
 
   setup(props: IProgressProps) {

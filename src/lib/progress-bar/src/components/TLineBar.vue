@@ -3,8 +3,8 @@
     <div
       class="t-line-bar"
       :style="{
-        height: height + 'px',
-        borderRadius: height + 'px',
+        height: realHeight + 'px',
+        lineHeight: realHeight + 'px',
       }"
     >
       <div
@@ -13,7 +13,9 @@
           width: percentage + '%',
           backgroundColor: statusColor,
         }"
-      ></div>
+      >
+        <template v-if="textInside"> {{ percentage }}% </template>
+      </div>
     </div>
     <div class="t-progress-tip">
       <span
@@ -30,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, toRefs } from "vue";
 
 export default defineComponent({
   props: {
@@ -38,13 +40,14 @@ export default defineComponent({
     statusColor: String,
     height: Number,
     statusTipType: String,
+    textInside: Boolean,
   },
   setup(props) {
-    const state = reactive({});
+    const state = reactive({
+      realHeight: props.textInside ? 30 : props.height,
+    });
 
-    console.log(props.statusColor);
-
-    return {};
+    return { ...toRefs(state) };
   },
 });
 </script>
@@ -68,7 +71,11 @@ export default defineComponent({
       position: absolute;
       height: 100%;
       left: 0;
+      color: #fff;
+      padding-right: 10px;
+      text-align: right;
       transition: all 300ms;
+      border-radius: 1000px;
     }
   }
 }
