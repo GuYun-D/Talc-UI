@@ -45,7 +45,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-$mainColor: #42b983;
+$mainColor: #454d64;
 $borderColor: rgb(180, 176, 176);
 
 footer {
@@ -55,6 +55,7 @@ footer {
     width: 100%;
     .title {
       font-size: 30px;
+      color: $mainColor;
     }
 
     .attr-container {
@@ -73,7 +74,7 @@ footer {
           display: inline-block;
           width: 25%;
           min-width: 151px;
-          color: #474747;
+          color: $mainColor;
         }
       }
       .itemMain {

@@ -4,7 +4,7 @@
       <h4>{{ item.titleName }}</h4>
       <ul>
         <li v-for="componentItem in item.list" :key="componentItem.name">
-          <router-link :to="'/doc/'+componentItem.url">{{
+          <router-link :to="'/doc/' + componentItem.url">{{
             componentItem.name
           }}</router-link>
         </li>
@@ -60,15 +60,16 @@ $main: #4fc08d;
       padding-left: 25px;
       font-size: 16px;
       transition: all 250ms;
+      color: #454d64;
     }
 
     .router-link-active {
       display: block;
       width: 100%;
       height: 100%;
-      color: $main;
+      color: #fff;
       border-left: 5px solid #4fc08d;
-      background: #e8fff4;
+      background-color: rgba(0, 0, 0, 0.65);
     }
   }
 }

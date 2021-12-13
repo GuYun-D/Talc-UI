@@ -43,7 +43,6 @@ $fontColor: #fff;
   background: url("../assets/jhk-1633087632377.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  // background-color: rgb(26, 100, 19);
   height: 100%;
   .container {
     display: flex;
@@ -63,6 +62,7 @@ $fontColor: #fff;
 
       > h2 {
         color: $fontColor;
+        border-bottom: none;
       }
 
       > .actions {
@@ -158,6 +158,5 @@ $fontColor: #fff;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  // background: lightgreen;
 }
 </style>
