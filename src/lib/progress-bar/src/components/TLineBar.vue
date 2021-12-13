@@ -4,6 +4,7 @@
       class="t-line-bar"
       :style="{
         height: realHeight + 'px',
+        borderRadius: realHeight + 'px',
         lineHeight: realHeight + 'px',
       }"
     >

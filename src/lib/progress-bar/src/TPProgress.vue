@@ -1,7 +1,7 @@
 <template>
   <div class="t-progress">
     <t-line-bar
-      :percentage="percentage"
+      :percentage="value"
       :statusColor="statusColor"
       :height="height"
       :statusTipType="statusTipType"
@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, watch } from "vue";
 import { EProgressType, IProgressProps } from "./types";
 import TLineBar from "./components/TLineBar.vue";
 
@@ -50,8 +50,8 @@ export default defineComponent({
 
     textInside: {
       tpe: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   setup(props: IProgressProps) {
@@ -70,19 +70,23 @@ export default defineComponent({
     };
 
     const state = reactive({
-      value: 0,
+      value: props.percentage,
       statusColor: statusType[props.status] || "#409eff",
       statusTipType: statusTip[props.status] || "",
+      percentage: props.percentage,
     });
 
-    console.log(state.statusColor);
-
-    state.value =
-      props.percentage > 100
-        ? 100
-        : props.percentage < 0
-        ? 0
-        : props.percentage;
+    watch(
+      () => props.percentage,
+      (value: number) => {
+        if (value > 100) state.value = 100;
+        else if (value < 0) state.value = 0;
+        else state.value = value;
+      },
+      {
+        immediate: true,
+      }
+    );
 
     return {
       ...toRefs(state),
