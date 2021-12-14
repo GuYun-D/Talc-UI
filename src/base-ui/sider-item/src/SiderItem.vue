@@ -45,7 +45,9 @@ $main: #4fc08d;
     font-family: ItalianDemo;
     color: rgb(97, 97, 97);
     user-select: none;
+    border-bottom: 1px solid rgba(185, 185, 185, .2);
   }
+
   li {
     height: 40px;
     line-height: 40px;
@@ -58,7 +60,7 @@ $main: #4fc08d;
     > a {
       display: block;
       padding-left: 25px;
-      font-size: 16px;
+      font-size: 15px;
       transition: all 250ms;
       color: #454d64;
     }
@@ -67,10 +69,9 @@ $main: #4fc08d;
       display: block;
       width: 100%;
       height: 100%;
-      color: #fff;
-      border-left: 5px solid #4fc08d;
-      background-color: rgba(0, 0, 0, 0.65);
+      color: #4fc08d;
     }
   }
+
 }
 </style>

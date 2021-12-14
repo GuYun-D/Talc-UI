@@ -73,10 +73,9 @@ h2 {
   font-size: 15px;
   color: rgb(99, 97, 97);
   font-size: 14px;
-  padding: 0 0 0 30px;
   line-height: 2;
   margin: 20px 18px;
-  border-left: 6px solid #e6e6e6;
+  margin-left: 0;
   box-sizing: border-box;
 }
 .demo {
@@ -120,16 +119,16 @@ h2 {
   }
 }
 
-.token.tag {
-  color: #d6235f !important;
+.token.tag,
+.token.property {
+  color: #ff4483 !important;
 }
-
 .token.attr-name {
   color: #2691cf;
 }
 
 .token.attr-value {
-  color: #39ce52;
+  color: #59f874;
 }
 
 .token.keyword {
@@ -157,6 +156,10 @@ h2 {
   background-color: transparent !important;
 }
 
+.token.selector{
+  color: rgb(255, 131, 42);
+}
+
 .token,
 .string,
 .url {
@@ -167,6 +170,6 @@ pre {
   font-size: 15px;
   line-height: 1.2 !important;
   padding: 20px;
-  color: #fff;
+  color: rgb(198, 198, 198);
 }
 </style>

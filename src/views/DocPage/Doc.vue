@@ -75,7 +75,11 @@ $main: #4fc08d;
   }
   > main {
     flex-grow: 1;
-    padding: 16px;
+    padding: 16px 50px;
+
+    @media (max-width: 500px) {
+      padding: 16px;
+    }
 
     h2 {
       border-bottom: 1px solid #f40;
@@ -91,6 +95,7 @@ aside {
   left: 0;
   z-index: 1;
   padding-top: 66px;
+  padding-left: 10px;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
