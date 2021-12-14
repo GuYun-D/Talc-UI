@@ -7,6 +7,19 @@
       status="success"
     ></t-progress>
 
+    <t-progress
+      :percentage="count"
+      :textInside="true"
+      status="normal"
+      :loading="true"
+    ></t-progress>
+
+    <t-progress
+      :percentage="count"
+      :textInside="true"
+      status="warning"
+    ></t-progress>
+
     <t-button @click="setNum('add')">+</t-button>
     <t-button @click="setNum('inAdd')">-</t-button>
   </div>

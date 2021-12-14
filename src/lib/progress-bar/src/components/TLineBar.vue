@@ -16,6 +16,7 @@
         }"
       >
         <div v-if="textInside && percentage > 0">{{ percentage }}%</div>
+        <div v-if="loading" class="t-progress-loading"></div>
       </div>
     </div>
     <div class="t-progress-tip">
@@ -43,11 +44,16 @@ export default defineComponent({
     height: Number,
     statusTipType: String,
     textInside: Boolean,
+    loading: Boolean
   },
   setup(props: ILineBarProps) {
     const state = reactive({
       realHeight: props.textInside ? 30 : props.height,
     });
+
+    if(props.loading){
+
+    }
 
     return { ...toRefs(state) };
   },
@@ -77,6 +83,30 @@ export default defineComponent({
       text-align: right;
       transition: all 300ms;
       border-radius: 1000px;
+
+      .t-progress-loading {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        background-color: rgba(256, 256, 256, .2);
+        background: linear-gradient(
+          to right,
+          rgba(256, 256, 256)
+          rgba(256, 256, 256, .2),
+          rgba(256, 256, 256, .1),
+        );
+        animation: loading 1s linear infinite;
+      }
+
+      @keyframes loading {
+        0% {
+          width: 0%;
+        }
+        100% {
+          width: 100%;
+        }
+      }
 
       div {
         padding-right: 10px;

@@ -4,6 +4,7 @@ export interface IProgressProps {
   status: string
   height: number
   textInside: boolean
+  loading: boolean
 }
 
 export interface ILineBarProps {
@@ -12,6 +13,7 @@ export interface ILineBarProps {
   height: number
   statusTipType: string
   textInside: boolean
+  loading: boolean
 }
 
 export enum EProgressType {

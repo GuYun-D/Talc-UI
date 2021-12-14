@@ -6,6 +6,7 @@
       :height="height"
       :statusTipType="statusTipType"
       :textInside="textInside"
+      :loading="loading"
     ></t-line-bar>
   </div>
 </template>
@@ -38,7 +39,7 @@ export default defineComponent({
       required: true,
       validator: (value: number) => {
         if (value >= 0 && value <= 100) return true;
-        throw new Error("[Progress Component Error]: value out of range")
+        throw new Error("[Progress Component Error]: value out of range");
       },
     },
 
@@ -51,6 +52,11 @@ export default defineComponent({
 
     textInside: {
       tpe: Boolean,
+      default: false,
+    },
+
+    loading: {
+      type: Boolean,
       default: false,
     },
   },
