@@ -1,6 +1,6 @@
 export interface IProgressProps {
   type: string
-  modelValue: number
+  percentage: number
   status: string
   height: number
   textInside: boolean

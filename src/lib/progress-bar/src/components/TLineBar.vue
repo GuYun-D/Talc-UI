@@ -15,7 +15,7 @@
           backgroundColor: statusColor,
         }"
       >
-        <template v-if="textInside"> {{ percentage }}% </template>
+        <div v-if="textInside && percentage > 0">{{ percentage }}%</div>
       </div>
     </div>
     <div class="t-progress-tip">
@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from "vue";
+import { ILineBarProps } from "../types";
 
 export default defineComponent({
   props: {
@@ -43,7 +44,7 @@ export default defineComponent({
     statusTipType: String,
     textInside: Boolean,
   },
-  setup(props) {
+  setup(props: ILineBarProps) {
     const state = reactive({
       realHeight: props.textInside ? 30 : props.height,
     });
@@ -73,10 +74,13 @@ export default defineComponent({
       height: 100%;
       left: 0;
       color: #fff;
-      padding-right: 10px;
       text-align: right;
       transition: all 300ms;
       border-radius: 1000px;
+
+      div {
+        padding-right: 10px;
+      }
     }
   }
 }

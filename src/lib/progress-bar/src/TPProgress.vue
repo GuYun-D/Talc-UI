@@ -33,9 +33,13 @@ export default defineComponent({
       },
     },
 
-    modelValue: {
+    percentage: {
       type: Number,
       required: true,
+      validator: (value: number) => {
+        if (value >= 0 && value <= 100) return true;
+        throw new Error("[Progress Component Error]: value out of range")
+      },
     },
 
     height: Number,
@@ -67,21 +71,15 @@ export default defineComponent({
     };
 
     const state = reactive({
-      value: props.modelValue,
+      value: props.percentage,
       statusColor: statusType[props.status] || "#409eff",
       statusTipType: statusTip[props.status] || "",
-      percentage: props.modelValue,
     });
 
     watch(
-      () => props.modelValue,
+      () => props.percentage,
       (value: number) => {
-        if (value > 100) emit("update:modelValue", 100);
-        else if (value < 0) emit("update:modelValue", 0);
-        else state.value = value;
-      },
-      {
-        immediate: true,
+        state.value = value;
       }
     );
 

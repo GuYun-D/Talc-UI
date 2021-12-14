@@ -2,7 +2,7 @@
   <div>
     <h1>progress 进度条</h1>
     <t-progress
-      v-model="count"
+      :percentage="count"
       :textInside="true"
       status="success"
     ></t-progress>
@@ -21,11 +21,10 @@ export default defineComponent({
 
     const setNum = (tag: string) => {
       if (tag === "add") {
-        count.value += 10;
+        if (count.value + 10 <= 100) count.value += 10;
       } else {
-        count.value -= 10;
+        if (count.value - 10 >= 0) count.value -= 10;
       }
-      
     };
     return { count, setNum };
   },
