@@ -16,7 +16,7 @@
 
     <t-progress
       :percentage="count"
-      :textInside="true"
+      :textInside="false"
       status="warning"
     ></t-progress>
 
