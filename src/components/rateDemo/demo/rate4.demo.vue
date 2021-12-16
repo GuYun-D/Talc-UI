@@ -4,11 +4,11 @@
 
 <template>
   <div>
-    <t-rate :num="3" :auxiliaryTextVisible="true"></t-rate>
+    <t-rate v-model="num" :auxiliaryTextVisible="true"></t-rate>
 
     <em>自定义辅助文字</em>
     <t-rate
-      :num="1"
+      v-model="num"
       :auxiliaryTextVisible="true"
       :auxiliaryText="['不懂', '了解', '熟悉', '掌握', '精通']"
     ></t-rate>
@@ -16,11 +16,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const num = ref(3);
+    return { num };
   },
 });
 </script>

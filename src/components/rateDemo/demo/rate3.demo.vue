@@ -4,16 +4,17 @@
 
 <template>
   <div>
-    <t-rate :num="3"></t-rate>
+    <t-rate v-model="num"></t-rate>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 
 export default defineComponent({
   setup() {
-    return {};
+    const num = ref(4);
+    return { num };
   },
 });
 </script>
