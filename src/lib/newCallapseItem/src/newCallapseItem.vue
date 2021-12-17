@@ -1,16 +1,21 @@
 <template>
   <div class="t-newCallapse-item" :class="titleClass">
     <div class="title" @click="toggleContent" :name="name">
-      <span
-        v-if="showIcon"
-        class="talc ta-right-arrow"
-        :class="{
-          'arrow-rotate': isOpen,
-        }"
-      ></span>
+      <template v-if="showIcon">
+        <slot name="icon">
+          <span
+            class="talc t-callapse-openTag"
+            :class="[
+              {
+                'arrow-rotate': isOpen,
+              },
+              iconClass,
+            ]"
+          ></span>
+        </slot>
+      </template>
       {{ title }}
     </div>
-
     <div class="content" v-show="isOpen">
       <slot></slot>
     </div>
@@ -25,7 +30,6 @@ import {
   inject,
   watch,
   Ref,
-  getCurrentInstance,
   onMounted,
   computed,
 } from "vue";
@@ -56,9 +60,12 @@ export default defineComponent({
         );
       },
     },
+    icon: {
+      type: String,
+      default: "right-arrow",
+    },
   },
   setup(props) {
-    const instance = getCurrentInstance();
     const state = reactive({
       isOpen: false,
     });
@@ -94,13 +101,17 @@ export default defineComponent({
       state.isOpen = tag;
     }
 
-    let titleClass = computed(() => {
+    const titleClass = computed(() => {
       return props.collapseDisabled !== undefined
         ? `t-callapse-${props.collapseDisabled}`
         : "";
     });
 
-    return { ...toRefs(state), toggleContent, titleClass };
+    const iconClass = computed(() => {
+      return `ta-${props.icon}`;
+    });
+
+    return { ...toRefs(state), toggleContent, titleClass, iconClass };
   },
 });
 </script>
@@ -127,7 +138,7 @@ export default defineComponent({
     align-items: center;
     user-select: none;
 
-    .ta-right-arrow {
+    .t-callapse-openTag {
       margin-right: 5px;
       transition: all 0.5s;
 
