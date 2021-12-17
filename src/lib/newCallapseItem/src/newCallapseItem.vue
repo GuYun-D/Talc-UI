@@ -1,10 +1,12 @@
 <template>
-  <div class="t-newCallapse-item">
+  <div class="t-newCallapse-item" :class="titleClass">
     <div class="title" @click="toggleContent" :name="name">
       <span
         v-if="showIcon"
         class="talc ta-right-arrow"
-        :class="{ 'arrow-rotate': isOpen }"
+        :class="{
+          'arrow-rotate': isOpen,
+        }"
       ></span>
       {{ title }}
     </div>
@@ -25,13 +27,16 @@ import {
   Ref,
   getCurrentInstance,
   onMounted,
+  computed,
 } from "vue";
-import { AllType } from "../../radio/src/type";
+
+import { ECallapseDisabled } from "./type";
+
 export default defineComponent({
   name: "t-newCallapse-item",
   props: {
     name: {
-      type: AllType,
+      type: String,
       required: true,
     },
     title: {
@@ -42,21 +47,34 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    collapseDisabled: {
+      type: String,
+      validator: (value: ECallapseDisabled) => {
+        if (ECallapseDisabled[value]) return true;
+        console.warn(
+          "[CallapseItem Component Warning]: The collapsedisabled property only supports hidden and readonly"
+        );
+      },
+    },
   },
   setup(props) {
     const instance = getCurrentInstance();
     const state = reactive({
       isOpen: false,
     });
+
+    /**
+     * 依赖获取
+     */
     let currentCallapseName = inject<Ref<string>>("currentCallapseName");
     let selectedName = inject<Ref<string>>("selectedName");
-    let parentProps = instance.parent.props;
+    let notAllowNameArr = inject<Ref<string[]>>("notAllowNameArr");
 
     /**
      * 点击标题显示对应内容
      */
     const toggleContent = () => {
-      if (parentProps.single) return;
+      if (props.collapseDisabled !== undefined) return;
       state.isOpen = !state.isOpen;
     };
 
@@ -67,6 +85,7 @@ export default defineComponent({
     watch(
       () => currentCallapseName.value,
       (value: string) => {
+        if (notAllowNameArr.value.includes(props.name)) return;
         _changeCallapseItemStatus(value === props.name);
       }
     );
@@ -75,21 +94,37 @@ export default defineComponent({
       state.isOpen = tag;
     }
 
-    return { ...toRefs(state), toggleContent };
+    let titleClass = computed(() => {
+      return props.collapseDisabled !== undefined
+        ? `t-callapse-${props.collapseDisabled}`
+        : "";
+    });
+
+    return { ...toRefs(state), toggleContent, titleClass };
   },
 });
 </script>
 
 <style scoped lang="scss">
 .t-newCallapse-item {
+  cursor: pointer;
   border-top: 1px solid #ccc;
+
+  &.t-callapse-hidden {
+    display: none;
+  }
+
+  &.t-callapse-readonly {
+    background-color: rgb(245, 245, 245);
+    cursor: not-allowed;
+    color: rgb(195, 195, 195);
+  }
 
   > .title {
     padding: 0 8px;
     min-height: 32px;
     display: flex;
     align-items: center;
-    cursor: pointer;
     user-select: none;
 
     .ta-right-arrow {

@@ -5,7 +5,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, provide, reactive, ref, toRefs } from "vue";
+import {
+  defineComponent,
+  provide,
+  ref,
+} from "vue";
 
 export default defineComponent({
   name: "t-newCallapse",
@@ -17,7 +21,17 @@ export default defineComponent({
     selected: String,
   },
   setup(props, { slots }) {
+    const notAllowNameArr = ref([]);
     const defaults = slots.default();
+
+    /**
+     * 遍历插槽，遍历到不允许操作的项，点击时不做操作
+     */
+    for (let i = 0; i < defaults.length; i++) {
+      if (defaults[i].props.collapseDisabled === "readonly") {
+        notAllowNameArr.value.push(defaults[i].props.name);
+      }
+    }
 
     const currentCallapseName = ref("");
     const selected = ref(props.selected);
@@ -29,12 +43,16 @@ export default defineComponent({
     const getCurrentCallapse = (event: MouseEvent) => {
       let target = event.target as HTMLElement;
       let name = target.getAttribute("name") || undefined;
-      if (!name || !props.single) return;
+      if (!name || !props.single || notAllowNameArr.value.includes(name)) return;
       currentCallapseName.value = name;
     };
 
+    /**
+     * 依赖注入
+     */
     provide("currentCallapseName", currentCallapseName);
     provide("selectedName", selected);
+    provide("notAllowNameArr", notAllowNameArr);
 
     return { getCurrentCallapse };
   },
