@@ -25,6 +25,9 @@ import TTag from '../lib/tag'
 import TTagInput from '../lib/tag-input'
 import TProgress from '../lib/progress-bar'
 
+import TNewCallapse from '../lib/newCallapse'
+import TNewCallapseItem from '../lib/newCallapseItem'
+
 const talcArr = [
   TLayout,
   THeader,
@@ -51,7 +54,9 @@ const talcArr = [
   TInputNumber,
   TTag,
   TTagInput,
-  TProgress
+  TProgress,
+  TNewCallapse,
+  TNewCallapseItem
 ]
 
 export { talcArr }
