@@ -24,6 +24,7 @@ import {
   watch,
   Ref,
   getCurrentInstance,
+  onMounted,
 } from "vue";
 import { AllType } from "../../radio/src/type";
 export default defineComponent({
@@ -48,6 +49,7 @@ export default defineComponent({
       isOpen: false,
     });
     let currentCallapseName = inject<Ref<string>>("currentCallapseName");
+    let selectedName = inject<Ref<string>>("selectedName");
     let parentProps = instance.parent.props;
 
     /**
@@ -57,6 +59,10 @@ export default defineComponent({
       if (parentProps.single) return;
       state.isOpen = !state.isOpen;
     };
+
+    onMounted(() => {
+      _changeCallapseItemStatus(selectedName.value === props.name);
+    });
 
     watch(
       () => currentCallapseName.value,

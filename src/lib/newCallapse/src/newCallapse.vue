@@ -14,11 +14,13 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    selected: String,
   },
   setup(props, { slots }) {
     const defaults = slots.default();
 
     const currentCallapseName = ref("");
+    const selected = ref(props.selected);
 
     /**
      * 设置当前展开的面板name
@@ -32,6 +34,7 @@ export default defineComponent({
     };
 
     provide("currentCallapseName", currentCallapseName);
+    provide("selectedName", selected);
 
     return { getCurrentCallapse };
   },
