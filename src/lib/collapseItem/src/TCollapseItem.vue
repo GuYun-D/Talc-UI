@@ -34,10 +34,10 @@ import {
   computed,
 } from "vue";
 
-import { ECallapseDisabled } from "./type";
+import { ECollapseDisabled } from "./type";
 
 export default defineComponent({
-  name: "t-newCallapse-item",
+  name: "t-collapse-item",
   props: {
     name: {
       type: String,
@@ -53,8 +53,8 @@ export default defineComponent({
     },
     collapseDisabled: {
       type: String,
-      validator: (value: ECallapseDisabled) => {
-        if (ECallapseDisabled[value]) return true;
+      validator: (value: ECollapseDisabled) => {
+        if (ECollapseDisabled[value]) return true;
         console.warn(
           "[CallapseItem Component Warning]: The collapsedisabled property only supports hidden and readonly"
         );

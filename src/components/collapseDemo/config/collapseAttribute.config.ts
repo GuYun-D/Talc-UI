@@ -5,14 +5,14 @@ export const collapseAttributeConfig: IAttributeConfig = {
   attributeItems: [
     {
       name: "selected",
-      desc: "默认展开",
-      type: "String",
+      desc: "默认展开，与name对应",
+      type: "string",
       value: "_",
       defaultValue: "_",
     }, {
       name: "single",
       desc: "是否只展开一项",
-      type: "Boolean",
+      type: "boolean",
       value: "_",
       defaultValue: "false",
     }

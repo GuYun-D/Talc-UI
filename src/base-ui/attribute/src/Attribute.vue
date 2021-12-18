@@ -54,6 +54,7 @@ footer {
   .itemAttribute {
     width: 100%;
     .title {
+      padding-bottom: 10px;
       font-size: 30px;
       color: $mainColor;
     }

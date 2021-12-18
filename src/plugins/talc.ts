@@ -7,8 +7,8 @@ import TToast from '../lib/toast/src/TToast.vue'
 import TBootton from '../lib/button/src/TButton.vue'
 import TIcon from '../lib/iconfont/src/TIcon.vue'
 import TPopover from '../lib/popover/src/TPopover.vue'
-import TCollapse from '../lib/collapse/src/TCollapse.vue'
-import TCollapseItem from '../lib/collapse-item/src/TCollapseItem.vue'
+import TCollapse from '../lib/collapse'
+import TCollapseItem from '../lib/collapseItem'
 import TCasasder from '../lib/cascader/src/TCascader.vue'
 import TCascaderItem from '../lib/cascader-item/src/TCascaderItem.vue'
 import TCarousel from '../lib/carousel'
@@ -24,9 +24,6 @@ import TInputNumber from "../lib/input-number"
 import TTag from '../lib/tag'
 import TTagInput from '../lib/tag-input'
 import TProgress from '../lib/progress-bar'
-
-import TNewCallapse from '../lib/newCallapse'
-import TNewCallapseItem from '../lib/newCallapseItem'
 
 const talcArr = [
   TLayout,
@@ -55,8 +52,6 @@ const talcArr = [
   TTag,
   TTagInput,
   TProgress,
-  TNewCallapse,
-  TNewCallapseItem
 ]
 
 export { talcArr }

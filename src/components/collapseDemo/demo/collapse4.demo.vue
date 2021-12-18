@@ -9,7 +9,7 @@
     </strong>
     <t-collapse>
       <t-collapse-item title="标题一" name="10">哈哈哈</t-collapse-item>
-      <t-collapse-item title="标题二" name="11" collapse-disabled="disabled"
+      <t-collapse-item title="标题二" name="11" collapse-disabled="readonly"
         >啦啦啦</t-collapse-item
       >
       <t-collapse-item title="标题三" name="12">呼呼呼</t-collapse-item>
@@ -42,5 +42,6 @@ export default defineComponent({
 strong{
   display: inline-block;
   padding: 20px 0;
+  color: rgb(168, 168, 168);
 }
 </style>>

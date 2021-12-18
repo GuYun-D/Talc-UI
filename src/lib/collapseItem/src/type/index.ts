@@ -1,4 +1,4 @@
-export enum ECallapseDisabled {
+export enum ECollapseDisabled {
   hidden = "hidden",
   readonly = "readonly"
 }
