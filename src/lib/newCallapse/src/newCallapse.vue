@@ -20,7 +20,7 @@ export default defineComponent({
     },
     selected: String,
   },
-  setup(props, { slots }) {
+  setup(props, { slots, emit }) {
     const notAllowNameArr = ref([]);
     const defaults = slots.default();
 
@@ -45,8 +45,9 @@ export default defineComponent({
       let name = target.getAttribute("name") || undefined;
       if (!name || !props.single || notAllowNameArr.value.includes(name)) return;
       currentCallapseName.value = name;
+      if(props.single) emit("changeCallapse", name)
     };
-
+    
     /**
      * 依赖注入
      */
