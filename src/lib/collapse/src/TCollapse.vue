@@ -6,8 +6,9 @@
 
 <script lang="ts">
 import { defineComponent, provide, ref } from "vue";
-
+import TCollapseItem from "../../collapseItem";
 import { ICollapseProps } from "./type";
+import { checkSlotType } from "../../utils";
 
 export default defineComponent({
   name: "t-collapse",
@@ -22,6 +23,8 @@ export default defineComponent({
   setup(props: ICollapseProps, { slots, emit }) {
     const notAllowNameArr = ref([]);
     const defaults = slots.default();
+
+    checkSlotType(defaults, TCollapseItem, "t-collapse");
 
     /**
      * 遍历插槽，遍历到不允许操作的项，点击时不做操作
