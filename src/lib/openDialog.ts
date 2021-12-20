@@ -21,8 +21,7 @@ export const openDialog = (options) => {
         Dialog,
         {
           visible: true,
-          "onUpdate:visible": (newVisible) => {
-            console.log(newVisible);
+          "onUpdate:visible": (newVisible: boolean) => {
             if (newVisible === false) {
               close()
             }
