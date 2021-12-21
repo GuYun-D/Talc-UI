@@ -1,172 +1,131 @@
 <template>
-  <div class="t-toast" v-if="visible" ref="toastRef" :class="toastClasses">
-    <div class="inner">
-      <slot class="defaultSlot" v-if="!enableHtml"></slot>
-      <div v-else class="htmlSlot">
-        <slot name="toastHtml"></slot>
+  <div class="t-toast-wrapper" :class="toastClass">
+    <div class="t-toast" v-if="thisVisiable" ref="toastRootRef">
+      <div class="t-toast-message">
+        <template v-if="!enableHtml">
+          <slot></slot>
+        </template>
+        <template v-else>
+          <div v-html="toastHTML"></div>
+        </template>
       </div>
-      <span class="line"></span>
-      <span v-if="closeButton.text" class="closeLine" @click="onclickClose">
-        {{ closeButton.text }}
+      <span class="t-toast-line" ref="toastLineRef"></span>
+      <span
+        v-if="closeButton"
+        class="t-toast-button"
+        @click="onClickClose"
+        v-html="closeButton.text"
+      >
       </span>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, watch, PropType, ref } from "vue";
-import { ICloseButton } from "../types/types";
+import { computed, defineComponent, nextTick, onMounted, ref } from "vue";
+import { IToastProps, EPosition } from "./type";
 
 export default defineComponent({
-  name: "t-toast",
-  emits: ["update:visible", "toastClose"],
   props: {
-    visible: {
-      type: Boolean,
-      default: false,
-    },
     autoClose: {
       type: Boolean,
       default: true,
     },
     autoCloseDelay: {
       type: Number,
-      default: 3,
+      default: 5,
     },
     closeButton: {
-      type: Object as PropType<ICloseButton>,
-      default: () => {
-        return {
-          text: "关闭",
-          callBack: () => {},
-        };
-      },
+      type: Object,
+      default: () => ({
+        text: "关闭",
+        callBack: () => {},
+      }),
     },
     enableHtml: {
       type: Boolean,
       default: false,
     },
+
+    toastHTML: String,
+
     position: {
       type: String,
       default: "top",
       validator: (value: string) => {
-        return ["top", "bottom", "middle"].includes(value);
+        if (EPosition[value]) return true;
+        console.warn(
+          "[Toast Component Warning]:The value of attribute position only supports top, middle and bottom "
+        );
       },
     },
   },
-  setup(props, { emit }) {
-    const toastVisible = computed(() => props.visible);
-    let timer: any;
 
-    const toastClasses = computed(() => {
-      return {
-        [`toast-${props.position}`]: props.position,
-      };
+  setup(props: IToastProps) {
+    const thisVisiable = ref(true);
+    const toastRootRef = ref<HTMLDivElement>();
+    const toastLineRef = ref<HTMLSpanElement>();
+
+    /**
+     * 点击了关闭按钮
+     */
+    const onClickClose = () => {
+      _close();
+      props.closeButton.callBack();
+    };
+
+    onMounted(() => {
+      /**
+       * 启用自动关闭
+       */
+      if (props.autoClose) {
+        setTimeout(() => {
+          _close();
+        }, props.autoCloseDelay * 1000);
+      }
+
+      nextTick(() => {
+        toastLineRef.value.style.height =
+          toastRootRef.value.getBoundingClientRect().height + "px";
+      });
     });
 
-    if (props.autoClose) {
-      watch(toastVisible, (newValue: boolean, oldVale: boolean) => {
-        if (newValue) {
-          if (timer) {
-            clearTimeout(timer);
-          }
-          timer = setTimeout(() => {
-            close();
-          }, props.autoCloseDelay * 1000);
-        } else {
-          clearTimeout(timer);
-        }
-      });
+    /**
+     * 销毁当前组件以及外层hmtl元素
+     */
+    function _close() {
+      thisVisiable.value = false;
+      toastRootRef.value.parentElement.remove();
     }
 
-    const close = () => {
-      emit("toastClose");
-      emit("update:visible", false);
-    };
+    /**
+     * 计算toast位置class
+     */
+    const toastClass = computed(() => {
+      return { [`t-toast-position-${props.position}`]: props.position };
+    });
 
-    const onclickClose = () => {
-      props.closeButton.callBack();
-      close();
+    return {
+      thisVisiable,
+      toastRootRef,
+      onClickClose,
+      toastLineRef,
+      toastClass,
     };
-
-    return { onclickClose, toastClasses };
   },
 });
 </script>
 
 <style scoped lang="scss">
-.t-toast {
-  position: fixed;
-  z-index: 10;
-  left: 50%;
-  transform: translateX(-50%);
-  &.toast-top {
-    top: 0;
-    .inner {
-      animation: slide-down 1s;
-    }
-  }
-
-  &.toast-bottom {
-    bottom: 0;
-    .inner {
-      animation: slide-up 1s;
-    }
-  }
-
-  &.toast-middle {
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-
-    .inner {
-      animation: slide-up 1s;
-    }
-  }
-  .inner {
-    display: flex;
-    align-items: center;
-    // top: 0;
-
-    box-sizing: border-box;
-    font-size: 14px;
-    line-height: 1.8;
-    max-width: 1200px;
-    padding: 10px;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.75);
-    border-radius: 4px;
-    color: #fff;
-
-    .htmlSlot {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .closeLine {
-      position: relative;
-      padding-left: 16px;
-      padding-right: 5px;
-      cursor: pointer;
-      flex-shrink: 0;
-      border-left: 1px solid #666;
-    }
-
-    .line {
-      display: inline-block;
-      height: 100%;
-      margin-left: 16px;
-    }
-  }
-}
-
 @keyframes slide-up {
   0% {
     opacity: 0;
     transform: translateY(100%);
   }
+
   100% {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(0);
   }
 }
 
@@ -175,9 +134,10 @@ export default defineComponent({
     opacity: 0;
     transform: translateY(-100%);
   }
+
   100% {
     opacity: 1;
-    transform: translateY(0%);
+    transform: translateY(0);
   }
 }
 
@@ -185,8 +145,72 @@ export default defineComponent({
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
+  }
+}
+
+.t-toast-wrapper {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  &.t-toast-position-top {
+    top: 0;
+    transform: translateX(-50%);
+    .t-toast {
+      animation: slide-down 1s;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+  &.t-toast-position-bottom {
+    bottom: 0;
+    .t-toast {
+      animation: slide-up 1s;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+  &.t-toast-position-middle {
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .t-toast{
+      animation: fade-in 1s;
+    }
+  }
+
+  .t-toast {
+    border: 1px solid rgb(32, 32, 32);
+    font-size: 14px;
+    min-height: 40px;
+    line-height: 1.8;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 4px;
+    color: #fff;
+    box-shadow: 0 0 03px 0px rgba(0, 0, 0, 0.5);
+
+    > .t-toast-message {
+      padding: 5px 0;
+    }
+
+    > .t-toast-line {
+      height: 100%;
+      margin-left: 16px;
+      border-left: 1px solid #666;
+    }
+
+    > .t-toast-button {
+      font-size: 14px;
+      padding-left: 16px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
   }
 }
 </style>
