@@ -5,53 +5,50 @@
 <template>
   <div>
     <t-button @click="toggleToastTop">上部</t-button>
-    <t-toast :visible="isShowToastTop" @update:visible="isShowToastTop = $event"
-      >这是一个顶部的toast</t-toast
-    >
 
     <t-button @click="toggleToastMiddle">中间</t-button>
-    <t-toast
-      :visible="isShowToastMiddle"
-      @update:visible="isShowToastMiddle = $event"
-      position="middle"
-      >这是一个中间的toast</t-toast
-    >
 
     <t-button @click="toggleToastBottom">底部</t-button>
-    <t-toast
-      :visible="isShowToastBottom"
-      @update:visible="isShowToastBottom = $event"
-      position="bottom"
-      >这是一个底部的toast</t-toast
-    >
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { openToast } from "../../../lib/toast";
 
 export default defineComponent({
   setup() {
-    const isShowToastTop = ref(false);
     const toggleToastTop = () => {
-      isShowToastTop.value = !isShowToastTop.value;
+      openToast({
+        defaultText: "我是一个顶部的toast",
+        props: {
+          autoClose: false,
+        },
+      });
     };
 
-    const isShowToastMiddle = ref(false);
     const toggleToastMiddle = () => {
-      isShowToastMiddle.value = !isShowToastMiddle.value;
+      openToast({
+        defaultText: "我是一个中间的toast",
+        props: {
+          position: "middle",
+          autoClose: false,
+        },
+      });
     };
 
-    const isShowToastBottom = ref(false);
     const toggleToastBottom = () => {
-      isShowToastBottom.value = !isShowToastBottom.value;
+      openToast({
+        defaultText: "我是一个顶部的toast",
+        props: {
+          position: "bottom",
+          autoClose: false,
+        },
+      });
     };
     return {
-      isShowToastTop,
       toggleToastTop,
-      isShowToastMiddle,
       toggleToastMiddle,
-      isShowToastBottom,
       toggleToastBottom,
     };
   },

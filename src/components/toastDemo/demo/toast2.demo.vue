@@ -5,25 +5,25 @@
 <template>
   <div>
     <t-button @click="toggleToast">自动关闭</t-button>
-    <t-toast
-      :visible="isShowToast"
-      :autoClose="true"
-      @update:visible="isShowToast = $event"
-      >这是一个顶部的toast</t-toast
-    >
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent } from "vue";
+import { openToast } from "../../../lib/toast";
 
 export default defineComponent({
   setup() {
-    const isShowToast = ref(false);
     const toggleToast = () => {
-      isShowToast.value = !isShowToast.value;
+      openToast({
+        defaultText: "2秒后我会自动关闭",
+        props: {
+          position: "middle",
+          autoCloseDelay: 2
+        },
+      });
     };
-    return { isShowToast, toggleToast };
+    return { toggleToast };
   },
 });
 </script>

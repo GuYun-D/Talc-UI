@@ -154,6 +154,8 @@ export default defineComponent({
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 100;
+
   &.t-toast-position-top {
     top: 0;
     transform: translateX(-50%);
@@ -175,7 +177,7 @@ export default defineComponent({
     top: 50%;
     transform: translate(-50%, -50%);
 
-    .t-toast{
+    .t-toast {
       animation: fade-in 1s;
     }
   }

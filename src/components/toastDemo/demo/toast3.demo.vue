@@ -5,35 +5,32 @@
 <template>
   <div>
     <t-button @click="toggleToast">打开</t-button>
-
-    <t-toast
-      :enableHtml="true"
-      :visible="isShowToast"
-      :autoClose="true"
-      @update:visible="isShowToast = $event"
-    >
-      <template #toastHtml>
-        <em>haha</em>
-        <ul>
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ul>
-      </template>
-    </t-toast>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
+import { openToast } from "../../../lib/toast";
 
 export default defineComponent({
   setup() {
-    const isShowToast = ref(false);
     const toggleToast = () => {
-      isShowToast.value = !isShowToast.value;
+      openToast({
+        defaultText: "支持html",
+        props: {
+          position: "middle",
+          enableHtml: true,
+          toastHTML: `
+            <ul>
+              <li>1.Vue</li>
+              <li>2.React</li>
+              <li>3.Anglar</li>
+            </ul>
+          `,
+        },
+      });
     };
-    return { isShowToast, toggleToast };
+    return { toggleToast };
   },
 });
 </script>

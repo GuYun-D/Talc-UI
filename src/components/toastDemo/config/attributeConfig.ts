@@ -6,44 +6,44 @@ export const attributeConfig: IAttributeConfig = {
     {
       name: "position",
       desc: "toast出现的位置",
-      type: "String",
+      type: "string",
       value: "top/middle/bottom",
       defaultValue: "top",
     },
     {
-      name: "visible",
-      desc: "控制toast的显示隐藏",
-      type: "Boolean",
-      value: "_",
-      defaultValue: "false",
-    },
-    {
       name: "autoClose",
       desc: "是否自动关闭",
-      type: "Boolean",
+      type: "boolean",
       value: "_",
-      defaultValue: "false",
+      defaultValue: "true",
     },
     {
       name: "autoCloseDelay",
       desc: "隔多久自动关闭",
-      type: "Number",
+      type: "number",
       value: "_",
-      defaultValue: "3(s)",
+      defaultValue: "5(s)",
     },
     {
       name: "closeButton",
       desc: "自定义关闭样式",
-      type: "Object",
+      type: "{}",
       value: "_",
       defaultValue: "{text: '关闭',...}",
     },
     {
       name: "enableHtml",
       desc: "是否支持HTML",
-      type: "Boolean",
+      type: "boolean",
       value: "_",
       defaultValue: "false",
     },
+    {
+      name: "toastHtml",
+      desc: "传入的HTML",
+      type: "string",
+      value: "_",
+      defaultValue: "_",
+    }
   ]
 }
