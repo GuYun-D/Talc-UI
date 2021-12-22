@@ -95,7 +95,6 @@ export default defineComponent({
      */
     function _close() {
       thisVisiable.value = false;
-      toastRootRef.value.parentElement.remove();
     }
 
     /**

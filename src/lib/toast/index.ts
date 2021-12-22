@@ -1,3 +1,3 @@
-import TToast from "./src/TToast.vue"
+import openToast from "./src/TToast"
 
-export default TToast
+export  {openToast}
