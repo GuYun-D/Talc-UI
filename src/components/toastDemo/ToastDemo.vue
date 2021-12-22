@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Toast</h1>
+    <Explain>
+      toast弹框每页面只能出现一次，后者出现时会卸载掉前者
+    </Explain>
     <Demo :component="Toast1Demo"></Demo>
     <Demo :component="Toast2Demo"> toast可以自动关闭的，默认关闭的时间为5s，如果你不喜欢这个时间，你可以使用autoCloseDelay来定义toast的关闭时间，如1s 就是:autoCloseDelay="1"</Demo>
     <Demo :component="Toast3Demo">
