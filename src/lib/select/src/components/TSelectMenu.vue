@@ -11,7 +11,7 @@
           't-select-item-disabled': item.disabled,
         }"
       >
-        {{ item.text }}
+        {{ item.label }}
       </li>
     </ul>
 

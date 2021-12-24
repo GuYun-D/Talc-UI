@@ -18,17 +18,17 @@ export default defineComponent({
       {
         id: 1,
         value: "html",
-        text: "HTML",
+        label: "HTML",
       },
       {
         id: 2,
         value: "css",
-        text: "CSS",
+        label: "CSS",
       },
       {
         id: 2,
         value: "javascript",
-        text: "JavaScript",
+        label: "JavaScript",
       },
     ];
     return { data, mySelecct1 };

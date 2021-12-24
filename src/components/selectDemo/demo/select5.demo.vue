@@ -23,18 +23,18 @@ export default defineComponent({
       {
         id: 346748596978,
         value: "html",
-        text: "HTML",
+        label: "HTML",
       },
       {
         id: 89048596978,
         value: "css",
-        text: "CSS",
+        label: "CSS",
         disabled: true,
       },
       {
         id: 1458596978,
         value: "javascript",
-        text: "JavaScript",
+        label: "JavaScript",
       },
     ];
     return { data, mySelecct5 };
