@@ -8,7 +8,7 @@
       v-model="mySelecct5"
       :data="data"
       :clearable="true"
-      :search-data="true"
+      :searchSelect="true"
     ></t-select>
   </div>
 </template>

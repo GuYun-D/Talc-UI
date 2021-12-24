@@ -2,6 +2,13 @@ export const attributeConfig = {
   attributeTitle: "Select Attribute",
   attributeItems: [
     {
+      name: "v-model",
+      desc: "当前选中的项",
+      type: "String",
+      value: "_",
+      defaultValue: "_",
+    },
+    {
       name: "placeHolder",
       desc: "未选中时的提示",
       type: "String",
@@ -23,7 +30,7 @@ export const attributeConfig = {
       defaultValue: "_",
     },
     {
-      name: "searchData",
+      name: "searchSelect",
       desc: "是否搜索",
       type: "Boolean",
       value: "_",
@@ -42,6 +49,12 @@ export const attributeConfig = {
       type: "Boolean",
       value: "_",
       defaultValue: "false",
-    }
+    }, {
+      name: "searchFilterDisabled",
+      desc: "搜索过滤禁选项",
+      type: "Boolean",
+      value: "_",
+      defaultValue: "false",
+    },
   ],
 };
