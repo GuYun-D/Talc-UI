@@ -44,6 +44,9 @@ export const siderConfig = [
       }, {
         name: "input number 计数器",
         url: "input-number"
+      }, {
+        name: "transfer 穿梭框",
+        url: "transfer"
       }
     ]
   },

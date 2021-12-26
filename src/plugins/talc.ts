@@ -23,6 +23,7 @@ import TInputNumber from "../lib/input-number"
 import TTag from '../lib/tag'
 import TTagInput from '../lib/tag-input'
 import TProgress from '../lib/progress-bar'
+import TTransfer from '../lib/transfer'
 
 const talcArr = [
   TLayout,
@@ -50,6 +51,7 @@ const talcArr = [
   TTag,
   TTagInput,
   TProgress,
+  TTransfer
 ]
 
 export { talcArr }
