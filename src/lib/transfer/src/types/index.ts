@@ -8,7 +8,7 @@ export interface IModelValue {
   key?: string
   label: string
   disabled?: boolean
-  [index: string]: any
+  [key: string]: any
 }
 
 export interface ITransferInputProps {
@@ -20,4 +20,9 @@ export interface ITransferInputProps {
 export enum EType {
   target = "target",
   selected = "selected"
+}
+
+export interface ICheckedProp {
+  isChecked: boolean
+  full: boolean
 }

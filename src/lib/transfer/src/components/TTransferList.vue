@@ -1,14 +1,18 @@
 <template>
-  <div class="t-transfer-input" @click="setChecked" :class="titleClasses">
-    <div class="t-transfer-title">
+  <div class="t-transfer-input">
+    <div class="t-transfer-title" @click="setChecked" :class="titleClasses">
       <span class="label talc ta-zhengque"></span>
       <span class="text">
         {{ title }}
       </span>
       <span class="prcentage"> 30/200 </span>
     </div>
-    <div>
-      {{ selectedArr }}
+    <div class="t-transfer-panel">
+      <ul>
+        <li v-for="item in selectedArr" :key="item.key">
+         <span>1</span>  {{ item.label }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -64,26 +68,26 @@ export default defineComponent({
 <style scoped lang="scss">
 $mainColor: #409eff;
 .t-transfer-input {
-  width: 180px;
+  width: 200px;
   margin: 0 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 5px;
-  cursor: pointer;
 
-  &.t-transfer-active {
-    .t-transfer-title {
+  .t-transfer-title {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    font-size: 0;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    &.t-transfer-active {
       span.label {
         background-color: $mainColor;
         border-color: $mainColor;
       }
     }
-  }
-
-  .t-transfer-title {
-    display: flex;
-    align-items: center;
-    font-size: 0;
 
     span {
       font-size: 16px;
@@ -93,7 +97,7 @@ $mainColor: #409eff;
       transition: all 300ms;
 
       &:last-child {
-        margin-left: 58px;
+        margin-left: 78px;
       }
 
       &.label {
@@ -119,6 +123,17 @@ $mainColor: #409eff;
       &.prcentage {
         color: rgb(156, 156, 156);
         font-size: 14px;
+      }
+    }
+  }
+
+  .t-transfer-panel {
+    padding: 5px;
+
+    ul {
+      > li{
+        display: flex;
+        align-items: center;
       }
     }
   }
